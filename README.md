@@ -12,9 +12,16 @@ written.
 ![In play](img/lod2.png)
 ![Options](img/lod3.png)
 
-## [Find & Destroy - 4 January 1998](F&D/F&D.PAS)
+## [F&D - 4 January 1998](F&D/F&D.PAS)
 
-Stunning itro, dynamic graphics. But there's nothing more unfortunately.
+Find & Destroy. Stunning itro, dynamic graphics, but there's nothing more
+unfortunately.
 
 ![Mega Game Center](img/fd1.png)
 ![FD](img/fd2.png)
+
+## [MINY - 21 May 1998](MINY/MINY.PAS)
+
+Enter size of the grid, enter number of mines and play the classical Windows game.
+
+![FD](img/miny1.png)
