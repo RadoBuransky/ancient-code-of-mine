@@ -24,4 +24,12 @@ unfortunately.
 
 Enter size of the grid, enter number of mines and play the classical Windows game.
 
-![FD](img/miny1.png)
+![MINY](img/miny1.png)
+
+## [CERVIKY - 17 June 1998](CERVIKY/CERVIKY.PAS)
+
+Multiplayer worms game where the goal is not to crash. The last one wins. Worms
+can also fire bricks or what is that.
+
+![CERVIKY](img/cerviky1.png)
+![CERVIKY](img/cerviky2.png)
