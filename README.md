@@ -47,3 +47,9 @@ Somehow handles collisions of a pool cue ball with cushions.
 Tic-tac-toe made by Mega Game Center!
 
 ![BILIARD](img/piskvorky1.png)
+
+## [ARKANOID - 27 April 1999](ARKANOID/ARKANOID.PAS)
+
+Ball bouncing game controlled by mouse. 
+
+![BILIARD](img/arkanoid1.png)
