@@ -52,4 +52,10 @@ Tic-tac-toe made by Mega Game Center!
 
 Ball bouncing game controlled by mouse. 
 
-![BILIARD](img/arkanoid1.png)
+![ARKANOID](img/arkanoid1.png)
+
+## [MORPH - 27 April 1999](MORPH/MORPH.PAS)
+
+Stone-stealing game featuring computer player.
+
+![MORPH](img/morph1.png)
