@@ -69,3 +69,4 @@ dedicated to the current Slovak f*cking prime minister Vladimir Meciar.
 ![MECIAR](img/meciar1.png)
 ![MECIAR](img/meciar2.png)
 ![MECIAR](img/meciar3.png)
+![MECIAR](img/meciar4.png)
