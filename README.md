@@ -39,3 +39,11 @@ can also fire bricks or what is that.
 Somehow handles collisions of a pool cue ball with cushions.  
 
 ![BILIARD](img/biliard1.png)
+
+## [TETRIS - 26 November 1998](TETRIS/TETRIS.PAS)
+
+## [PISKVORK - 13 December 1998](PISKVORK/PISKVORK.PAS)
+
+Tic-tac-toe made by Mega Game Center!
+
+![BILIARD](img/piskvorky1.png)
