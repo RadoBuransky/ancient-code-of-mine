@@ -70,3 +70,10 @@ dedicated to the current Slovak f*cking prime minister Vladimir Meciar.
 ![MECIAR](img/meciar2.png)
 ![MECIAR](img/meciar3.png)
 ![MECIAR](img/meciar4.png)
+
+## [TANKERS - 19 May 1999](TANKERS/TANKERS.PAS)
+
+Multiplayer games of tanks shooting at each other.
+
+![TANKERS](img/tankers1.png)
+![TANKERS](img/tankers2.png)
