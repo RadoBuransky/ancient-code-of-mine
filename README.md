@@ -42,6 +42,8 @@ Somehow handles collisions of a pool cue ball with cushions.
 
 ## [TETRIS - 26 November 1998](TETRIS/TETRIS.PAS)
 
+`BGI error: Graphics not initialized (use "initgraph")`
+
 ## [PISKVORK - 13 December 1998](PISKVORK/PISKVORK.PAS)
 
 Tic-tac-toe made by Mega Game Center!
@@ -77,3 +79,11 @@ Multiplayer games of tanks shooting at each other.
 
 ![TANKERS](img/tankers1.png)
 ![TANKERS](img/tankers2.png)
+
+## [WORM - 11 July 1999](WORM/CERVIK.PAS)
+
+`BGI error: Graphics not initialized (use "initgraph")`
+
+## [TANKY - 11 July 1999](TANKY/TANKY.PAS)
+
+`BGI error: Graphics not initialized (use "initgraph")`
