@@ -33,3 +33,9 @@ can also fire bricks or what is that.
 
 ![CERVIKY](img/cerviky1.png)
 ![CERVIKY](img/cerviky2.png)
+
+## [BILIARD - 4 November 1998](BILIARD/BILIARD.PAS)
+
+Somehow handles collisions of a pool cue ball with cushions.  
+
+![BILIARD](img/biliard1.png)
