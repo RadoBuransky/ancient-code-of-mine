@@ -59,3 +59,13 @@ Ball bouncing game controlled by mouse.
 Stone-stealing game featuring computer player.
 
 ![MORPH](img/morph1.png)
+
+## [MECIAR - 15 May 1999](MECIAR/MECIAR.PAS)
+
+Thrilling game of a fly jumping from one shrinking lotus leaf to another, trying
+to collect as many gems as possible while running away from frog. Named by and
+dedicated to the current Slovak f*cking prime minister Vladimir Meciar.
+
+![MECIAR](img/meciar1.png)
+![MECIAR](img/meciar2.png)
+![MECIAR](img/meciar3.png)
