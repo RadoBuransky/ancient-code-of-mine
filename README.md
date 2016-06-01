@@ -9,3 +9,5 @@ antipatterns you have ever heard about. But for me it's the best code I've ever
 written.
 
 ![Enter your name](img/lod1.png)
+![In play](img/lod2.png)
+![Options](img/lod3.png)
