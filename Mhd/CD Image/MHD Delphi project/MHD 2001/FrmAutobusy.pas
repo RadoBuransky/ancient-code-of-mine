@@ -1,0 +1,306 @@
+unit FrmAutobusy;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ComCtrls, StdCtrls, ClassData, ExtCtrls;
+
+type
+  TFormAutobusy = class(TForm)
+    ComboBox: TComboBox;
+    CheckBox: TCheckBox;
+    TrackBar: TTrackBar;
+    ListView: TListView;
+    procedure FormCreate(Sender: TObject);
+    procedure ComboBoxChange(Sender: TObject);
+    procedure TrackBarChange(Sender: TObject);
+    procedure CheckBoxClick(Sender: TObject);
+    procedure ListViewSelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
+    procedure ListViewDblClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+    VybranySpoj : PSpoj;
+    VybranaZastavka : PZastavka;
+
+    Prilepeny : integer; {-1 - nie je; 0 - left; 1 - right}
+
+    procedure InitComboBox;
+    procedure UpdateListBox;
+    procedure Moving( var Message : TMessage );message WM_MOVING;
+    procedure ZrusPrilepenie;
+  public
+    { Public declarations }
+  end;
+
+var
+  FormAutobusy: TFormAutobusy;
+
+implementation
+
+uses ClassMapa, FrmZastavka, FormHlavneOkno;
+
+{$R *.DFM}
+
+//==============================================================================
+//==============================================================================
+//
+//                                 Constructor
+//
+//==============================================================================
+//==============================================================================
+
+procedure TFormAutobusy.InitComboBox;
+var I : integer;
+begin
+  ComboBox.Clear;
+  for I := 0 to Data.SpojeInfo.Count-1 do
+    if TSpojInfo( Data.SpojeInfo[I]^ ).Spoj <> nil then
+      if TSpojInfo( Data.SpojeInfo[I]^ ).Spoj^.Typ = 0 then
+        ComboBox.Items.Add( IntToStr( TSpojInfo( Data.SpojeInfo[I]^ ).Spoj^.Cislo ) );
+  ComboBox.ItemIndex := 0;
+end;
+
+procedure TFormAutobusy.FormCreate(Sender: TObject);
+begin
+  VybranySpoj := nil;
+  VybranaZastavka := nil;
+  Prilepeny := -1;
+//  OrigRect := HlavneOkno.PanelDock.BoundsRect;
+
+  InitComboBox;
+  UpdateListBox;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                   Show
+//
+//==============================================================================
+//==============================================================================
+
+procedure TFormAutobusy.FormShow(Sender: TObject);
+begin
+  Left := ((HlavneOkno.ClientRect.Left + HlavneOkno.ClientRect.Right) div 2) - (Width div 2);
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                   Close
+//
+//==============================================================================
+//==============================================================================
+
+procedure TFormAutobusy.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if Action <> caNone then
+    ZrusPrilepenie;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                 Windows messages
+//
+//==============================================================================
+//==============================================================================
+
+procedure TFormAutobusy.ZrusPrilepenie;
+begin
+  Prilepeny := -1;
+{  HlavneOkno.PanelDock.Visible := False;
+  HlavneOkno.PanelDock.Left := OrigRect.Left;
+  HlavneOkno.PanelDock.Width := OrigRect.Right - OrigRect.Left;}
+end;
+
+procedure TFormAutobusy.Moving( var Message : TMessage );
+begin
+{  Rect := Pointer( Message.LParam );
+
+  case Prilepeny of
+    0 : begin
+          if Rect^.Left >= MARGIN then
+            begin
+              ZrusPrilepenie;
+              exit;
+            end;
+        end;
+    1 : begin
+          if (HlavneOkno.BoundsRect.Right - Rect^.Right) >= MARGIN then
+            begin
+              ZrusPrilepenie;
+              exit;
+            end;
+        end;
+  end;
+
+  if (Rect^.Left < MARGIN) and
+     ((Prilepeny = -1) or
+      (Prilepeny = 0)) then
+    begin
+      Rect^.Left := 2;
+      Rect^.Right := Rect^.Left + (BoundsRect.Right - BoundsRect.Left);
+
+      if Prilepeny = -1 then
+        begin
+          HlavneOkno.PanelDock.Left := 1;
+          HlavneOkno.PanelDock.Top := HlavneOkno.ClientRect.Top;
+          HlavneOkno.PanelDock.Height := HlavneOkno.ClientHeight - HlavneOkno.StatusBar.Height;
+          HlavneOkno.PanelDock.Width := Rect^.Right;
+        end;
+
+      if Rect^.Top <= HlavneOkno.PanelDock.ClientOrigin.y then
+        begin
+          Rect^.Top := HlavneOkno.PanelDock.ClientOrigin.y + 1;
+          Rect^.Bottom := Rect^.Top + (BoundsRect.Bottom - BoundsRect.Top);
+        end;
+
+      if Rect^.Bottom >= HlavneOkno.PanelDock.ClientOrigin.y + HlavneOkno.PanelDock.ClientHeight then
+        begin
+          Rect^.Bottom := HlavneOkno.PanelDock.ClientOrigin.y + HlavneOkno.PanelDock.ClientHeight - 1;
+          Rect^.Top := Rect^.Bottom - (BoundsRect.Bottom - BoundsRect.Top);
+        end;
+
+      if Prilepeny = -1 then
+        begin
+          I := HlavneOkno.PanelDock.BoundsRect.Right;
+          HlavneOkno.PanelDock.Left := HlavneOkno.PanelDock.BoundsRect.Right + 1;
+          HlavneOkno.PanelDock.ClientWidth := I - HlavneOkno.PanelDock.Left;
+
+          HlavneOkno.PanelDock.Visible := True;
+
+          Prilepeny := 0;
+        end;
+
+      exit;
+    end;
+
+  if (HlavneOkno.BoundsRect.Right - Rect^.Right < MARGIN) and
+     ((Prilepeny = -1) or
+      (Prilepeny = 1)) then
+    begin
+      if Prilepeny = -1 then
+        begin
+          HlavneOkno.PanelDock.Left := HlavneOkno.ClientRect.Right - (BoundsRect.Right - BoundsRect.Left) - 2;
+          HlavneOkno.PanelDock.Top := HlavneOkno.ClientRect.Top;
+          HlavneOkno.PanelDock.Height := HlavneOkno.ClientHeight - HlavneOkno.StatusBar.Height;
+          HlavneOkno.PanelDock.Width := Rect^.Right - Rect^.Left + 2;
+        end;
+
+      Rect^.Left := HlavneOkno.PanelDock.BoundsRect.Left + 1;
+      Rect^.Right := Rect^.Left + (BoundsRect.Right - BoundsRect.Left);
+
+      if Rect^.Top <= HlavneOkno.PanelDock.ClientOrigin.y then
+        begin
+          Rect^.Top := HlavneOkno.PanelDock.ClientOrigin.y + 1;
+          Rect^.Bottom := Rect^.Top + (BoundsRect.Bottom - BoundsRect.Top);
+        end;
+
+      if Rect^.Bottom >= HlavneOkno.PanelDock.ClientOrigin.y + HlavneOkno.PanelDock.ClientHeight then
+        begin
+          Rect^.Bottom := HlavneOkno.PanelDock.ClientOrigin.y + HlavneOkno.PanelDock.ClientHeight - 1;
+          Rect^.Top := Rect^.Bottom - (BoundsRect.Bottom - BoundsRect.Top);
+        end;
+
+      if Prilepeny = -1 then
+        begin
+          HlavneOkno.PanelDock.ClientWidth := HlavneOkno.PanelDock.BoundsRect.Left - HlavneOkno.PanelDock.Left - 2;
+          HlavneOkno.PanelDock.Visible := True;
+
+          Prilepeny := 1;
+        end;
+    end;    }
+
+  inherited;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                 Komponenty
+//
+//==============================================================================
+//==============================================================================
+
+procedure TFormAutobusy.UpdateListBox;
+var I : integer;
+    Active : PSpoj;
+    PNewListItem : TListItem;
+begin
+  if (ComboBox.ItemIndex = -1) then exit;
+
+  Active := nil;
+  for I := 0 to Data.SpojeInfo.Count-1 do
+    if TSpojInfo( Data.SpojeInfo[I]^ ).Spoj^.Cislo = StrToInt( ComboBox.Items[ ComboBox.ItemIndex ] ) then
+      begin
+        case TrackBar.Position of
+          0 : Active := TSpojInfo( Data.SpojeInfo[I]^ ).Spoj;
+          1 : Active := TSpojInfo( Data.SpojeInfo[I]^ ).OpacnySpoj;
+        end;
+
+        if Active = VybranySpoj then exit;
+
+        VybranySpoj := Active;
+        break;
+      end;
+
+  ListView.Items.Clear;
+  while Active <> nil do
+    begin
+      PNewListItem := ListView.Items.Add;
+      PNewListItem.Caption := Active^.NaZastavke^.Nazov;
+      Active := Active^.Next;
+    end;
+end;
+
+procedure TFormAutobusy.ComboBoxChange(Sender: TObject);
+begin
+  UpdateListBox;
+  if CheckBox.Checked then Mapa.UkazSpoj := VybranySpoj;
+end;
+
+procedure TFormAutobusy.TrackBarChange(Sender: TObject);
+begin
+  UpdateListBox;
+  if CheckBox.Checked then Mapa.UkazSpoj := VybranySpoj;
+end;
+
+procedure TFormAutobusy.CheckBoxClick(Sender: TObject);
+begin
+  if not CheckBox.Checked then Mapa.UkazSpoj := nil
+                          else Mapa.UkazSpoj := VybranySpoj;
+end;
+
+procedure TFormAutobusy.ListViewSelectItem(Sender: TObject;
+  Item: TListItem; Selected: Boolean);
+var Active : PSpoj;
+begin
+  if not Selected then
+    begin
+      VybranaZastavka := nil;
+      exit;
+    end;
+
+  Active := VybranySpoj;
+  while (Active^.NaZastavke^.Nazov <> Item.Caption) and
+        (Active <> nil) do
+    Active := Active^.Next;
+
+  VybranaZastavka := Active^.NaZastavke;
+
+  if CheckBox.Checked then Mapa.PozriSaNaZastavku( Active^.NaZastavke );
+end;
+
+procedure TFormAutobusy.ListViewDblClick(Sender: TObject);
+begin
+  if ListView.Selected = nil then exit;
+  FormZastavka.MyShow( BoundsRect , VybranaZastavka  );
+end;
+
+end.

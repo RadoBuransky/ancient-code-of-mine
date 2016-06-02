@@ -1,0 +1,13 @@
+[OPTIONS]
+Compatibility=1.1
+Compiled file=Project.chm
+Contents file=Table of Contents.hhc
+Default topic=Html\index.htm
+Display compile progress=No
+Index file=Index.hhk
+Language=0x41b Slovenské
+Title=MHD 2001 Help
+
+
+[FILES]
+Html\index.htm

@@ -1,0 +1,191 @@
+unit Konstanty;
+
+interface
+
+type TTicket = record
+       Min : integer;
+       Norm, Zlav : integer;
+     end;
+     TTickets = array of TTicket;
+
+     TClientInfo = record
+       Name, Company, Serial : string;
+       LastUpdate : string;
+     end;
+
+     TServerInfo = record
+       Host : string;
+       Port : word;
+     end;
+
+var ROOT_DIR : string;
+    ROZVRHY_DIR : string;
+
+    // Obrazky :
+    MAP_FILE : string;
+    HODINY_FILE : string;
+
+    //  Datove subory :
+    ZASTAVKY_FILE : string;
+
+    //  Listky :
+    TICKETS : TTickets;
+
+    //  Konštanty :
+    HEKTOMETER : word;
+    SPEED : integer;
+
+    //  Settings nastavenia casu
+    DEF_SETTINGS : record
+      Time : integer;
+      Den : integer;
+      Zlavneny : boolean;
+      Rezerva : integer;
+      AutoShow : boolean;
+    end;
+
+    //  Synchronization
+    CLIENTINFO : TClientInfo;
+    SERVERINFO : TServerInfo;
+
+function GetTickets( Key : string ) : TTickets;
+
+implementation
+
+uses Windows, Registry, Classes, SysUtils;
+
+function GetTickets( Key : string ) : TTickets;
+var Reg : TRegistry;
+    Strings : TStringList;
+    I,J : integer;
+    S, S1 : string;
+begin
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+
+    Reg.OpenKey( Key , False );
+    Strings := TStringList.Create;
+    try
+      Reg.GetValueNames( Strings );
+      SetLength( Result , Strings.Count );
+      for I := 0 to Strings.Count-1 do
+        begin
+          S := Reg.ReadString( Strings[I] );
+          Result[I].Min := StrToInt( Strings[I] );
+
+          J := 1;
+          S1 := '';
+          repeat
+            S1 := S1 + S[J];
+            Inc( J );
+          until S[J] = ';';
+          Result[I].Norm := StrToInt( S1 );
+
+          S1 := '';
+          for J := J+1 to Length( S ) do
+            S1 := S1 + S[J];
+          Result[I].Zlav := StrToInt( S1 );
+        end;
+    finally
+      Strings.Free;
+    end;
+  finally
+    Reg.Free;
+  end;
+end;
+
+procedure ReadRegs;
+var Reg : TRegistry;
+begin
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+
+    Reg.OpenKey( '\Software\MHDClient\Dirs' , False );
+    ROOT_DIR := Reg.ReadString( 'App_dir' );
+    ROZVRHY_DIR := Reg.ReadString( 'Rozvrhy_dir' );
+
+    Reg.OpenKey( '\Software\MHDClient\Files' , False );
+    ZASTAVKY_FILE := Reg.ReadString( 'Zastavky' );
+    MAP_FILE := Reg.ReadString( 'Mapa' );
+    HODINY_FILE := Reg.ReadString( 'Hodiny' );  
+
+    Reg.OpenKey( '\Software\MHDClient\Consts' , False );
+    HEKTOMETER := Reg.ReadInteger( '100m' );
+    SPEED := Reg.ReadInteger( 'Speed' );
+
+    Reg.OpenKey( '\Software\MHDClient\Settings' , False );
+    with DEF_SETTINGS do
+      begin
+        Time := Reg.ReadInteger( 'Time' );
+        Den := Reg.ReadInteger( 'Den' );
+        if (Reg.ReadString( 'Zlavneny' ) = 'True') then Zlavneny := True
+                                                   else Zlavneny := False;
+        Rezerva := StrToInt( Reg.ReadString( 'Rezerva' ) );
+        if (Reg.ReadString( 'AutoShow' ) = 'True') then AutoShow := True
+                                                   else AutoShow := False;
+      end;
+
+    Reg.OpenKey( '\Software\MHDClient\Synchronization' , False );
+    CLIENTINFO.LastUpdate := Reg.ReadString( 'Last' );
+
+    Reg.OpenKey( '\Software\MHDClient\Synchronization\Settings' , False );
+    SERVERINFO.Host := Reg.ReadString( 'Host' );
+    SERVERINFO.Port := Reg.ReadInteger( 'Port' );
+
+    Reg.OpenKey( '\Software\MHDClient\User' , False );
+    CLIENTINFO.Name := Reg.ReadString( 'Name' );
+    CLIENTINFO.Company := Reg.ReadString( 'Company' );
+    CLIENTINFO.Serial := Reg.ReadString( 'Serial' );
+  finally
+    Reg.Free;
+  end;
+end;
+
+procedure WriteRegs;
+var Reg : TRegistry;
+    Strings : TStringList;
+    I : integer;
+begin
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+
+    Reg.OpenKey( '\Software\MHDClient\Settings' , False );
+    with DEF_SETTINGS do
+      begin
+        Reg.WriteInteger( 'Time' , Time );
+        Reg.WriteInteger( 'Den' , Den );
+        if Zlavneny then Reg.WriteString( 'Zlavneny' , 'True' )
+                    else Reg.WriteString( 'Zlavneny' , 'False' );
+        Reg.WriteString( 'Rezerva' , IntToStr( Rezerva ) );
+        if AutoShow then Reg.WriteString( 'AutoShow' , 'True' )
+                    else Reg.WriteString( 'AutoShow' , 'False' );
+      end;
+
+    Reg.OpenKey( '\Software\MHDClient\Tickets' , False );
+    Strings := TStringList.Create;
+    try
+      Reg.GetValueNames( Strings );
+      for I := 0 to Strings.Count-1 do
+        Reg.DeleteValue( Strings[I] );
+    finally
+      Strings.Free;
+    end;
+    for I := 0 to Length( TICKETS )-1 do
+      Reg.WriteString( IntToStr( TICKETS[I].Min ) , IntToStr( TICKETS[I].Norm ) + ';' + IntToStr( TICKETS[I].Zlav ) );
+
+    Reg.OpenKey( '\Software\MHDClient\Synchronization' , False );
+    Reg.WriteString( 'Last' , CLIENTINFO.LastUpdate );
+  finally
+    Reg.Free;
+  end;
+end;
+
+initialization
+  ReadRegs;
+  TICKETS := GetTickets( '\Software\MHDClient\Tickets' );
+finalization
+  WriteRegs;
+end.

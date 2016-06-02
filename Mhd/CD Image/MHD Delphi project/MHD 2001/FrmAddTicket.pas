@@ -1,0 +1,74 @@
+unit FrmAddTicket;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Konstanty;
+
+type
+  TFormAddTicket = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    ButtonOK: TButton;
+    ButtonZrusit: TButton;
+    procedure ButtonOKClick(Sender: TObject);
+    procedure ButtonZrusitClick(Sender: TObject);
+    procedure Edit1Exit(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    NewTicket : TTicket;
+  end;
+
+var
+  FormAddTicket: TFormAddTicket;
+
+implementation
+
+{$R *.DFM}
+
+procedure TFormAddTicket.ButtonOKClick(Sender: TObject);
+begin
+  with NewTicket do
+    begin
+      Min := StrToInt( Edit1.Text );
+      Norm := StrToInt( Edit2.Text );
+      Zlav := StrToInt( Edit3.Text );
+    end;
+  ModalResult := 1;
+end;
+
+procedure TFormAddTicket.ButtonZrusitClick(Sender: TObject);
+begin
+  ModalResult := -1;
+end;
+
+procedure TFormAddTicket.Edit1Exit(Sender: TObject);
+var I : integer;
+    S : string;
+begin
+  S := TEdit( Sender ).Text;
+
+  try
+    I := StrToInt( S );
+  except
+    MessageDlg( 'Zadaná hodnota nie je celé èíslo!' , mtError , [mbOK] , 0 );
+    TEdit( Sender ).SetFocus;
+    exit;
+  end;
+
+  if I <= 0 then
+    begin
+      MessageDlg( 'Zadaná èíslo nie je väèšie ako nula!' , mtError , [mbOK] , 0 );
+      TEdit( Sender ).SetFocus;
+      exit;
+    end;
+end;
+
+end.

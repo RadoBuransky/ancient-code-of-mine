@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="Window Styles" value="0x800025">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Vitajte!">
+		<param name="Local" value="Html\index.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Predstavenie programu MHD 2001">
+		<param name="Local" value="Html\contents\predstavenie.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Ako na to?">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Zobrazenie rozvrhu">
+			<param name="Local" value="Html\contents\akonato\rozvrh.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Zobrazenie spoja na mape">
+			<param name="Local" value="Html\contents\akonato\spoj.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Zobrazenie zastávky na mape">
+			<param name="Local" value="Html\contents\akonato\zast.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Zobrazenie najbližšej zastávky">
+			<param name="Local" value="Html\contents\akonato\najbl.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Vyh¾adanie spojenia">
+			<param name="Local" value="Html\contents\akonato\vyhladanie.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Aktualizácia údajov">
+			<param name="Local" value="Html\contents\akonato\aktualizacia.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

@@ -1,0 +1,29 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = MHD.exe MHDserver.exe MHDeditor.exe lgmControls.bpl
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+MHD.exe: MHD 2001\MHD.dpr
+  $(DCC)
+
+MHDserver.exe: MHD 2001 Server\MHDserver.dpr
+  $(DCC)
+
+MHDeditor.exe: MHD 2001 Server\Editor\MHDeditor.dpr
+  $(DCC)
+
+lgmControls.bpl: ..\..\..\Programovanie\Delphi\lgmpanel\LGM-Controls\Components\lgmControls.dpk
+  $(DCC)
+
+
