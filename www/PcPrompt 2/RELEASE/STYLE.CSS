@@ -1,0 +1,5 @@
+BODY				{background-color:#ffffff; color:#eb4040}
+.menuitem			{text-align:center; color:#ffffff; background-color:#eb4040;}
+.submenu			{background-color:eb4040}
+.offsubmenu			{display:none}
+.onsubmenu			{display:on}

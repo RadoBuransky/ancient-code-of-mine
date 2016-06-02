@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>8 minutes - Snack Bar - Kontakt</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <style type="text/css" media="all">
+      @import "default.css";
+    </style>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA4czDtKl57ibXVtzubbc3thQRWeM-lOID13mzVPl9y21-5KuQvRRenwhVxd7bBcL23NIma0257Ws2bQ"
+      type="text/javascript"></script>
+    <script type="text/javascript">
+
+    //<![CDATA[
+
+    function load() {
+      if (GBrowserIsCompatible()) {
+      	var pos = new GLatLng(48.146058,17.137563);
+        var map = new GMap2(document.getElementById("map"));
+        map.addControl(new GLargeMapControl());
+        map.disableScrollWheelZoom();
+        map.setMapType(G_HYBRID_MAP);
+        
+        map.setCenter(pos, 17);
+        
+        var opt = { 
+					title: '8 minutes',
+					clickable: false
+				};
+        var m = new GMarker(pos, opt);
+        map.addOverlay(m);        
+      }
+      
+       if (parent.adjustIFrameSize)
+       	parent.adjustIFrameSize(window);
+    }
+
+    //]]>
+    </script>
+  </head>
+  <body onload="load()" onunload="GUnload()" class="contentBody">
+    <h1>Kontakt</h1>
+    <p><a href="http://www.apollobc.sk/sk/home-0" target="new">Apollo Business Center</a><br>
+    Mlynské Nivy 45<br>
+    Bratislava</p>
+    <p>Pondelok - piatok . . . . . 8:00 - 17:00<br>
+    Sobota, nedeľa . . . . . zatvorené</p>
+    <p>Objednávky prijímame iba telefonicky.</p>
+    <p>Telefónne č.: +421 2 53 63  56 56</p>
+    <p><a href="mailto:8minutes@8minutes.sk">8minutes@8minutes.sk</a></p>
+    <img src="img/mapka.jpg" style="margin-bottom: 20px; border: 1px solid black; display: block"/>
+    <img src="img/apollo.jpg" style="margin-bottom: 20px; margin-right:20px; border: 1px solid black"/>
+	  <img src="img/shop.jpg" style="margin-bottom: 20px; border: 1px solid black"/>
+    <div id="map" style="width: 655px; height: 350px; border: 1px solid black" />
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<h1>Základne pojmy</h1>
+<h2>Denný psychiatrický stacionár</h2>
+<p>Je zariadením zameraným na liečbu akútnych psychiatrických pacientov, ktorí majú dostatočne stabilné sociálne pozadie. Na jednej strane denný stacionár pomáha predchádzať úplnej hospitalizácii a na druhej poskytuje podporu pacientom, ktorí boli hospitalizovaní, ale po ťažkej kríze sú znovu pripravení postupne rozvíjať svoj zdravý potenciál v rámci psychosociálnej rehabilitácie. Pacientom v tomto úsilí pomáha tím odborníkov – psychiatrov, psychológov, zdravotných sestier a sociálnych pracovníkov.</p>
+<h2>Chránené bývanie</h2>
+<p>Väčšine pacientov nahrádza vlastný domov a je rezervovaný pre typ pacientov, u ktorých v najbližšom čase nemožno počítať so sociálnym a pracovným znovuzaradením. U niektorých pacientov môže byť umiestnenie v chránenom domove zamýšľané ako krátkodobé riešenie, u iných ako viac-menej trvalé. Domov by mal byť vedený sociálnym pracovníkom alebo sociálnou sestrou či ošetrovateľom. Domov a jeho obyvatelia si vyžadujú aj psychiatrický dohľad vo forme návštev lekára.</p>
+<h2>Podporované bývanie</h2>
+<p>Je formou zariadenia pre malé skupiny do 3 až 5 pacientov, ktorí obývajú spoločný byt. Pacienti musia byť schopní sami sa postarať o svoje finančné záležitosti a o chod domácnosti.  Takýto byt je „podporovaný“ v tom zmysle, že v prípade akýchkoľvek zdravotných alebo praktických ťažkostí sa pacient môže obrátiť na sociálneho pracovníka, prípadne iného odborníka z tímu. Lekár so sociálnym pracovníkom vykonávajú pravidelné návštevy v týždenných alebo mesačných intervaloch.</p>
+<h2>Chránené zamestnanie</h2>
+<p>Je špeciálnou formou priamej tvorby pracovných miest, realizované formou chránených dielní alebo chránených pracovísk, v ktorých pracuje najmenej 50 % občanov so zdravotným postihnutím, ktorí nie sú schopní nájsť si zamestnanie na otvorenom trhu práce. Sú to tiež pracoviská, na ktorých sa občania so zdravotným postihnutím zaškoľujú alebo pripravujú na prácu, a v ktorých sú pracovné podmienky vrátane nárokov na pracovný výkon prispôsobené zdravotnému stavu občanov so zdravotným postihnutím.</p>
+<h2>Chránená dielňa</h2>
+<p>Poskytuje pacientom premyslený pracovný tréning. Cieľom je poskytnúť klientovi možnosť pracovať a zamestnať sa niečím, čo je adekvátne jeho možnostiam a schopnostiam. Klienti dostávajú odmenu podľa ich výkonu. Klientmi sú najčastejšie ľudia s chronickou formou duševného ochorenia.</p>
+<h2>Podporované zamestnanie</h2>
+<p>Je pravá, skutočná práca v integrovanom pracovnom prostredí s priebežnou podporou, ktorú môže poskytovať agentúra sociálnych služieb, podporná skupina alebo iná organizácia.</p>
+<h2>Služba case-manažment (manažment jednotlivých prípadov)</h2>
+<p>Je špecializovaná komunitná služba, ktorú vykonáva tím pracovníkov z rôznych oblastí. Tento tím koordinuje a poskytuje podporu ľuďom s ťažkou a pretrvávajúcou duševnou poruchou priamo v ich v prirodzenom prostredí – v komunite. Zabezpečuje pravidelný kontakt s klientom podľa meniacich sa potrieb a individuálneho plánu klienta.</p>

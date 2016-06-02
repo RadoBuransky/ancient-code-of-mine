@@ -1,0 +1,43 @@
+{t:Help}
+{st:Lennon/McCartney}
+{define: A6 1 2 2 2 2 0 0}
+[Hm]Help!  I need somebody  [G]Help!   not just anybody 
+[E7]Help!  You know i need someone   [A]HELP!
+
+{c:First verse:}
+[A]When I was young oh so much [C#m]younger than today
+[F#m]I never needed anybody's [D]help in [G]any [A]way
+But now these day have gone and I'm [C#m]not so self assured
+[F#m]And now I find I need you like I've [D]never [G]done be[A]fore
+
+{soc}
+[Hm]Help me if you can I'm feeling down
+And I [G]do appreciate your being 'round
+[E7]Help me get my feet back on the ground
+Won't you [A]please please help [A]me?
+#         ^(riff)
+{eoc}
+
+{c:Second Verse:}
+[A]And now my life has changed in [C#m]oh so many ways
+[F#m]My independence seems to [D]vanish in [G]the [A]haze
+But every now and then I [C#m]feel so insecure
+[F#m]And now I find I need you like I've [D]never [G]done be[A]fore
+
+{c:Repeat Chorus}
+
+{c:Repeat first verse}
+
+{c:Repeat Chorus until last line, then:}
+Won't you [A]please please help [F#m]me
+#	  ^(riff)
+Help me   Help [A]me.  O[A6]ohm.
+#
+#	Help! signature riff:
+#
+#	E ------------------------------------
+#	B --------0-------0-------0-------0---
+#	G ------0-------0-------0-------0-----
+#	D ----5-------4-------3-------2-------
+#	A --7-------6-------5-------4---------
+#	E ------------------------------------

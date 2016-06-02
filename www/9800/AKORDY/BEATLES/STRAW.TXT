@@ -1,0 +1,85 @@
+{title:Strawberry Fields Forever}
+{st:John Lennon/Paul McCartney}
+{define: E7-5 1 0 3 1 0 1 0}
+     [G]Let me take you down 'cause I'm going [Dm7]to Strawberry Fields.
+     [E7-5]Nothing is real.
+     And [C]nothing to [D]get [E]hung about.
+     [Am7]Stawberry Fields [D]fore[G]ver.
+
+[D]Living is easy with [D7]eyes close[B7]d,
+[Em]Misunderstanding all you [C]see.
+[Am7]It's getting [D7]hard to be some[G]one but it all works [Em]out,
+[Am7]It doesn't [D7]matter much to [C]me.[G]   [C]
+
+     Let me take you down 'cause I'm going to Strawberry Fields.
+     Nothing is real.
+     And nothing to get hung about.
+     Stawberry Fields forever.
+
+No one I think is in my tree,
+I mean it must be high or low.
+That is, you know you can't tune in but it's all right,
+That is, I think it's not too bad.
+
+     Let me take you down 'cause I'm going to Strawberry Fields.
+     Nothing is real.
+     And nothing to get hung about.
+     Stawberry Fields forever.
+
+Always know sometimes think it's me,
+But you know I know and it's a dream.
+I think I know of thee, ah, yes but it's all wrong,
+That is, I think I disagree.
+
+     Let me take you down 'cause I'm going to Strawberry Fields.
+     Nothing is real.
+     And nothing to get hung about.
+     Stawberry Fields forever.
+#
+# Submitted to the ftp.nevada.edu:/pub/guitar archives
+# by Steve Putz <putz@parc.xerox.com> 
+# 7 September 1992
+
+
+From: rzlucy@hikos.rz.uni-konstanz.de (Dierk Lucyga)
+ 
+{title:Strawberry Fields Forever}
+{st:The Beatles}
+ 
+{define: Em/D 1 0 0 0 0 -1 -1}
+{define: Bdim7 1 1 0 1 0 -1 -1}
+ 
+{start_of_chorus}
+[G] Let me take you down cause I'm going to [Dm7] strawberry fields.
+[Bdim7] Nothing is real.
+And no[C]thing to get hu[E]ng about
+[Cmaj7]Strawberry fields for[G]ever
+{end_of_chorus}
+ 
+[D]Living is [Dmaj7]easy with [D7]eyes closed.
+[Em]Misundersta[Em/D]nding all you [C]see.
+It's getting [D7]hard to be some[G]one, but it all works [Em]out
+[C] It doesn't mat[D]ter much to [C]me.
+ 
+{c:Chorus}
+ 
+[D]No one I [Dmaj7]think is in [D7]my tree
+[Em]I mean it [Em/D]must be high or [C]low.
+That is, you [D7]know you can't tune [G]in, but it's all [Em]right
+[C] That is, I [D]think it's not too [C]bad.
+ 
+{c:Chorus}
+ 
+[D]Always [Dmaj7]know some[D7]times think it's me.
+[Em]But you know I [Em/D]know and it's a [C]dream.
+I think I [D7]know of thee, ah, [G]yes, but it's all [Em]wrong
+[C] That is, I [D]think I disa[C]gree.
+ 
+{c:Chorus}
+Dierk Lucyga           |  Internet: rzlucy@nyx.rz.uni-konstanz.de               
+Infomation Manager     |  Bitnet:   RZLUCY@DKNKURZ1                             
+Universitaet Konstanz  |                                                        
+Postfach 5560          |                                                        
+D-W7750 Konstanz       |  Tel.:     +49 7531 88 2404                            
+
+

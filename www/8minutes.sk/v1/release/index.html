@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>8 minutes - Snack Bar</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Windows-1250" />
+    <link rel="icon" href="img/favicon.jpg" type="image/jpg" />
+    <style type="text/css" media="all">
+      @import "default.css";
+    </style>
+    <script type="text/javascript" language="javascript">
+			function adjustIFrameSize (iframeWindow) {
+				var w, h;
+				
+				w = -1;
+				h = -1;
+			  if (iframeWindow.document.height) {
+			    var iframeElement = document.getElementById(iframeWindow.name);
+			    h = iframeWindow.document.documentElement.scrollHeight;
+			    w = iframeWindow.document.width;
+			  }
+			  else if (document.all) {
+			    var iframeElement = document.all[iframeWindow.name];
+			    if ((iframeWindow.document.compatMode != null) &&
+			        (iframeWindow.document.compatMode != 'BackCompat')) 
+			    {
+			      h = iframeWindow.document.documentElement.scrollHeight + 5;
+			      w = iframeWindow.document.documentElement.scrollWidth + 5;
+			    }
+			    else {
+			      h = iframeWindow.document.body.scrollHeight + 5;
+			      w = iframeWindow.document.body.scrollWidth + 5;
+			    }
+			  }
+			  
+			  if ((w > 0) && (h > 0))
+			  {
+			  	if (w < 680)
+			  		w = 680;
+			  		
+			  	if (h < 645)
+			  		h = 645;
+			  	
+			  	iframeElement.style.width = w + 'px';
+			  	iframeElement.style.height = h + 'px';
+			  }
+			}
+		</script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="img/logo.jpg" alt="8 minutes" class="logo" />
+        <img src="img/banner01.gif" alt="Desiatový set" class="banner" />
+        <ul class="menu">
+	        <li><a href="ponuka.html" target="content">Ponuka</a></li>
+	        <li><a href="akcie.html" target="content">Akcie</a></li>
+	        <li><a href="kontakt.html" target="content">Kontakt</a></li>
+	      </ul>
+      </div>      
+      <iframe src="ponuka.html"  name="content" id="content" class="content" frameborder="0">
+      </iframe>
+      <div class="footer">
+      8 minutes - Snack Bar, Apollo Centrum, <a href="mailto:8minutes@8minutes.sk">8minutes@8minutes.sk</a>
+      </div>
+    </div>
+  </body>
+</html>

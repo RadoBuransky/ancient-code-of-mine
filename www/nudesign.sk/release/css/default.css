@@ -1,0 +1,45 @@
+body
+{
+	background-color: #272525;
+	padding: 0;
+	margin: 0;
+}
+
+a, a:link, a:hover, a:visited, a:active
+{
+	border: none;
+	text-decoration: none;
+}
+
+a img, a:link img, a:hover img, a:visited img, a:active img
+{
+	border: none;
+}
+
+a img.Contact
+{
+	border-bottom: 1px solid #272525;
+}
+
+a:hover img.Contact
+{
+	border-bottom: 1px solid #f6ef0c;
+}
+
+table.Index
+{
+	width: 100%;
+	color: white;
+	text-align: center;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+div.IndexGradient
+{
+	width: 100%;
+	height: 60px;
+	background-image: url(../img/back-index2.gif);
+	background-repeat: repeat-x;
+	padding: 0;
+	margin: 0;
+}

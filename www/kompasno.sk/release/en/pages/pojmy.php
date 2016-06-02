@@ -1,0 +1,15 @@
+<h1>Key terms</h1>
+<h2>Daytime psychiatric facility</h2>
+<p>Is a facility for the treatment of acute psychiatric patients with sufficiently stable social background. This daytime facility enables patients to remain out of hospitalized care and also offers support to patients with hospitalization history, who are ready to develop their healthy potential within the framework of psycho-social rehabilitation. Patients here are assisted by a team of professionals- psychiatrists, psychologists, nurses and social workers.</p>
+<h2>Protective home</h2>
+<p>Represents the substitute for an own home to most patients and is reserved for those patients, who can’t expect to achieve social and employment reintegration in the near future. For some patients, placement in a protective home may be a temporary measure, while for others a protective home may represent a more permanent solution. The protective home should be headed by a social worker or nurse. The home and its inhabitants require psychiatric assistance taking the form of a specialist’s visits.</p>
+<h2>Supportive home</h2>
+<p>Represents a facility for smaller groups of 3 to 5 patients, who share a home together. Patients must be able to handle their financial situation and running their household. “Supportive” home means that in case of any health or practical issues, the residents may turn for help to a social worker or other professional. A physician and a social worker also make regular visits in weekly or monthly intervals.</p>
+<h2>Protected employment</h2>
+<p>Represents a special form of directly created employment opportunities, taking the form of protected workshops or protected workplaces with over 50% of employees with health disabilities, who cannot find a job on the open job market. Protected employment also offers vocational training and preparation for people with health disabilities, where working conditions and demands are accommodated to the health status of people with disabilities.</p>
+<h2>Protected workshop</h2>
+<p>Provides complex vocational training to patients. The objective is to provide the client with an employment opportunity and an engagement activity adequate for his or her abilities. Clients are rewarded based on their performance. Clients are mostly people with chronic mental illness.</p>
+<h2>Supportive employment</h2>
+<p>Refers to actual proper employment in a working environment with some support provided. Support may come from a social services agency, support group, or other organization.</p>
+<h2>Case management services</h2>
+<p>Represent a specialized community service performed by a team of professionals from various areas. This team coordinates and provides support to people with severe and prolonged mental disorders in their native environment- in the community. The objective is to maintain regular contact with the client in line with the changing individual needs of the client.</p>

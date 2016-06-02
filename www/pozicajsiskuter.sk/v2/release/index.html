@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Požičaj Si Skúter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=Windows-1250" />
+    <style type="text/css" media="all">
+      @import "styles/default.css";
+    </style>
+    <script type="text/javascript" language="javascript">
+      // Global list of tabs
+      var tabNames = ['uvod', 'ako', 'cennik', 'galeria', 'kontakt', 'img01', 'img02', 'img03', 'img04'];
+      
+      // Show tab
+      function ShowTab(tabName)
+      {
+        // Hide tabs except this one
+        for (i = 0; i < tabNames.length; i++)
+          if (tabNames[i] == tabName)
+            document.getElementById(tabNames[i]).style.display = 'block';
+          else
+            document.getElementById(tabNames[i]).style.display = 'none';
+      }
+      
+      // Initialization function
+      function OnLoad()
+      {      	
+      	// Show first tab by default
+      	ShowTab(tabNames[0]);      	
+      }
+    </script>
+  </head>
+  <body onload="OnLoad();">
+    <div class="container">
+      <div class="main">
+        <div class="header">
+          <table>
+            <tr>
+              <td colspan="3" style="text-align: center">
+                <a href="index_en.html"><img src="img/usa.jpg" alt="English version" /></a>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="img/scooterl.jpg"></td>
+              <td style="width: 480px"><h1>www.PozicajSiSkuter.sk</h1></td>
+              <td><img src="img/scooterr.jpg"></td>
+            </tr>
+          </table>          
+        </div>
+        <div class="menu">
+        <ul class="menu">
+          <li><a href="#" onclick="ShowTab(tabNames[0])">Úvod</a></li>
+          <li><a href="#" onclick="ShowTab(tabNames[1])">Ako?</a></li>
+          <li><a href="#" onclick="ShowTab(tabNames[2])">Cenník</a></li>
+          <li><a href="#" onclick="ShowTab(tabNames[3])">Galéria</a></li>
+          <li><a href="#" onclick="ShowTab(tabNames[4])">Kontakt</a></li>
+        </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div id="uvod">
+          <h2>Úvod</h2>
+          <table class="uvodTable">
+            <tr>
+              <td style="width: 100px"><span class="uvodHeader">Čo?</span></td>
+              <td>Cestný skúter do 50 ccm</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">Kto?</span></td>
+              <td>Ktokoľvek so štandardným vodičským preukazom</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">Kedy?</span></td>
+              <td>Termín si dohodneš telefonicky</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">Kde?</span></td>
+              <td>Bratislava – centrum</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">Za koľko?</span></td>
+              <td>449 SKK (14.99 EUR) / deň</td>
+            </tr>
+          </table>
+        </div>
+        <div id="ako">
+          <h2>Ako si požičiam skúter?</h2>
+          <table class="akoTable">
+            <tr>
+              <td><span class="uvodHeader">1.</span></td>
+              <td>Rezervuj si termín a dohodni miesto prevzatia telefonicky na 0949 178 789, 0903 264 949
+            alebo pošli email na <a href="mailto:rezervacie@pozicajsiskuter.sk">rezervacie@pozicajsiskuter.sk</a></td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">2.</span></td>
+              <td>Vyzdvihni si skúter v stanovený čas na dohodnutom mieste, prines si so sebou občiansky
+            preukaz a vodičský preukaz (skútre sú do 50 ccm, čo znamená, že stačí štandardný vodicšký preukaz typu B)</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">3.</span></td>
+              <td>Podpíš zmluvu o zapožičaní skútra</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">4.</span></td>
+              <td>Pri preberaní skútra dostaneš všetky informácie a inštrukcie vrátane „pohotovostného“ kontaktu</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">5.</span></td>
+              <td>K skútru ti dáme prilbu a samozrejme všetky potrebné doklady</td>
+            </tr>
+            <tr>
+              <td><span class="uvodHeader">6.</span></td>
+              <td>Vráť skúter v stanovený čas na dohodnuté miesto</td>
+            </tr>
+          </table>
+        </div>
+        <div id="cennik">
+          <h2>Cenník zapožičania jedného skútra</h2>
+          <center><h3>(platný od 24.6.2008)</h3></center>
+          <center>
+            <table class="price">
+              <tr class="priceheader">
+                <td style="vertical-align: top">Deň</td>
+                <td>KM limit<br><font style="font-weight: normal;">(každý ďalší km = 5 SKK)</font></td>
+                <td>Cena za deň<br><font style="font-weight: normal;">(SKK / EUR)</font></td>
+              </tr>
+              <tr>
+                <td>Pondelok - Štvrtok</td>
+                <td>120 km</td>
+                <td>449,- / 14.90</td>
+              </tr>
+              <tr>
+                <td>Piatok - Nedeľa</td>
+                <td>120 km</td>
+                <td>499,- / 16.60</td>
+              </tr>
+            </table>
+          </center>
+          <center>
+          <table class="price">
+            <tr class="priceheader">
+              <td>Počet dní</td>
+              <td>Zľava</td>
+            </tr>
+            <tr>
+              <td>2 dni</td>
+              <td>3%</td>
+            </tr>
+            <tr>
+              <td>3 dni</td>
+              <td>6%</td>
+            </tr>
+            <tr>
+              <td>4 dni</td>
+              <td>9%</td>
+            </tr>
+            <tr>
+              <td>5 dní</td>
+              <td>12%</td>
+            </tr>
+          </table>
+          </center>
+        </div>
+        <div id="galeria">
+          <h2>Galéria</h2>
+          <center>
+            <table class="galTable">
+              <tr>
+                <td><a href="#" onclick="ShowTab(tabNames[5])"><img src="img/gal01.jpg"></a></td>
+                <td><a href="#" onclick="ShowTab(tabNames[7])"><img src="img/gal03.jpg"></a></td>
+              </tr>
+              <tr>
+                <td><a href="#" onclick="ShowTab(tabNames[6])"><img src="img/gal02.jpg"></a></td>
+                <td><a href="#" onclick="ShowTab(tabNames[8])"><img src="img/gal04.jpg"></a></td>
+              </tr>
+            </table>
+          </center>
+        </div>
+        <div id="img01">
+          <center><a href="#" onclick="ShowTab(tabNames[3])"><img class="bigImage" src="img/gal01big.jpg"></a></center>
+        </div>
+        <div id="img02">
+          <center><a href="#" onclick="ShowTab(tabNames[3])"><img class="bigImage" src="img/gal02big.jpg"></a></center>
+        </div>
+        <div id="img03">
+          <center><a href="#" onclick="ShowTab(tabNames[3])"><img class="bigImage" src="img/gal03big.jpg"></a></center>
+        </div>
+        <div id="img04">
+          <center><a href="#" onclick="ShowTab(tabNames[3])"><img class="bigImage" src="img/gal04big.jpg"></a></center>
+        </div>
+        <div id="kontakt">
+          <h2>Kontakt</h2>
+          <h3>Požičaj Si Skúter</h3>
+          Dostojevského rad 21<br>
+          811 09 Bratislava<br>
+          0949 178 789, 0903 264 949<br><br>
+          <a href="mailto:rezervacie@pozicajsiskuter.sk">rezervacie@pozicajsiskuter.sk</a>
+        </div>
+      </div>
+      <div class="footer">
+        Požičaj Si Skúter, Dostojevského rad 21, 811 09 Bratislava, 0949 178 789, 0903 264 949,
+        <a href="mailto:rezervacie@pozicajsiskuter.sk">rezervacie@pozicajsiskuter.sk</a>
+      </div>
+    </div>
+  </body>
+</html>

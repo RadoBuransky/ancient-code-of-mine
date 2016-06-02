@@ -1,0 +1,34 @@
+{title:Let it Be}
+{st:John Lennon/Paul McCartney}
+Wh[G]en I find myself in t[D]imes of trouble,
+Mo[Em]ther Mary c[C]omes to me,
+Sp[G]eaking words of w[D]isdom, let it [C]be.[G]
+And in my hour of da[D]rkness,
+She is st[Em]anding right in f[C]ront of me,
+Sp[G]eaking words of w[D]isdom, let it [C]be.[G]
+
+{c:Chorus:}
+     Let it [Em]be, let it [Bm]be, let it [C]be, let it [G]be.
+     Whisper words of wis[D]dom, let it [C]be.[G]
+
+And when the broken hearted people
+Living in the world agree,
+There will be no answer, let it be.
+But though there may be parting,
+There is still a chance that they will see,
+There will be an answer, let it be.
+
+     {c:Chorus.}
+
+And when the night is cloudy,
+There is still a light that shines on me,
+Shine until tomorrow, let it be.
+I wake up to the sound of music,
+Mother Mary comes to me,
+Whisper words of wisdom, let it be.
+
+     {c:Chorus.}
+#
+# Submitted to the ftp.nevada.edu:/pub/guitar archives
+# by Steve Putz <putz@parc.xerox.com> 
+# 7 September 1992

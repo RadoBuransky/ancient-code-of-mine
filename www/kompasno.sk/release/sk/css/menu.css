@@ -1,0 +1,87 @@
+.MainMenu1
+{
+	width: 100px;
+}
+
+#MainMenu
+{
+	position: relative;
+	z-index: 100;
+	width: 964px;
+	height: 26px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #50ae12;
+	font-weight: bold;
+	font-size: 10pt;
+
+}
+
+#MainMenu ul
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#MainMenu ul li
+{
+	position: relative;
+	float: left;
+	text-align: center;
+	background: #50ae12;
+}
+
+#MainMenu ul li a
+{
+	display: block;
+	width: 114px;
+	height: 26px;
+	line-height: 26px;
+	border: 0;
+	color: #201f20;
+	text-decoration: none;
+}
+
+#MainMenu table
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-collapse: collapse;
+}
+
+#MainMenu ul li a:hover
+{
+	background: #a5cc8b;
+}
+
+#MainMenu ul li a:hover ul,
+#MainMenu ul li:hover ul
+{
+	visibility: visible;
+}
+
+#MainMenu ul li ul
+{
+	visibility: hidden;
+	position: absolute;
+	height: 0;
+	top: 26px;
+	left: 0;
+	border-top: 1px solid #469810;
+}
+
+#MainMenu ul li ul li
+{
+	text-align: left;
+}
+
+#MainMenu ul li ul li a
+{
+	width: 150px;
+	height: auto;
+	line-height: 1.0em;
+	font-weight: normal;
+	padding: 5px 10px;
+}

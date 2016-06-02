@@ -1,0 +1,41 @@
+{t:Dream on}
+{st:Aerosmiths}
+
+{c:Intro:    F#m  C#m/F#  |  F#m6  Bm6  |  F#m  C#7sus  |  F#m}
+
+{c:Verse 1:}
+[F#m]Ev'ry [F#m7]time that I [F#m6]look in the [Bm6]mirror 
+[F#m]  All these [F#m7]lines on my [F#m6]face gettin' [Bm6]clearer
+[F#m]  [F#m7]The past is [F#m6]gone   [Bm6]
+[F#m]It went [F#m7]by like [F#m6]dusk to [Bm6]dawn
+
+{c:Bridge:}
+[D#m7]Isn't that the [C#sus4]way [C#]      ev'[D#m7]rybody's got their [Bm6]dues in life to pay?
+
+[C#]  [F#m]    [D#7]  [C#7] 
+ 
+{c:Chorus 1:}
+     [F#5]I know [E5]nobody knows [D5]where it comes and where[E5] it goes
+     [F#5]I know it's ev'[E5]ryvody's sin; [D5]you got to lose to [E5]know how to win
+
+[F#m]  [C#m]  [F#m6]  [Bm6]   [F#m]  [F#m9]   [F#m]
+
+{c:Verse 2:}
+Half my life's in books' written pages  
+Lived and learned from fools and from sages
+You know it's true
+All these things come back to you.
+
+{c:Chorus 2:}
+     Sing with me,sing for the years. 
+     Sing for the laughter and sing for the tears.
+     Sing with me if it's just for today,
+     Maybe tomorrow the good Lord will take you away
+
+[B5]Dream on, [C#5]dream on, [D5]dream on, [E5]dream yourself a dream come [F#5]true.
+[B5]Dream on, [C#5]dream on, [D5]dream on, and [E5]dream until your dream comes [F#5]true.
+[B5]Dream on, [C#m]dream on, [D5]dream on, [E5]dream on,
+[F#5]Dream on, [G#5]dream on, [A5]dream on, [B5]ah   
+[C#5]Aaah.____________________________________________
+
+{c:Repeat chorus 2}

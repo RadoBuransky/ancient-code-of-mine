@@ -1,0 +1,194 @@
+body
+{
+	background-color: #840707;
+	font-family: arial;
+	text-align: center;
+	color: black;
+	margin: 0px;
+}
+
+h1
+{
+	margin: 0px;
+	color: darkblue;
+}
+
+h2
+{
+	color: darkblue;
+	margin-bottom: 5px;
+}
+
+h3
+{
+	color: #840707;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+a:visited, a:active, a:link
+{
+	color: black;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+a img
+{
+	border: 0;
+}
+
+.container
+{
+	background-color: #EEEEEE;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+	min-height: 540px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 3px solid #000;
+	border-right: 4px solid #000;
+	border-bottom: 3px solid #000;	
+	border-top: 3px solid #000;
+}
+
+.header
+{
+	padding-top: 0px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+.main
+{
+	padding-top: 10px;
+}
+
+.menu
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-left: 2px;
+	font-weight: bold;
+	color: white;
+}
+
+.menu li
+{
+	background-color: darkblue;
+	color: white;
+	float: left;
+	margin: 0 2px;
+}
+
+.menu li a
+{
+	height: 26px;
+	line-height: 26px;
+	float: left;
+	width: 130px;
+	display: block;
+	border: 2px solid #000000;
+	text-decoration: none;
+	text-align: center;
+}
+
+.menu li a:visited, .menu li a:active, .menu li a:link
+{
+	color: white;
+}
+
+.menu li a:hover
+{
+	background-color: #EEEEEE;
+	color: darkblue;
+	text-decoration: none;
+}
+
+.content
+{
+	padding-top: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	height: 370px;
+}
+
+.uvodItem
+{
+	padding-left: 50px;
+}
+
+.price
+{
+	border: 3px solid black;
+	text-align: center;
+	border-collapse: collapse;
+	margin: 10px;
+}
+
+.priceheader
+{
+	background-color: darkblue;
+	color: white;
+	font-weight: bold;
+}
+
+.price td
+{
+	padding: 5px;
+}
+
+.galTable td
+{
+	padding: 5px;
+}
+
+.galTable img
+{
+	border: 3px solid #000;
+}
+
+.bigImage
+{
+	margin-top: 30px;
+	border: 3px solid #000;
+}
+
+.footer
+{
+	color: black;
+	font-size: 12px;
+	text-align: center;
+	left: 0;
+	right: 0;
+	padding-top: 30px;
+	padding-bottom: 1em;
+}
+
+.uvodHeader
+{
+	font-weight: bold;
+	color: #840707;
+}
+
+.uvodTable td
+{
+	padding: 7px;
+}
+
+.akoTable td
+{
+	vertical-align: top;
+	padding: 7px;
+}

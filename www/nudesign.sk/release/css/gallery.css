@@ -1,0 +1,21 @@
+body.Gallery
+{
+	margin-top: 90px;
+}
+
+body.Image
+{
+	margin-top: 20px;
+	text-align: center;
+}
+
+table.Gallery
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.Gallery tr td
+{
+	padding: 20px;
+}

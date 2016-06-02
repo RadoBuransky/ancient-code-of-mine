@@ -1,0 +1,44 @@
+{t:Sweet Child Of Mine}
+{st:Guns 'n' Roses}
+{c:Intro}
+{sot}
+  D chord                      Cadd9 chord                  G chord 
+e|-------------15----14----|T |-------------15----14----|T |-------------15----14----|T
+B|----15-------------------|w |----15-------------------|w |----15-------------------|w 
+G|-------14-12----14----14-|i |-------14-12----14----14-|i |-12----14-12----14----14-|i
+D|-12----------------------|c |-14----------------------|c |-------------------------|c 
+A|-------------------------|e |-------------------------|e |-------------------------|e
+E|-------------------------|  |-------------------------|  |-------------------------|
+{eot}
+
+[D]She's got a smile that it seems to me 
+Re[Cadd9]minds me of childhood memories
+Where [G]everything was as fresh as the bright blue [D]sky
+[D]Now and then when I see her face
+she [Cadd9]takes me away to that special place
+and if I [G]stay too long I'd probably break down and [D]cry
+
+[Cadd9]Oh oh oh [G]oh sweet child of [D]mine
+[Cadd9]Oh oh oh [G]oh sweet love of [D]mine
+
+[D]She's got eyes of the bluest sky
+as [Cadd9]if they thought of rain
+I [G]hate to look into those eyes and [D]see an ounce of pain
+Her [D]hair reminds me of a warm safe place
+where [Cadd9]as a child I'd hide
+and [G]pray for the thunder and the rain to [D]quietly pass me by
+
+[Cadd9]Oh oh oh [G]oh sweet child of [D]mine
+[Cadd9]Oh oh oh [G]oh sweet love of [D]mine
+
+[Em]     [C]     [B7]     [Am]     [Em]     [C]     [B7]     [Am]     [Em]     [C]     [B7]     [Am]     [Em]     [C]     [B7]     [Am]
+{c:Solo}
+
+{c:Following vocals ad lib over E  F#  G  A  B  C  D  G chord sequence}
+Where do we go
+Where do we go now
+Where do we go
+Sweet child of mine
+
+{c:End on E open chord}
+

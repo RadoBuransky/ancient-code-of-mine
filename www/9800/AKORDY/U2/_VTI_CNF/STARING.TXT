@@ -1,0 +1,7 @@
+vti_encoding:SR|utf8-nl
+vti_author:SR|Administrator
+vti_timecreated:TR|20 Jan 1999 15:08:09 +0100
+vti_modifiedby:SR|Administrator
+vti_backlinkinfo:VX|akordy/u2/u2.html
+vti_extenderversion:SR|3.0.2.926
+vti_timelastmodified:TR|20 Jan 1999 15:08:09 +0100

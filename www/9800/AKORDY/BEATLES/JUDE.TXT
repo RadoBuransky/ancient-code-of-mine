@@ -1,0 +1,36 @@
+{title:Hey Jude}
+{st:John Lennon/Paul McCartney}
+{define: C7sus 1 0 1 3 3 3 -1}
+Hey, [F]Jude, don't make it [C]bad,
+Take a [C7sus]sad song and [C7]make it [F]better.
+Re[Bb]member to let her into your [F]heart,
+Then you can [C7]start to make it [F]better.
+
+Hey, Jude, don't be afraid,
+You were made to go out and get her.
+The minute you let her under your skin,
+Then you begin to make it better.
+
+     [F7]And anytime you feel the [Bb]pain,
+     Hey, Jude, re[Gm7]frain,
+     Don't carry the [C7]world upon your [F]shoulders.
+     Da da da [F7]da da da [C7]da da da da.
+
+Hey, Jude, don't let me down,
+You have found her, now go and get her.
+Remember to let her into your heart,
+Then you can start to make it better.
+
+     For now you know that it's a fool
+     Who plays it cool
+     By making his world a little colder.
+     Da da da da da da da da da da.
+
+Hey, Jude, don't make it bad,
+Take a sad song and make it better.
+Remember to let her into your heart,
+Then you can start to make it better.
+#
+# Submitted to the ftp.nevada.edu:/pub/guitar archives
+# by Steve Putz <putz@parc.xerox.com> 
+# 7 September 1992

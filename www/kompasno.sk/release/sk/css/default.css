@@ -1,0 +1,117 @@
+body
+{
+	margin: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 0;
+	padding-right: 0;
+	background-image: url(../img/bkg.gif);
+	background-repeat: repeat;
+	font-family: Verdana;
+	font-size: 0.8em;
+}
+
+h1, h2
+{
+	font-family: Georgia;
+	color: #454344;
+}
+
+h1
+{
+	font-size: 2em;
+	margin-top: 15px;
+}
+
+h2
+{
+	font-size: 1.5em;
+}
+
+p
+{
+	text-align: justify;
+}
+
+ul.Kompas li
+{
+	list-style-image: url(/kompasno/img/ul.png);
+	margin: 10px;
+	text-align: justify;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+a:visited, a:active, a:link
+{
+	color: black;
+}
+
+.Top
+{
+	width: 964px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: white;
+	text-align: right;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+}
+
+.Logo
+{
+	margin-right: 32px;
+}
+
+.LogoOnly
+{
+	float: left;
+	padding-top: 16px;
+	padding-left: 30px;
+	padding-right: 0px;
+}
+
+.BrownStripe
+{
+	background-color: #454344;
+	height: 8px;
+	overflow: hidden;
+}
+
+.GreenStripe
+{
+	background-color: #50ae12;
+	border-bottom: 1px solid #469810;
+}
+
+.Container
+{
+	width: 924px;
+	min-height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: white;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.Bold
+{
+	font-weight: bold;
+}

@@ -1,0 +1,31 @@
+{title:A Hard Day's Night}
+{st:The Beatles}
+{define:G  - 3 3 0 0 2 3}
+{define:C9 - 3 3 0 0 3 -1}
+
+{soc}
+It's been A [G]Hard [C9]Day's [G]Night and I've been [F]working like a [G]dog
+It's been A Hard [C9]Day's [G]Night I should be [F]sleeping like a [G]log
+But when I [C]get home to you I find the [D]things that you do will
+make me [G]feel [C9]al---[G]right
+{eoc}
+
+You know I work all day to get you money to buy things
+And It's worth it just to hear you say you're gonna give me ev'rything
+So why I love to come home 'Cause when I get you alone you know I'll be O.K.
+
+{c:Bridge:}
+     When I [Bm]home [Em]ev'rything seems to be al[Bm]right
+     When I'm [G]home [Em]feeling you holding me [C]tight, [D]tight,yeah
+
+{c:Chorus}
+
+{c:Solo}
+
+So why I love to come home 'Cause when I get you alone you know I'll be O.K.
+
+{c:Bridge}
+
+{c:Chorus}
+          
+You know I [G]feel [C9]al---[G]right

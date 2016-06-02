@@ -1,0 +1,8 @@
+vti_encoding:SR|utf8-nl
+vti_author:SR|Administrator
+vti_timecreated:TR|20 Jan 1999 15:08:05 +0100
+vti_modifiedby:SR|Rado
+vti_backlinkinfo:VX|akordy/pink/pink.html
+vti_nexttolasttimemodified:TR|20 Jan 1999 15:08:05 +0100
+vti_extenderversion:SR|3.0.2.926
+vti_timelastmodified:TR|06 Nov 1999 13:49:10 +0100

@@ -1,0 +1,268 @@
+Date: Sun, 01 Dec 1996 15:39:33 +0000
+From: CYBERIA ealing 7 <cyberiaeal7@cyberiacafe.net>
+Subject: TAB:  Ironic by Alanis Morissette
+
+
+                      Ironic - Alanis Morissette
+
+                  From the album, "Jagged Little Pill"
+    
+                  Words and music by Alanis Morissette           
+       
+               -------------------------------------------
+
+                [Laboriously typed up by Mardi Gras(TNT)]
+
+
+Notes:  If there are spacing errors...  That's because I didn't type all         this up on a PC or Mac!  Requires a minimum of 2 guitars.  Guitar 1         plays the intro rhythm where required and the sections where the         chords are shown above the lyrics.  Guitar 2 handles all the rhythm         figures and adds the boost in the song by accompanying Guitar 1         with some of the chords in the chorus sections.  Ideally, Guitar 1         should be acoustic and Guitar 2 should have a switch between a soft         neck postion sound and distortion.
+        The chords in verse 1 are to be played really softly and smoothly,         almost sweep picking the strings.  In verse 3, Guitar 1 plays the         chords shown, but this time adding a lot of palm muting between         chord changes (listen to the track).  Later on in verse 3, on the         part where "And isn't it ironic...  etc..." is sung, Guitar 1         arpeggiates the chords instead of just strumming the chords (again,         listen to the track). 
+
+    
+Tablature explanation:
+
+                        2^4     Hammer on from 2 to 4 
+
+                        4^2     Pull off from 4 to 2
+
+                        2/4     Slide up from 2 to 4
+
+                        4\2     Slide down from 4 to 2
+
+                        2'(4)   Bend up a whole step from 2 to 4
+                       
+                        (4)`2   Release bend a whole step from 4 to 2
+                        
+                        2~~~    Vibrato on 2
+                        
+                        2^^^    Heavy vibrato/Tremelo vibrato on 2
+
+                        +2      Tap on 2
+
+                        2-      Release tap off 2
+
+                        +2/4    Tap 2 and slide up to 4
+
+                        +4\2    Tap 4 and slide down to 2
+
+
+
+Suggested chords:   F#   244322
+                    B    224442  
+                    G#m  466444
+
+
+Intro 1:
+         This is played during the bit where Alanis sings "hi hi hi, la la          la, hi hi"
+
+
+         E|  7   7   7    7  7 7   9  9  9  | 9 9 9   7  7  7    7  7 7
+         B|  O   O   O    O  O O   O  O  O  | O O O   O  O  O    O  O O
+         G|  8   8   8    8  8 8   9  9  9  | 9 9 9   9  9  9    9  9 9
+         D|  9   9   9    9  9 9   9  9  9  | 9 9 9   9  9  9    9  9 9
+         A|                                 |
+         E|                                 |            
+  
+Intro 2:
+         E|  7  6              |
+         B|          7         |  
+         G|                    |
+         D|              9~~~  |   
+         A|                    |
+         E|                    | 
+
+                            
+
+               F#  B   F#            G#m
+Verse 1:    An old man turned ninety-eight
+
+
+                       F#   B      F#            G#m
+            He won the lottery and died the next day
+
+
+                   F#    B      F#          G#m
+            It's a black fly in your chardonnay
+
+
+                   F#        B          F#         G#m
+            It's a death row pardon two minutes to late
+ 
+
+
+                         F#       B           F#     G#m
+            And isn't it ironic...  Don't you think?
+
+
+
+                      F# B         F#      G#m
+Chorus:   It's like rain   on your wedding day
+
+                       F# B             F#      G#m
+           It's a free ride when you've already paid
+
+                         F# B            F#          G#m
+           It's the good advice that you just didn't take
+
+               A              G#m               F#
+           And who would have thought...  It figures?
+
+
+
+Rhythm Fig 1:  
+               E|                          |
+               B|  2^4    2   2   4        |
+               G|           4        1~~~  |
+               D|                          |
+               A|                          |
+               E|                          |
+
+Rhythm Fig 2:  
+               E|                          |
+               B|  2^4    2   2~~~~~~~~~~  |
+               G|           4              |
+               D|                          |
+               A|                          |
+               E|                          |
+
+Rhythm Fig 3:
+               E|  2^4    2   2~~~~~~~~~~  |
+               B|           4              |
+               G|                          |
+               D|                          |
+               A|                          |
+               E|                          |
+
+Rhythm Fig 4:
+               E|       9      7           |
+               B|  7/9    9\7    7~~~~~~~  |
+               G|                          |
+               D|                          |
+               A|                          |
+               E|                          |
+
+
+                      
+              F#      B         F#       G#m  
+                         (Rhy Fig 1)   
+Verse 2:  Mr. Play-It-Safe was afraid to fly
+
+
+                        F#  B                   F#       G#m  (Rhy Fig 2)
+          He packed his suitcase and kissed his kids goodbye
+
+ 
+                        F#         B            F#        G#m  (Rhy Fig 3)           He waited his whole damn life just to take that flight
+
+
+                     F#    B                              F#         G#m
+          And as the plane crashed down he thought, "well isn't this nice?"
+
+
+
+                        F#    B            F#     G#m                              (Rhy Fig 4)
+          And isn't it ironic... Don't you think?
+
+
+
+Chorus:  (Repeat chorus as before)
+
+
+
+Rhythm Fig 5:
+               E|  2^4  2                  |
+               B|           2^4~~~~~~~~~~  |
+               G|                          |
+               D|                          |
+               A|                          |
+               E|                          |
+
+Rhythm Fig 6:
+               E|       9      7~~~~~~~~~  |
+               B|  7/9    9\7              |
+               G|                          |
+               D|                          |
+               A|                          |
+               E|                          |
+
+
+
+                                              
+        
+Bridge: (Play the intro 1 rhythm throughout this part)
+                                            
+         Well life has a funny way of sneaking up on you
+                       
+                                                                (Rhy Fig 5)          When you think everything is okay and everything's going right
+
+
+                                 (Rhy Fig 6)
+         And life has a funny way of helping you out when you think
+                                                                 
+         Everything's gone wrong and everything blows up in your face
+
+         (Intro 2 rhy)
+
+
+Rhythm Fig 7:
+               E|                          |                          |
+               B|        7                 |                          |
+               G|  6         8~~~~~~~~~~~  |  6     8                 |
+               D|                          |            9~~~~~~~~`~~  |
+               A|                          |                          |
+               E|                          |                          |
+
+
+
+Verse 3:  (Play Rhy Fig 7 throughout)
+         
+            F#      B                F#      G#m
+          A traffic jam when you are already late
+
+
+               F#      B            F#        G#m
+          A no-smoking sign on your cigarette break
+
+
+                    F#           B                   F#        G#m
+          It's like ten thousand spoons when all you need is a knife
+
+
+          (No instruments on these last two lines)         
+          
+          It's like meeting the man of my dreams
+
+          And then meeting his beautiful wife
+
+          (Bongo drums Fill-in)
+ 
+
+
+                        F#    B             F#     G#m
+          And isn't it ironic...  Don't you think?
+
+
+                    F#    B                  F#        G#m
+           A little too ironic...  And yeah I really do think...
+
+
+
+Chorus:  (Repeat chorus as before)
+
+
+
+       
+
+Coda:  (Play the intro 1 rhythm throughout this part)
+
+       Life has a funny way of sneaking up on you
+
+       Life has a funny, funny way of helping you out...  Helping you out
+
+       (Cymbals and ending on guitars)
+
+       (I suggest you end on the intro 2 rhythm s-l-o-w-l-y)
+
+
+    That's about it for Ironic.  There is only so much that can be explained in words.  I suggest you just listen to the track.  The song itself is fairly easy and sounds great when played with a band.  I'm fairly sure that what I have tabbed out is accurate to the track on the album.  There may be small errors here and there, so corrections are all welcome.
+ 
+

@@ -1,0 +1,96 @@
+{t:The Sidewinder Sleeps Tonight}
+{st:REM}
+
+{c:Intro:}
+[D]////[G]//[C]//[Am]/
+[D]////[G]//[C]//[Am]/
+[D]////[G]//[C]//[Am]/
+
+{sot}
+The transition to the verses:
+e-[C]--------0-----|-[Em]--------0---------
+B-------------1-|-------------0-----
+G---------------|-------------------
+D-----2---------|-------------------
+A-3-------------|-----2-------------
+E---------------|-0-----------------
+{eot}
+
+{ci:F, C, and A's are barre chords}
+
+[F]This here is the place where I will [C]stay in
+There [F]isn't a number, you can call the pay phone
+[C]Let it ring a long long long long [F]time
+If I don't pick up, hang up, [Am]call back, let it [C]ring some more,  [F]Ohhhh[C]hhh... 
+If [F]I don't pick up, pick up, the sidewinder [Am]sleeps, sleeps, sleeps in a [C]coil
+      
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+
+[C]Ohhhh[Em].....(Play using above riff)
+
+There are [F]scratches all around the [F]coin slot
+Like a heart beat [C]baby trying to wake up
+[F]But this machine can only [C]swallow money
+
+you can't lay a patch by computer design
+[F]Just a lot of stup[Am]id, stupid s[C]igns
+ 
+[F]Tell her (y[C]odeled)
+[F]Tell her she can kiss my [C]ass and laugh and say that you were [F]only kidding
+That way she'll know that it was re[Am]ally, really, really, really me me[C]
+ 
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her[C][Em]
+
+Baby, [F]instant soup doesn't really grab me
+Today [C]I need something more sub, stop, sub, sub, substantial
+[F]A can of beans or black eyed peas, some Nes[C]cafe and ice
+[F]Candy bar, a fallen star, or a reading [Am]from Doctor Suess[C]
+
+ 
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her[C][Em]
+
+{c:Bridge:}
+{sot}
+(*During the bridge, Am and Bm are played as A barres, and the picking 
+pattern is like this:
+
+e-[Bm]--------2------|[Bm]---------2------|[Am]---------0------|[Am]---------0------|
+B-------------3--|-------------3--|-------------1--|-------------1--|
+G----------------|----------------|----------------|----------------|
+D-----4----------|-----4----------|-----2----------|-----2----------|
+A-2--------------|-2--------------|-0--------------|-0--------------|
+E----------------|----------------|----------------|----------------|
+
+The C below is picked in the same pattern, i.e. A str, D str, e str, B str*)
+{eot}
+
+[Bm]The cat in the hat came back, [Am]wrecked a lot of havoc [Bm]on the way.
+Always had a smile, never reason to [Am]pretend,
+Their worl[Bm]d has flat backgrounds and little [Am]need to sleep but to [C]dream
+The sidewinder [Em]sleeps on his back
+
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her
+[D]Call when you try to [G]wake her up, [C]call whe[G]n you try [Am]to wake her[C]   [Em]    (*)
+
+{sot}
+(*But now this transition thing changes to what we'll call the New Transition*)
+e[C]---------0-----|-[Em]0-------0-----|
+B-------------1-|-0-------0-----|
+G---------------|-0-------0-----|
+D-----2---------|-2-------2-----|
+A-3-------------|-2-------2-----|
+E---------------|-0-------2-----|
+{eot}
+
+[D]////[G]//[C]//[Am]/
+[D]////[G]//[C]//[Am]/
+[D]////[G]//[C]//[Am]/
+
+[C]You got a boogie woogie gr[Em]oove on th[D]is one

@@ -1,0 +1,248 @@
+                              A E R O S M I T H
+
+                             "Livin' on the Edge"
+                              from _Get a Grip_
+
+                       Transcribed by Kevin Bourrillion
+			    phlegm@cs1.bradley.edu
+
+
+Dropped-D tuning                             h = hammer-on    p = pull-off
+~~~~~~~~~~~~~~~~                             b = bend note    r = release bend
+
+
+_INTRO_________________________________________________________________________
+
+   D5
+e+-----------0h2p0-------0---------|-----------0h2p0-------0---------|
+B+-----3-----------3-------3-----3-|-----3-----------3-------3-----3-|
+G+---------------------------0h2---|---------------------------0h2---|
+d+-0-------------------------------|-0-------------------------------|
+A+---------------------------------|---------------------------------|
+D+---------------------------------|---------------------------------|
+
+[repeat]
+
+
+_VERSE 1_______________________________________________________________________
+
+D5 [w/Intro pattern]
+there's something wrong with the world today, I don't know what it is
+Bm                                                A5
+something's wrong with our eyes
+      D5 [w/Intro pattern]
+we're seeing things in a different way, and God knows it ain't His
+   Bm
+it sure ain't no surprise           (yeah!)
+
+
+_PSEUDO-CHORUS_________________________________________________________________
+
+
+Chorus Pattern (use this many times throughout the song):
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+|-------7--7--7--7--9b11r9b10r9-7-|-------7--7--7--7--9b11r9--------|
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+  (or something like that...)  :-)
+
+
+                    D5 [w/chorus pattern]
+we're Livin' On The Edge
+
+Livin' On The Edge
+              A#           G/B
+Livin' On The Edge
+              D5
+Livin' On The Edge
+
+
+_VERSE 2_______________________________________________________________________
+
+[w/Intro pattern]
+there's something wrong with the world today, the lightbulb's gettin' dim
+there's meltdown in the sky
+if you can judge a wise man by the color of his skin
+then mister you're a better man than I
+[feedback!]
+
+
+_CHORUS________________________________________________________________________
+
+              D5 [w/chorus pattern]
+Livin' On The Edge     (you can't help yourself from falling)
+
+Livin' On The Edge     (you can't help yourself at all)
+              A#                                     G/B
+Livin' On The Edge     (you can't stop yourself from falling)
+              D5
+Livin' On The Edge
+
+
+_BRIDGE________________________________________________________________________
+
+ [F#5]            
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+|-----------------------2---------|-----------------------2---------|
+|-4---4-------4---2-3-4-0-----4-2-|-4---4-------4---2-3-4-0-----4/--|
+|-4---4-------4---2-3-4-------4-2-|-4---4-------4---2-3-4-------4/--|
+tell me what you think about your situation, complication, aggravation
+
+
+ [B5] (w/Fill 1 first time around, then Fill 2 second time)
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+|-----------------------7---------|-----------------------7---------|
+|-----------------------7---------|-----------------------7---------|
+|-9---9-------9---7-8-9-------9-7-|-9---9-------9---7-8-9-------9\--|
+|-9---9-------9---7-8-9-------9-7-|-9---9-------9---7-8-9-------9\--|
+it's getting to you
+
+
+ [F#5]
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+|---------------------------------|---------------------------------|
+|-----------------------2---------|-----------------------2---------|
+|-4---4-------4---2-3-4-0-----4-2-|-4---4-------4---2-3-4-0-----4---|
+|-4---4-------4---2-3-4-------4-2-|-4---4-------4---2-3-4-------4---|
+if Chicken Little tells you that the sky is fallin, even if it wasn't
+
+                              G5
+would you still come crawling back again?
+          A5
+I bet you would, my friend
+ A#
+again and again and again and again and again
+
+
+ FILL 1:
+   |---------------------------------|---------------------------------|
+   |---------------------------------|-----9b10r9---7-9b10r9----7-9-7\-|
+   |-----------------7b9-----7-------|---7-9b11r9---7-9b11r9----7-9-7\-|
+   |---------------------------------|-9-------------------------------|
+   |---------------------------------|---------------------------------|
+   |---------------------------------|---------------------------------|
+
+
+ FILL 2:
+   |---------------------------------|------------------------------7\-|
+   |---------------------------------|-----9-9-9b10r9b10r9b10r9-----7\-|
+   |-----------------7b9-----7-------|---7-9-9-9b11r9b11r9b11r9-7------|
+   |---------------------------------|-9--------------------------9----|
+   |---------------------------------|---------------------------------|
+   |---------------------------------|---------------------------------|
+
+
+_______________________________________________________________________________
+
+[Guitar Solo]
+
+[Repeat BRIDGE]
+
+
+_VERSE 3_______________________________________________________________________
+
+there's something right with the world today,
+and everybody knows it's wrong
+well we could tell 'em no, we could let it go
+but I would rather be hangin' on!
+
+[pause]
+
+[Repeat CHORUS]
+
+
+_OUTRO_________________________________________________________________________
+
+              A#            A5
+Livin' On The Edge
+              G5            F5
+Livin' On The Edge
+              E5            D#5
+Livin' On The Edge
+
+yeah, yeah, yeah...
+D5 (hold for four measures)
+
+
+
+This pattern is repeated in the background from here on:
+
+ |---------17--------------17------|
+ |-15--------------15--------------|
+ |-----14------14------14------14--|
+ |---------------------------------|
+ |---------------------------------|
+ |---------------------------------|
+
+              A#                                 G5                     F5
+Livin' On The Edge (you can't help yourself from falling)
+              D5
+Livin' On The Edge (you can't help yourself at all)
+              A#                                 G/B                    F5
+Livin' On The Edge (you can't stop yourself from falling)
+              D5
+Livin' On The Edge
+              A#                                 G/B                    F5
+Livin' On The Edge (you can't help yourself)        (you can't help yourself)
+              D5
+Livin' On The Edge (you can't help yourself at all)
+              A#                                 A5       
+Livin' On The Edge (you can't help yourself)        (you can't help yourself)
+              G5                                 F5
+Livin' On The Edge (you can't help yourself)        (you can't help yourself)
+              E5                                 D#5
+Livin' On The Edge (you can't help yourself from falling)
+                          D5
+Livin' On The Edge, yeah, yeah...
+
+
+|-----6-----------|-----5-----------|
+|-----------------|-----------------|
+|-7b8-(hold)------|-8r7-------------|
+|-----------------|-----------------|
+|-----------------|-----------------|
+|-----------------|-----------------|
+
+
+|------10---------|------8----------|-----6-----------|-----5-----------|
+|-----------------|-----------------|-----------------|-----------------|
+|-9b11-(hold)-----|-11r9------------|-7b8-(hold)------|-8r7-------------|
+|-----------------|-----------------|-----------------|-----------------|
+|-----------------|-----------------|-----------------|-----------------|
+|-----------------|-----------------|-----------------|-----------------|
+
+
+_______________________________________________________________________________
+
+I didn't include the guitar solo because all the little nuances (bend here,
+use slide here, bend-and-release here, etc.)  make it a bitch to get into
+ASCII notation.  It's fairly simple to play if you can get the hang of
+using a slide on and off (easier said than done!).  I'm not sure if my 
+"b" and "r" notation is standard, so if you don't understand, feel
+free to drop me a line and I will clarify myself.
+
+
+      D5     Bm     A5     A#     G5     F5     E5    D#5    G/B
+   |---------2------------------------------------------------3--|
+   |--3------3-------------3-----(8)----(6)----(5)----(4)-----3--|
+   |--2------4------2------3-----(7)----(5)----(4)----(3)-----0--|
+   |--0------4------2------3------5------3------2------1------0--|
+   |--0------2------0------1------5------3------2------1------2--|
+   |------------------------------5------3------2------1---------|
+
+
+Questions, comments, and corrections welcome (as always)!
+
+--
+Kevin Bourrillion               Bradley University               IITYWYGMTB
+phlegm@cs1.bradley.edu              Geisert 804              (309) 677-1193
+---------------------------------------------------------------------------
+"These are your low beams.  These are for driving at night.  And these are
+your high beams.  These are for when someone pisses you off."
+                           -- My dad, teaching my sister how to drive

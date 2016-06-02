@@ -1,0 +1,7 @@
+vti_encoding:SR|utf8-nl
+vti_author:SR|Rado
+vti_timecreated:TR|09 Jan 2000 13:38:35 +0100
+vti_modifiedby:SR|Rado
+vti_backlinkinfo:VX|akordy/elan/elan.html akordy/akordy.html
+vti_extenderversion:SR|3.0.2.926
+vti_timelastmodified:TR|09 Jan 2000 13:38:35 +0100

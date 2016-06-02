@@ -1,0 +1,129 @@
+From: Wouter Janssen <wjanssen@cs.vu.nl>
+
+
+OH ME
+=====
+As performed by Nirvana & the Meat Puppets
+On 'Nirvana Unplugged in New York'
+Written by the Meat Puppets
+Transcription by Wouter Janssen (wjanssen@cs.vu.nl)
+
+Tune down a *whole* step to play along with the CD.
+
+NB : This song is actually played with 2 guitars, this transcription is just
+for one guitar, however it's rather easy to transform it into the 2-guitar
+version. Let one guitar play the chords on the higher strings (G/B/e)
+throughout the song and the other should play the tab below. (omitting some
+of the strokes on the higher strings, just listen to CD
+
+PART A : INTRO + VERSES
+
+           E               D              D          C           E
+e -------------0--|--------------|------------------|-----0-----|---0---
+B -------------0--|------------3-|------------3-----|-----1-0-0-|---0---
+G -------------1--|------------2-|------------2--0-0|-----0-0-0-|---1---
+D ------2--2-2----|------2-0-0-0-|------2-0-0-0--0-0|-2-2-------|-2-----
+A --0-2----2-2----|--0-2---0-0---|--0-2---0-0-------|-3-3-------|-2-----
+E -4--------------|-4------------|-4----------------|-----------|-0-----
+
+   If I had to loose a mile, if I had to touch feelings
+   I would loose my soul, the way I do
+   ....
+
+
+PART (B) : CHORUS
+
+   G         E      G           E 
+e -3--3-3-3-----0-|-3--3-3-3----0-|  
+B -0--0-0-0-----0-|-0--0-0-0----0-|  Repeat this until :
+G -0--0-0-0-----1-|-0--0-0-0----1-|  
+D -----------2-2--|----------2-2--|  
+A -----------2-2--|----------2-2--|  
+E -----------0-0--|----------0-0--|  
+
+PART (C) : END_OF_CHORUS
+
+          C            D         E  
+e -------------0-----|---------------0---
+B -------------1-----|-----3---------0---
+G ---------0-0-0-0-0-|-2-2-2-2-2-----1---
+D ------2--2-2---2-2-|-0-0-0-2-2-0-0-----
+A --0-2----3-3---3-3-|-0-0---0-0-0-0-----
+E -4-----------------|-------------------
+
+PART (D) : SOLO
+
+e ---------------------------3/2-----------2/5-5-5-3-2-----------------------
+B -------------------3-3^5~------5--(3-5)-5------------5/3-----------3-5~----
+G ------------2-4~-----------------------------------------4-2-2-2/4---------
+D ------2-2^4----------------------------------------------------------------
+A --0-2----------------------------------------------------------------------
+E -4-------------------------------------------------------------------------
+
+PART (E) : OUTRO 
+
+Use the same chords as part (C) : C-D-E (but now as powerchords and slide
+from C to D and from D to E.
+
+~   = vibrato                       | Sequence : Intro
+/   = slide                         |            Verse 1 + Chorus
+^   = push                          |            Solo
+( ) = play very softly              |            Verse 2 + Chorus
+                                    |            Outro
+
+Lyrics (taken from ftp.uwp.edu) : 
+
+if i had to lose a mile
+if i had to touch feelings
+i would lose my soul
+the way i do
+
+i don't have to think
+i only have to do it
+the results are always perfect
+and that's old news
+
+would you like to hear my voice
+sweetened with emotion
+invented at your birth?
+
+i can't see the end of me
+my whole expanse i cannot see
+i formulate infinity
+and store it deep inside of me
+
+
+=============================================================================
+Comments and corrections are always welcome at wjanssen@cs.vu.nl. 
+=============================================================================
+-------------------------------------------------------------------
+In real life : Wouter Janssen	   | Take a step outside yourself
+E-mail       : wjanssen@cs.vu.nl   | and turn around
+Irc          : Tijgertje	   | Take a look at who you are
+URL: http://www.cs.vu.nl/~wjanssen/| it's pretty scary   (K. Cobain)
+--------------------------------------------------------------------
+
+From: tmvtzet@cs.vu.nl (Zet van 't TM)
+Subject: TAB: "Oh me" - Nirvana w/ Meat Puppets
+
+As this is done totally from memory, I'll see what I can do..
+
+Opening riff 
+
+
+-------------
+-------------
+-------------
+-------------
+---------7\--
+--4-5-7------
+
+
+Followed by E D D C
+
+The rest is also a combination of C, D and E. I bet this has
+been really helpful. I'll post it in its glorious fullness and
+completeness later this week :-) 
+
+Mark (tmvtzet@cs.vu.nl)
+

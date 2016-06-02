@@ -1,0 +1,148 @@
+From: psalzman@sfsuvax1.sfsu.edu (Peter Salzman)
+Subject: CRD: About A Girl
+
+If someone emails me the lyrics, I'll turn this into a really nice TAB
+(instead of a spartan CRD).  I don't want to offend anyone, but I can't
+imagine this taking someone more than 2 min to strumm out, unless they
+don't have the album I guess.  Oh well.  Have no clue to the lyrics,
+sorry.   There doesn't seem to be any chorus.
+
+Song: About A Girl
+Artist: Nirvana    written by Kurt Cobain
+CRD'er: Peter Jay Salzman psalzman@stars.sfsu.edu
+
+cut time                 <----    
+E-G back and forth 8 times   | 
+drum roll on 4; enter on 5   | 
+                             | 
+E-G back and forth 8 times   |  
+lyrics start on 1            | 
+                             |  back to here 
+C# G# F#  2 times            | 
+                             | 
+E  A  C   1 time  ------------
+
+
+This loop is done 4 times, then the E-G thing back and forth 8 times
+while he sings (what I think is) Adieu.  The drum queues apply only to
+the first time the loop is played.  Guitar solo is done during the 3rd
+loop, on the 2nd E-G thing, for the rest of the loop.  I'll transcribe 
+the guitar solo on the tab if someone sends me the lyrics, but the solo 
+is based on the Em scale for the E-G thing and then goes into power chords, 
+following the song chords (ie- C# G# F# C# G# F# E A C).
+
+Before anyone argues with me whether it's E or Em, I'm 90% sure it's
+E.  The reason for the minor tonality is a pretty ingenious (or lucky?) 
+trick Cobain played with chords.  G happens to be the minor 3rd of E.  
+Therefore, even though he plays an E, the tonality of the passsage is 
+minor.  I wonder if he was aware of this...
+-------
+From: wolser@rpi.edu
+
+CRD-About A Girl
+
+>From Nirvana's Bleach 
+(also featured on Nirvana's 1993 MTV Unplugged performance)
+
+
+Intro: Em G Em G Em G Em G
+
+Em G      Em   G
+I need an easy friend
+
+Em   G      Em      G
+I do with a hand to lend
+
+Em   G         Em       G
+I do think you fit this shoe
+
+Em   G        Em     G
+I do what you have a clue
+
+C#        G#        F#
+I'll take advantage while
+
+C#          G#     F#
+You hang me out to dry
+
+Em                  A     C     Em  G  Em  G
+But I can't see you every night free
+
+Em  G  Em  G
+I do
+
+Em  G        Em      G
+I'm standing in your light
+
+Em   G        Em       G
+I do hope you have the time
+
+Em   G       Em     G
+I do pick up number two
+
+Em   G      Em        G
+I do keep a date with you
+
+
+C#        G#        F#
+I'll take advantage while
+
+C#          G#     F#
+You hang me out to dry
+
+Em                  A     C     Em  G  Em  G
+But I can't see you every night free
+
+Em  G  Em  G
+I do
+
+Solo: Repeat 3x (s=slide up)
+E ------------------------|-
+B ------------------------|-
+G ----------------7--7s9--|-
+D -----5-7-7s9--9---------|-
+A -7-7--------------------|-
+E ------------------------|-
+
+(Repeat verse 1)
+
+C#        G#        F#
+I'll take advantage while
+
+C#          G#     F#
+You hang me out to dry
+
+Em                  A     C     
+But I can't see you every night
+
+Em              A     C     
+I can't see you every night
+
+Em  G  Em  G
+Free
+
+Em  G  Em  G
+I do
+
+Em  G  Em  G
+I do
+
+Em  G  Em  G  Em
+I do
+
+
+Notes:
+All apologies for incorrect lyrics -- this is just how I hear 
+them.  No one knows for sure what they are, anyway.
+
+On Bleach, they play this song in standard tuning (EADGBE), 
+but on Unplugged they played it a half-step down (Eb Ab Db Gb 
+Bb Eb).  
+
+Some say the Em is actually an E or an E5.  Try 'em all and see what
+sounds best to you.
+
+Robert Wolsey
+wolser@rpi.edu
+
+

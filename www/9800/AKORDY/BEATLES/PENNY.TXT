@@ -1,0 +1,45 @@
+{title:Penny Lane}
+{st:John Lennon/Paul McCartney}
+{define: Em7-5 1 3 3 0 2 2 3}
+Penny [G]Lane: there is a [Em]barber showing [Am7]photographs[D7]
+Of every [G]head he's had the [Em]pleasure to [Gm7]know.
+And all the [Em7-5]people that come and [Eb]go
+Stop and [D7]say hello.[C]
+
+     Penny [F]Lane is in my ears and in [Am7]my ey[Bb]es.
+     [F]Wet beneath the blue subur[Am7]ban sk[Bb]ies,
+     I sit and [Cdim]meanwhile:[D7]
+
+On the corner is a banker with a motor car.
+The little children laugh at him behind his back.
+And the banker never wears a "mac"
+In the pouring rain.
+
+     Penny Lane is in my ears and in my eyes.
+     Wet beneath the blue suburban skies,
+     I sit and meanwhile:
+
+Back in Penny Lane: there is a fireman with an hourglass.
+And in his pocket is a portrait of the queen.
+He likes to keep his fire engine clean,
+It's a clean machine.
+
+     Penny Lane is in my ears and in my eyes.
+     Wet beneath the blue suburban skies,
+     I sit and meanwhile:
+
+Back in Penny Lane: the barber shaves another customer.
+We see the banker sitting, waiting for a trend.
+And then the fireman rushes in
+From the pouring rain.
+
+     Penny Lane is in my ears and in my eyes.
+     Wet beneath the blue suburban skies,
+     I sit and meanwhile back:
+
+     Penny [G]Lane is in my ears and in [Bm7]my e[C]yes.
+     [G]Wet beneath the blue subur[Bm7]ban sk[C]ies.
+#
+# Submitted to the ftp.nevada.edu:/pub/guitar archives
+# by Steve Putz <putz@parc.xerox.com> 
+# 7 September 1992

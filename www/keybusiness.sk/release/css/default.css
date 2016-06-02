@@ -1,0 +1,181 @@
+body
+{
+	background-color: #191919;
+	color: white;
+	margin: 0;
+	font-family: Verdana;
+}
+
+h1
+{
+	margin: 0;
+}
+
+.MenuContainer
+{
+	background-color: #191919;
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+}
+
+.MenuBL { background: url(../img/mbl.gif) 0 100% no-repeat; }
+.MenuBR { background: url(../img/mbr.gif) 100% 100% no-repeat; }
+.MenuTL { background: url(../img/mtl.gif) 0 0 no-repeat; }
+.MenuTR { background: url(../img/mtr.gif) 100% 0 no-repeat; padding: 10px}
+
+.MenuContainer ul
+{
+	list-style: none;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	width: 800px;
+	height: 40px;
+}
+
+.MenuContainer li
+{
+	float: left;
+	display: inline;
+	line-height: 20px;
+}
+
+.MenuFirst
+{
+	border-right: 1px solid white;
+}
+
+.MenuLast
+{
+	border-left: 2px solid white;
+}
+
+.MenuLast .MenuTL
+{
+	height: 40px;
+}
+
+.MenuItem
+{
+	width: 145px;	
+	text-align: center;
+	border-left: 2px solid white;
+	border-right: 1px solid white;
+}
+
+.MenuItem a
+{
+	text-decoration: none
+}
+
+.MenuItem a:hover
+{
+	text-decoration: underline
+}
+
+.MenuItem a:visited, .MenuItem a:active, .MenuItem a:link
+{
+	color: white
+}
+
+.Middle
+{
+	background-image: url(../img/gradient.gif);
+	background-color: #D22000;
+	background-repeat: repeat-x;
+	padding-bottom: 15px;
+}
+
+.Logo
+{
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	height:100px;
+}
+
+.ContentContainer
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	background-color: #191919;
+	border: 3px solid white;
+}
+
+.ContentTL
+{
+	margin-left: -3px;
+	margin-top: -3px;
+	float: left;
+	clear: both;
+}
+
+.ContentTR
+{
+	margin-right: -3px;
+	margin-top: -3px;
+	float: right;
+	clear: right;
+}
+
+.ContentBR
+{
+	margin-right: -3px;
+  margin-bottom: -3px;
+  margin-top: -7px;
+	float: right;
+	clear: right;
+}
+
+.ContentBL
+{
+	margin-left: -3px;
+	margin-bottom: -3px;
+	 margin-top: -7px;
+	float: left;
+	clear: right;
+}
+
+.ContentTable
+{
+	padding: 10px;
+}
+
+.ContentTable table
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+.ContentLeft
+{
+	width: 200px;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: top;
+}
+
+.ContentRight
+{
+	vertical-align: top;
+}
+
+.FooterContainer
+{
+	border-top: 3px solid white;
+}
+
+.Footer
+{
+	padding-top: 10px;
+	padding-bottom: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	color: #838383;
+	text-align: center;
+	font-size: 10pt;
+}

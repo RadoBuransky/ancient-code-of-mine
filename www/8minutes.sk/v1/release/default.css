@@ -1,0 +1,212 @@
+body
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.7em;
+	padding: 0px;
+	margin-top: 20px;
+}
+
+h1
+{
+	color: #d62a28;
+	font-size: 2em;
+}
+
+a, a:link, a:active, a:visited
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+a img
+{
+	border: 0;
+}
+
+.container
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+}
+
+.header
+{
+	margin-left: 8px;
+}
+
+.logo
+{
+	margin-left: 0px;
+	margin-right: 4px;
+	float: left;
+	display: inline;
+}
+
+.banner
+{
+	margin-left: 5px;
+}
+
+.menu
+{
+	padding: 0px;
+	list-style: none;
+	margin-left: 0px;
+	padding-bottom: 10px;
+	margin-top: 16px;
+}
+
+.menu li
+{
+	padding-left: 0px;
+	background-color: #d62a28;	
+	margin-left: 8px;
+	margin-right: 8px;
+	float: left;
+	display: inline;
+}
+
+.menu li a
+{
+	display: block;
+	border: 2px solid #999999;
+	text-align: center;
+	width: 155px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.menu li a, .menu li a:link, .menu li a:active, .menu li a:visited
+{
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.menu li a:hover
+{
+	background-color: #f9ec14;
+	color: #d62a28;
+	text-decoration: none;
+}
+
+.content
+{
+	width: 684px;	
+	height: 660px;
+	margin-left: 8px;
+	margin-right: 8px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+.contentBody
+{
+	width: 645px;
+}
+
+.footer
+{
+	background-color: #d62a28;
+	color: #FFFFFF;
+	border: 2px solid #999999;
+	text-align: center;
+	height: 1.3em;
+	padding: 0.1em;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.footer a, .footer a:link, .footer a:active, .footer a:visited
+{
+	color: #FFFFFF;
+}
+
+.footer a:hover
+{
+	color: #f9ec14;
+}
+
+.ponukaTable td
+{
+	text-align: center;
+	vertical-align: bottom;
+	padding: 6px;
+}
+
+.ponukaTable tr
+{
+	height: 100px;
+}
+
+.ponukaTable img
+{
+	margin-bottom: 5px;
+}
+
+.label, a .label, a:link .label, a:active .label, a:visited .label
+{
+	color: #999999;
+}
+
+a:hover .label
+{
+	color: #999999;
+	text-decoration: underline;
+}
+
+.priceList
+{
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+
+.priceItem
+{
+	font-weight: bold;
+	font-size: 12pt;
+	float: left;
+	width: 540px;
+}
+
+.price
+{
+	font-weight: bold;
+	font-size: 12pt;
+	color: #d62a28;
+}
+
+.priceDesc
+{
+	font-size: 8pt;
+	padding-bottom: 6px;
+}
+
+.foodWeight
+{
+	font-weight: normal;
+	font-size: 8pt;
+}
+
+.action
+{
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+.newPrice
+{
+	font-size: 16pt;
+	color: #d62a28;
+}
+
+.contact
+{
+	font-weight: bold;
+	font-size: 12pt;
+}

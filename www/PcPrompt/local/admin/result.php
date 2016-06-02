@@ -1,0 +1,1 @@
+<center><big><? echo( $msg ); ?></big></center>

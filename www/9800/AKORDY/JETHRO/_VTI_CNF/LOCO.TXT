@@ -1,0 +1,14 @@
+vti_encoding:SR|utf8-nl
+vti_author:SR|Administrator
+vti_cachedlinkinfo:VX|
+vti_cachedhastheme:BR|false
+vti_cachedhasborder:BR|false
+vti_timecreated:TR|16 Jul 1999 15:59:01 +0200
+vti_filesize:IX|1587
+vti_modifiedby:SR|Administrator
+vti_backlinkinfo:VX|akordy/jethro/jethro.html
+vti_cacheddtm:TX|16 Jul 1999 15:59:01 +0200
+vti_cachedhasbots:BR|false
+vti_nexttolasttimemodified:TR|16 Jul 1999 15:59:01 +0200
+vti_extenderversion:SR|3.0.2.926
+vti_timelastmodified:TR|16 Jul 1999 15:59:07 +0200
