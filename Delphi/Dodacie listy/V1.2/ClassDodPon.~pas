@@ -1,0 +1,634 @@
+unit ClassDodPon;
+
+interface
+
+uses Classes, Grids, StdCtrls, Graphics, Printers;
+
+const Left = 200;
+      Right = 100;
+      Top = 50;
+      Bottom = 200;
+
+      Vyska = 300;
+
+type PStrings = ^TStrings;
+     TDodPon = class
+     private
+       StringGrid : TStringGrid;
+
+       Adresa : TStringList;
+       Tab : array[0..3] of TStringList;
+       Datum : TEdit;
+
+       PocetStran : integer;
+       PocetRiadkov : integer;
+       KoniecTlace : boolean;
+
+       procedure ZapisDoPonuky( FileName : string );
+       procedure VytlacStranku( Canvas : TCanvas );
+     public
+       ZPonuky : string;
+
+       Count : integer;
+
+       constructor Create( P0, P1, P2, P3, PAdr : PStrings; iDatum : TEdit; SG : TStringGrid );
+       destructor Destroy; override;
+
+       procedure OtvorZPon( FileName : string );
+       procedure Otvor( FileName : string );
+
+       procedure Uloz( FileName : string ); overload;
+       procedure Uloz( FileName : string; P0, P1, P2, P3, PAdr : PStrings; iDatum : TEdit ); overload;
+
+       procedure Tlac;
+     end;
+
+var DodPon : TDodPon;
+
+implementation
+
+uses Dialogs, Windows, FormTlacDodPon, FormMoznosti;
+
+//==============================================================================
+//==============================================================================
+//
+//                              Constructor
+//
+//==============================================================================
+//==============================================================================
+
+constructor TDodPon.Create( P0, P1, P2, P3, PAdr : PStrings; iDatum : TEdit; SG : TStringGrid );
+begin
+  inherited Create;
+  Adresa := TStringList( PAdr );
+  Tab[0] := TStringList( P0 );
+  Tab[1] := TStringList( P1 );
+  Tab[2] := TStringList( P2 );
+  Tab[3] := TStringList( P3 );
+  ZPonuky := '';
+  Datum := iDatum;
+  Count := 0;
+  StringGrid := SG;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                              Destructor
+//
+//==============================================================================
+//==============================================================================
+
+destructor TDodPon.Destroy;
+begin
+  inherited;
+end;
+
+procedure TDodPon.ZapisDoPonuky( FileName : string );
+var S : string;
+    F1, F2 : TextFile;
+begin
+  AssignFile( F1 , 'zaloha.txt' );
+  {$I-}
+  Rewrite( F1 );
+  {$I+}
+  if IOResult <> 0 then exit;
+
+  AssignFile( F2 , FileName );
+  {$I-}
+  Reset( F2 );
+  {$I+}
+  if IOResult <> 0 then
+    begin
+      MessageDlg( 'S˙bor '+FileName+' sa ned· otvoriù!' , mtError , [mbOK] , 0 );
+      exit;
+    end;
+
+  Readln( F2 );
+  Writeln( F1 , 'ANO' );
+  while not EoF( F2 ) do
+    begin
+      Readln( F2 , S );
+      Writeln( F1 , S );
+    end;
+
+  CloseFile( F2 );
+
+  AssignFile( F2 , FileName );
+  Reset( F2 );
+  CloseFile( F2 );
+  Erase( F2 );
+
+  CloseFile( F1 );
+  Rename( F1 , FileName );
+end;
+
+procedure TDodPon.VytlacStranku( Canvas : TCanvas );
+
+procedure StringToRiadky( S : string; Riadky : TStringList; Width : integer );
+var I, J : integer;
+    Slovo, Riadok : string;
+begin
+  Riadky.Clear;
+
+  I := 1;
+  J := 0;
+  Riadok := '';
+  while I <= Length( S ) do
+    begin
+      //  NaËÌtanie slova
+      while (S[I] = ' ') and
+            (I <= Length( S ) ) do Inc( I );
+      if I > Length( S ) then break;
+
+      Slovo := '';
+
+      while (S[I] <> ' ') and
+            (I <= Length( S ) ) do
+        begin
+          Slovo := Slovo + S[I];
+          Inc( I );
+        end;
+      if I > Length( S ) then break;
+
+      if Canvas.TextWidth( Slovo ) > Width then exit;
+
+      if Canvas.TextWidth( Riadok+Slovo ) <= Width then Riadok := Riadok+Slovo+' '
+                                                   else
+                                                     begin
+                                                       Inc( J );
+                                                       Delete( Riadok , Length( Riadok ) , 1 );
+                                                       Riadky.Add( Riadok );
+                                                       Riadok := Slovo+' ';
+                                                     end;
+    end;
+  if (J > 0) then
+    Delete( Riadok , Length( Riadok ) , 1 );
+  Riadky.Add( Riadok );
+end;
+
+var I, J, K, L : integer;
+    Posl : longint;
+    Stlpce : array[1..4] of integer;
+    VysTab, VysRiad : integer;
+    Dest, Src : TRect;
+    S : string;
+    Riadky : TStringList;
+
+begin
+  KoniecTlace := True;
+
+  Posl := Top;
+
+  Canvas.Font.Name := FormTlacDodPonuka.ComboBoxFont.Items[ FormTlacDodPonuka.ComboBoxFont.ItemIndex ];
+  Canvas.Font.Size := 8;
+
+  //  V˝öky
+  VysRiad := Canvas.TextHeight( 'Õ' ) + 10;
+  VysTab := VysRiad + 30;
+
+  //  äÌrka stÂpcov
+  for I := 1 to 4 do
+    Stlpce[I] := 0;
+
+  if FormTlacDodPonuka.Stlpce[1] then
+    begin
+      Stlpce[1] := Canvas.TextWidth( 'Komponenty' )+40;
+      for I := 0 to Tab[0].Count-1 do
+        begin
+          J := Canvas.TextWidth( Tab[0][I] )+40;
+          if J > Stlpce[1] then
+            Stlpce[1] := J;
+        end;
+    end;
+
+  if FormTlacDodPonuka.Stlpce[3] then
+    begin
+      Stlpce[3] := Canvas.TextWidth( 'SÈriovÈ ËÌsla' )+40;
+      for I := 0 to Tab[2].Count-1 do
+        begin
+          J := Canvas.TextWidth( Tab[2][I] )+40;
+          if J > Stlpce[3] then
+            Stlpce[3] := J;
+        end;
+    end;
+
+  if FormTlacDodPonuka.Stlpce[4] then
+    begin
+      Stlpce[4] := Canvas.TextWidth( 'Z·ruka' )+40;
+      for I := 1 to Tab[3].Count-1 do
+        begin
+          J := Canvas.TextWidth( Tab[3][I]+' mes.' )+40;
+          if J > Stlpce[4] then
+            Stlpce[4] := J;
+        end;
+    end;
+
+  if FormTlacDodPonuka.Stlpce[2] then
+    Stlpce[2] := Printer.PageWidth-Left-Right-Stlpce[1]-Stlpce[3]-Stlpce[4];
+
+  if PocetStran = 0 then
+    begin
+      //  HlaviËka
+      if FormMozn.Header <> nil then
+        begin
+          Dest.Left := Left;
+          Dest.Right := Printer.PageWidth-Right;
+          Dest.Top := Top;
+          Dest.Bottom := Top+Vyska;
+
+          case FormMozn.RadioGroup1.ItemIndex of
+            0 : begin
+                  Src := FormMozn.Header.Bitmap.Canvas.ClipRect;
+
+                  if Src.Bottom > Dest.Bottom  then
+                    Src.Bottom := Dest.Bottom;
+
+                  if Src.Right > Dest.Right then
+                    Src.Right := Dest.Right;
+
+                  Dest.Right := Dest.Left + Src.Right;
+                  Dest.Bottom := Dest.Top + Src.Bottom;
+
+                  Canvas.CopyRect( Dest , FormMozn.Header.Bitmap.Canvas , Src );
+                end;
+            1 : Canvas.StretchDraw( Dest , FormMozn.Header.Bitmap );
+          end;
+        end;
+      Inc( Posl , Vyska );
+      with Canvas do
+        begin
+          Pen.Color := clBlack;
+          Pen.Width := 3;
+
+          MoveTo( Left , Posl+20 );
+          LineTo( Printer.PageWidth-Right , Posl+20 );
+        end;
+      Inc( Posl , 60 );
+
+      //  Adresa
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Size := 15;
+
+      J := 0;
+      for I := 0 to Adresa.Count-1 do
+        begin
+          K := Canvas.TextWidth( Adresa[I] );
+          if K > J then J := K;
+        end;
+
+      K := Canvas.TextHeight( 'Õ' ) + 10;
+      for I := 0 to Adresa.Count-1 do
+        begin
+          Canvas.TextOut( Printer.PageWidth-Right-J-20 , Posl , Adresa[I] );
+          Inc( Posl , K );
+        end;
+
+      Canvas.Pen.Width := 1;
+      Canvas.Brush.Style := bsClear;
+  {    Canvas.Rectangle( Printer.PageWidth-Right-J-40 , Posl-Length(Adresa)*K ,
+                        Printer.PageWidth-Right , Posl+10 );}
+
+      //  Nadpis
+      with Canvas do
+        begin
+          Font.Size := 25;
+
+          TextOut( Left , (((Posl-Adresa.Count*K)+(Posl+10)) div 2)-
+                  (TextHeight('DodacÌ list') div 2) , 'DodacÌ list' );
+        end;
+
+      Inc( Posl , 50 );
+    end;
+
+  //  HlaviËka tabulky
+  if PocetRiadkov+1 <= Tab[0].Count-1 then
+    begin
+      Canvas.Font.Size := 8;
+      Canvas.Brush.Style := bsSolid;
+      Canvas.Brush.Color := clLtGray;
+      J := Left;
+      for I := 1 to 4 do
+        if FormTlacDodPonuka.Stlpce[I] then
+          begin
+            Canvas.Rectangle( J , Posl , J+Stlpce[I] , Posl+VysTab );
+            case I of
+              1 : S := 'Komponenty';
+              2 : S := 'Model';
+              3 : S := 'SÈriovÈ ËÌsla';
+              4 : S := 'Z·ruka';
+            end;
+            Canvas.TextOut( J+20 , ((2*Posl+VysTab) div 2)-Canvas.TextHeight( S )div 2 , S );
+            Inc( J , Stlpce[I] );
+          end;
+      Canvas.Brush.Style := bsClear;
+      Inc( Posl , VysTab );
+    end;
+
+  Riadky := TStringList.Create;
+  for I := PocetRiadkov+1 to Tab[0].Count-1 do
+    begin
+      K := 1;
+      if FormTlacDodPonuka.Stlpce[2] then
+        begin
+          //  Model
+          StringToRiadky( Tab[1][I] , Riadky , Stlpce[2]-40 );
+          K := Riadky.Count;
+          if K = 0 then K := 1;
+          if Riadky.Count*VysTab > Printer.PageHeight-Bottom then
+            begin
+              PocetRiadkov := I-1;
+              Inc( PocetStran );
+              KoniecTlace := False;
+              break;
+            end;
+        end;
+
+      J := Left;
+      if FormTlacDodPonuka.Stlpce[1] then
+        begin
+          //  Komponenty
+          Canvas.TextOut( Left+20 , (((Posl)+(Posl+VysTab)) div 2)-(Canvas.TextHeight( Tab[0][I] )div 2) , Tab[0][I] );
+          Canvas.Rectangle( J , Posl , J+Stlpce[1] , Posl+VysTab*K );
+          Inc( J , Stlpce[1] );
+        end;
+
+      if FormTlacDodPonuka.Stlpce[2] then
+        begin
+          Canvas.Rectangle( J , Posl , J+Stlpce[2] , Posl+VysTab*K );
+          Inc( J , Stlpce[2] );
+        end;
+
+       if FormTlacDodPonuka.Stlpce[3] then
+        begin
+          //  SÈriovÈ ËÌsla
+          Canvas.Rectangle( J , Posl , J+Stlpce[3] , Posl+VysTab*K );
+          Inc( J , Stlpce[3] );
+        end;
+
+      if FormTlacDodPonuka.Stlpce[4] then
+        begin
+          //  Z·ruka
+          Canvas.Rectangle( J , Posl , J+Stlpce[4] , Posl+VysTab*K );
+        end;
+
+
+      if FormTlacDodPonuka.Stlpce[2] then
+        begin
+          //  Model
+          for L := 0 to Riadky.Count-1 do
+            begin
+              Canvas.TextOut( Left+20+Stlpce[1] , (((Posl)+(Posl+VysTab)) div 2)-Canvas.TextHeight( Riadky[L] )div 2 , Riadky[L] );
+              Inc( Posl , VysTab );
+            end;
+          if Riadky.Count > 0 then Dec( Posl , VysTab );
+        end;
+
+      if FormTlacDodPonuka.Stlpce[3] then
+        begin
+          //  SÈriovÈ ËÌsla
+          Canvas.TextOut( Left+Stlpce[1]+Stlpce[2]+20 ,
+                          (((Posl)+(Posl+VysTab)) div 2)-Canvas.TextHeight( Tab[2][I] )div 2 ,
+                          Tab[2][I] );
+        end;
+
+      if FormTlacDodPonuka.Stlpce[4] then
+        begin
+          //  Z·ruka
+          Canvas.TextOut( Left+Stlpce[1]+Stlpce[2]+Stlpce[3]+20 ,
+                          (((Posl)+(Posl+VysTab)) div 2)-Canvas.TextHeight( Tab[3][I] )div 2 ,
+                          Tab[3][I]+' mes.' );
+        end;
+
+      Inc( Posl , VysTab );
+
+      if Posl > Printer.PageHeight-Bottom then
+        begin
+          PocetRiadkov := I;
+          Inc( PocetStran );
+          KoniecTlace := False;
+          break;
+        end;
+    end;
+  Riadky.Free;
+
+  //  Celkom
+  if KoniecTlace then
+    begin
+      if Printer.PageHeight-Bottom-Posl < 3*VysTab+VysRiad then
+        begin
+          PocetRiadkov := Tab[0].Count;
+          KoniecTlace := False;
+          Inc( PocetStran );
+          exit;
+        end;
+      Inc( Posl , 3*VysTab );
+
+      Canvas.TextOut( Left , Posl , 'V Bratislave dÚa '+Datum.Text );
+      Canvas.TextOut( Printer.PageWidth-Right-500-Canvas.TextWidth( 'S pozdravom' ) , Posl , 'S pozdravom' );
+    end;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                            I N T E R F A C E
+//
+//==============================================================================
+//==============================================================================
+
+procedure TDodPon.OtvorZPon( FileName : string );
+var I, J : integer;
+    S : string;
+begin
+  for I := 0 to 3 do
+    Tab[I].Clear;
+  Adresa.Clear;
+  Datum.Text := '';
+  Tab[0].Add( 'Komponenty' );
+  Tab[1].Add( 'Model' );
+  Tab[2].Add( 'SÈriovÈ ËÌsla' );
+  Tab[3].Add( 'Z·ruka' );
+  Count := 0;
+  StringGrid.RowCount := 2;
+  ZPonuky := '';
+
+  AssignFile( Input , FileName );
+  {$I-}
+  Reset( Input );
+  {$I+}
+  if IOResult <> 0 then
+    begin
+      MessageDlg( 'S˙bor '+FileName+' sa ned· otvoriù!' , mtError , [mbOK] , 0 );
+      exit;
+    end;
+
+  ZPonuky := FileName;
+
+  Readln;
+  Readln( S );
+  Datum.Text := S;
+  Readln( Count );
+  if Count < 3 then StringGrid.RowCount := 2
+               else StringGrid.RowCount := Count+1;
+  for I := 1 to Count do
+    begin
+      for J := 0 to 1 do
+        begin
+          Readln( S );
+          Tab[J].Add( S );
+        end;
+      Readln;
+      Readln;
+      Readln;
+    end;
+  Readln;
+  Readln;
+  while not EoF( Input ) do
+    begin
+      Readln( S );
+      Adresa.Add( S );
+    end;
+
+  Close( Input );
+
+  for I := 1 to Count do
+    Tab[3].Add( '6' );
+end;
+
+procedure TDodPon.Otvor( FileName : string );
+var I, J : integer;
+    S : string;
+    F : TextFile;
+begin
+  for I := 0 to 3 do
+    begin
+      for J := 0 to Tab[I].Count do
+        Tab[I].Strings[J] := '';
+
+      Tab[I].Clear;
+      Tab[I].Capacity := 0;
+    end;
+
+  Tab[0].Add( 'Komponenty' );
+  Tab[1].Add( 'Model' );
+  Tab[2].Add( 'SÈriovÈ ËÌsla' );
+  Tab[3].Add( 'Z·ruka' );
+  Adresa.Clear;
+  Datum.Text := '';
+  Count := 0;
+  StringGrid.RowCount := 2;
+  ZPonuky := '';
+
+  AssignFile( F , FileName );
+  {$I-}
+  Reset( F );
+  {$I+}
+  if IOResult <> 0 then
+    begin
+      MessageDlg( 'S˙bor '+FileName+' sa ned· otvoriù!' , mtError , [mbOK] , 0 );
+      exit;
+    end;
+
+  Readln( F , S );
+  Datum.Text := S;
+  Readln( F , Count );
+  if Count < 3 then StringGrid.RowCount := 2
+               else StringGrid.RowCount := Count+1;
+  for I := 1 to Count do
+    for J := 0 to 3 do
+      begin
+        S := '';
+        Readln( F , S );
+        Tab[J].Add( S );
+      end;
+
+  while not EoF( F ) do
+    begin
+      Readln( F , S );
+      Adresa.Add( S );
+    end;
+
+  Close( F );
+end;
+
+procedure TDodPon.Uloz( FileName : string );
+var I, J : integer;
+begin
+  if ZPonuky <> '' then
+    ZapisDoPonuky( ZPonuky );
+
+  AssignFile( Output , FileName );
+  {$I-}
+  Rewrite( Output );
+  {$I+}
+  if IOResult <> 0 then
+    begin
+      MessageDlg( 'S˙bor '+FileName+' sa ned· vytvoriù!' , mtError , [mbOK] , 0 );
+      exit;
+    end;
+
+  Writeln( Datum.Text );
+  Writeln( Count );
+  for I := 1 to Count do
+    for J := 0 to 3 do
+      Writeln( Tab[J][I] );
+
+  for I := 0 to Adresa.Count-1 do
+    Writeln( Adresa[I] );
+
+  Close( Output );
+end;
+
+procedure TDodPon.Uloz( FileName : string; P0, P1, P2, P3, PAdr : PStrings; iDatum : TEdit );
+var I : integer;
+begin
+  if ZPonuky <> '' then
+    ZapisDoPonuky( ZPonuky );
+
+  AssignFile( Output , FileName );
+  {$I-}
+  Rewrite( Output );
+  {$I+}
+  if IOResult <> 0 then
+    begin
+      MessageDlg( 'S˙bor '+FileName+' sa ned· vytvoriù!' , mtError , [mbOK] , 0 );
+      exit;
+    end;
+
+  Writeln( iDatum.Text );
+  Writeln( TStrings( P0 ).Count-1 );
+  for I := 1 to TStrings( P0 ).Count-1 do
+    begin
+      Writeln( TStrings( P0 )[I] );
+      Writeln( TStrings( P1 )[I] );
+      Writeln( TStrings( P2 )[I] );
+      Writeln( TStrings( P3 )[I] );
+    end;
+
+  for I := 0 to TStrings( PAdr ).Count-1 do
+    Writeln( TStrings( PAdr )[I] );
+
+  Close( Output );
+end;
+
+procedure TDodPon.Tlac;
+begin
+  if FormTlacDodPonuka.ShowModal = 1 then
+    begin
+      PocetStran := 0;
+      PocetRiadkov := 0;
+      KoniecTlace := False;
+
+      repeat
+        Printer.BeginDoc;
+        VytlacStranku( Printer.Canvas );
+        Printer.EndDoc;
+      until KoniecTlace;
+
+    end;
+end;
+
+end.
+
+

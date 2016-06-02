@@ -1,0 +1,1533 @@
+AS Mlynské nivy
+2939
+1873
+Alexyho
+1322
+984
+Alstrova
+3350
+366
+Americké nám.
+2783
+1782
+Amfiteáter
+2194
+1564
+Antolská
+2732
+2837
+Astronomická
+3847
+1614
+Bajkalská
+3198
+1544
+Bakošova
+1529
+722
+Baníkova
+1627
+1729
+Barónka
+3305
+400
+BauMax
+3512
+1368
+Bilíkova
+1351
+977
+Bodrocká
+4447
+2218
+Bojnická
+3669
+1155
+Borská
+1525
+1524
+Bosákova
+2899
+2344
+Botanická záhrada
+1939
+1841
+Boèná
+3782
+1200
+Bradáèova
+2681
+2617
+Brodná
+3735
+1799
+Budatínska
+2490
+2950
+Bulharská
+3710
+1306
+Bulíkova
+2988
+2407
+Bystrická
+218
+106
+Bzovícka
+2807
+2963
+Bárdošova
+2370
+1447
+Búdková
+2260
+1700
+Cesta mládeže
+2044
+978
+Cesta na letisko
+4188
+1309
+Chatam Sófer
+2318
+2005
+Chlumeckého
+3769
+1622
+Cintorín Ružinov
+4110
+1978
+Cintorín Slávièie údolie
+1873
+1604
+Cintorínska
+2785
+1879
+Clementisova
+3648
+1471
+Damborského
+1427
+1121
+Detvianska
+3458
+399
+Devätinová
+4567
+2456
+Devín
+233
+1222
+Devín-záhrady
+241
+953
+Dievèí hrádok
+1222
+52
+Dolnozemská
+2841
+2988
+Dolné Krèace
+1533
+1347
+Domkárska
+3872
+1983
+Dostihová dráha
+2893
+2680
+Drieòová
+3248
+1619
+Drobného
+1298
+922
+Družstevné sklady
+1227
+62
+Dubová
+2143
+1448
+Dudvážska
+4543
+2088
+Dulovo nám.
+3078
+1816
+Dvory
+2545
+2302
+Einsteinova
+2414
+2225
+Ekonomická univerzita
+3019
+2362
+Estónska
+4345
+1967
+Farského
+2756
+2316
+Floriánske nám.
+2782
+1752
+Furmanská
+1210
+621
+Gagarinova
+3656
+1803
+Galvaniho
+3862
+1413
+Haburská
+3468
+1507
+Hany Melièkovej
+1610
+1806
+Hanácka
+3589
+1384
+Herlianska
+3477
+1648
+Heèkova
+3358
+584
+Hlavná stanica
+2566
+1614
+Hodonínska
+1488
+911
+Hodžovo nám.
+2586
+1842
+Holíèska
+2529
+2798
+Homolova
+1152
+789
+Horné Krèace
+1527
+1248
+Horský park
+2230
+1637
+Hospodárska
+4507
+491
+Hrad
+2410
+1980
+Hrad Devín
+216
+1251
+Hradištná
+145
+481
+Hranièná
+3510
+1822
+Hroboòova
+2302
+1497
+Hrobákova
+2725
+2527
+Hronská
+4446
+2140
+Hubeného
+3206
+746
+Hummelova
+2257
+1861
+Husova
+2593
+1353
+Hybešova
+3379
+484
+Hydrostav
+4047
+2270
+Hájovòa
+984
+1687
+Hálkova
+3064
+1305
+Hálova
+2592
+2408
+Hýrošova
+2054
+1434
+IKEA
+3380
+1455
+Ihrisková
+3535
+468
+Inovecká
+2361
+1938
+Ivana Bukovèana
+167
+395
+Ivanská cesta
+3738
+1478
+Janotova
+1684
+1812
+Janèova
+2257
+1841
+Jarovce
+2885
+3166
+Jarovce-záhrady
+2879
+3103
+Jasovská
+2772
+3074
+Jelaèièova
+3014
+1648
+Jesenského
+2679
+1963
+Jeséniova
+2712
+1453
+Jiráskova
+2447
+2686
+Jungmannova
+2667
+2412
+Jurajov Dvor
+3590
+1036
+Jurajov dvor
+3601
+1052
+Jurigovo nám.
+1733
+1733
+Jurigrad
+1619
+1870
+Jána Jonáša
+625
+4
+Jánske hony
+4291
+2762
+Kadleèík
+1328
+1783
+Kadnárova
+3204
+675
+Kamenné nám.
+2692
+1928
+Kameòolom
+2299
+764
+Kapucínska
+2546
+1899
+Karadžièova
+2897
+1726
+Karlova Ves
+1490
+1466
+Karpatská
+2707
+1654
+Kaštie¾ Rusovce
+3032
+3112
+Kaštie¾ska
+3654
+1827
+Ketelec
+4206
+3079
+Kladnianska
+3586
+1829
+Klanec
+1700
+810
+Klenová
+2323
+1318
+Klepáè
+1976
+1067
+Koliba
+2498
+1313
+Kollárovo nám.
+2683
+1803
+Kolmá
+2391
+2609
+Komisárky
+3653
+283
+Komárovská
+4269
+2106
+Komáròanská
+3508
+2129
+Koniarkova
+4314
+517
+Kopèany
+2254
+2736
+Kopèany-sídlisko
+2313
+2613
+Kopèianska
+2323
+2639
+Korytnická
+4405
+2258
+Kovová
+4287
+2195
+Kovácsova
+2888
+3198
+Kozia
+2472
+1847
+Košická
+3039
+1907
+Krahulèia
+2815
+1254
+Krasovská
+2731
+2148
+Krematórium
+1413
+432
+Kremencová
+233
+190
+Kreme¾ská
+509
+1355
+Kremnická
+2353
+2321
+Krpáš
+657
+526
+Krásna
+3700
+1906
+Krèe
+1214
+31
+Krížna
+2912
+1690
+Kuklovská
+1442
+1621
+Kukuèínova
+2995
+1274
+Kvaèalova
+2989
+1709
+Kúpalisko Matador
+2349
+2446
+Lachova
+2832
+2388
+Lackova
+1568
+1587
+Lafranconi
+2072
+1920
+Lamaè
+1607
+833
+Landererova
+2883
+1975
+Lanovka
+2299
+778
+Lediny
+1496
+867
+Legionárska
+2886
+1695
+Lesná správa
+2212
+839
+Lesopark
+2299
+749
+Letisko
+4277
+1353
+Letisko-terminál
+4258
+1302
+Lieskovec
+4191
+2960
+Lieskovská cesta
+4389
+2483
+Lipského
+1581
+1141
+Lodenica
+3530
+2313
+Lokomotívne depo I
+3645
+666
+Lokomotívne depo II
+3891
+740
+Lopenícka
+2759
+1222
+Lovinského
+2127
+1514
+Lúky V
+2508
+3018
+Lúèanka
+2620
+2974
+Lúèna
+3420
+2084
+Magnetová
+3430
+1127
+Magurská
+2333
+1419
+Majerská
+4278
+1769
+Malá scéna
+2802
+1987
+Malý Draždiak
+2818
+2677
+Mariánska
+2735
+1865
+Markova
+2553
+2557
+Martinský cintorín
+3582
+1467
+Matejkova
+1523
+1753
+Maximiliána Hella
+3586
+1583
+Mestská
+3048
+1479
+Micherov majer
+3600
+2577
+Mickiewiczova
+2757
+1795
+Mierová
+3666
+1826
+Mierová kolónia
+3506
+1192
+Milana Mareèka
+237
+513
+Miletièova
+3210
+1869
+MiÚ Devínska Nová Ves
+122
+410
+MiÚ P. Biskupice
+4483
+2387
+MiÚ Raèa
+3440
+385
+MiÚ Rusovce
+2890
+3233
+MiÚ Vajnory
+4400
+558
+MiÚ Záh. Bystrica
+1209
+20
+MiÚ Èunovo
+3043
+3193
+Mladá garda
+2965
+1181
+Mliekárenská
+3307
+1732
+Mlynarovièova
+2857
+2321
+Mlynská
+181
+253
+Mlynské nivy
+2899
+1855
+Mokraï
+3495
+780
+Mokrohájska
+1852
+1238
+Molecova
+1781
+1799
+Morava
+271
+1188
+Mototechna
+3646
+973
+Mraziarenská
+3219
+1672
+Mäsokombinát
+3796
+374
+Na Grbe
+178
+349
+Na hriadkach
+80
+548
+Na pasekách
+3766
+708
+Na vrátkach
+1486
+998
+Nad lúèkami
+1608
+1659
+Nemocnica Antolská
+2763
+2902
+Nemocnica Kramáre
+2238
+1394
+Nemocnica P. Biskupice
+4415
+2401
+Nevädzová
+3620
+1755
+Nobelova
+3111
+1038
+Novohradská
+3107
+1897
+Novoveská
+137
+339
+Nová doba
+3070
+1477
+Nový kameòolom
+718
+1564
+Nový most
+2529
+2021
+Nový záhon
+3188
+834
+Nákupná
+4436
+2305
+Nákupná zóna Lúky
+2385
+2833
+Nám. 1. mája
+2640
+1812
+Nám. Biely kríž
+2993
+1067
+Nám. SNP
+2650
+1909
+Nám. hranièiarov
+2768
+2460
+Nám. hrdinov ÈA
+3400
+340
+Nám. práce
+396
+1255
+Nám. slobody
+2653
+1780
+Nám. ¼. Štúra
+2628
+2028
+Nár. onkolog. ústav
+2289
+1293
+OD Lamaè
+1449
+664
+OD Ružinov
+3607
+1684
+OD Saratov
+1264
+819
+OD Slimák
+2989
+1345
+OLO Bazová
+2986
+1764
+OU obchodné
+3906
+253
+OU železnièné
+3848
+316
+Odbojárov
+3012
+1558
+Odborárska
+3285
+1202
+Odborárske nám.
+2824
+1758
+Ondrejovova
+3832
+1788
+Opletalova
+244
+18
+Oslobodite¾ská
+4334
+571
+Ovsište
+3040
+2537
+Ovsištské nám.
+3010
+2491
+PD P. Biskupice
+4335
+2660
+PD Prievoz
+3750
+2202
+POLUS CITY CENTER
+3166
+1355
+Pamiatkostav
+3661
+769
+Park kultúry
+2179
+1963
+Partizánska
+2440
+1896
+Pastierska
+3525
+515
+Patrónka
+2026
+1370
+Pažítková
+3393
+1821
+Pekná cesta
+3244
+764
+Pekníkova
+1227
+887
+Pepsi Cola
+4045
+1332
+Pestovate¾ská
+3944
+1368
+Petofiho
+4577
+2299
+Pionierska
+2947
+1334
+Plniareò plynu
+4240
+2881
+Plynárenská
+3200
+1994
+Pod násypom
+1504
+896
+Podháj
+1586
+751
+Podzáhradná
+4354
+2189
+Polianky
+1776
+1170
+Potoèná
+3359
+197
+Povodie Dunaja
+3532
+2415
+Povraznícka
+2758
+1690
+Poštová
+2622
+1873
+Po¾nohospodárske uèilište
+872
+515
+Praèanská
+4387
+682
+Predstanièné nám.
+2606
+1681
+Predstanièné námestie
+2569
+1679
+Pri Suchom mlyne
+2078
+1390
+Pri jazere
+3370
+1658
+Pri krematóriu
+1377
+446
+Pri kríži
+1240
+749
+Pri mlyne
+4471
+691
+Pri nadjazde
+3521
+918
+Pri podchode
+1660
+1821
+Pri starom letisku
+4247
+654
+Pri tehelni
+230
+55
+Pri vinohradoch
+3622
+316
+Pri zvonici
+3764
+1274
+Pri záhradách
+770
+1599
+Pri Šajbách
+3574
+583
+Pri štadióne
+303
+294
+Pribylinská
+3523
+826
+Pridánky
+1666
+1080
+Priekopnícka
+4194
+2109
+Priemstav
+3583
+753
+Prievoz-most
+4002
+1908
+Prievozská
+3356
+1831
+Prokofievova
+2483
+2626
+Prokopa Ve¾kého
+2266
+1514
+Prístav
+3259
+2009
+Prístavná
+2979
+1986
+Prístavný most
+3382
+1921
+Párièkova
+3013
+1848
+Píla
+2883
+3136
+Radnièné nám.
+3755
+1813
+Radvanská
+2294
+1890
+Rajská
+2748
+1894
+Raèianske mýto
+2820
+1630
+Riazanská
+2955
+1258
+Riviéra
+1779
+1846
+Romanova
+2653
+2550
+Rožòavská
+3831
+950
+Rusovská cesta
+2502
+2418
+Ružová dolina
+3185
+1758
+Rybnièná
+3931
+209
+Rybník
+2297
+791
+Rádiová
+3687
+1263
+Ríbez¾ová
+3980
+1847
+SAV
+2563
+1705
+SOŠ PZ SR
+423
+247
+STK
+1714
+1203
+Sabinovská
+3294
+1497
+Sady
+2886
+3180
+Sandberg
+152
+728
+Segnerova
+1675
+1713
+Segnáre
+1607
+982
+Shopping Park Soravia
+3760
+1054
+Sklabinská
+3619
+633
+Sliaèska
+2933
+1282
+Slov. nár. archív
+2085
+1580
+Slovnaftská
+4188
+2254
+Slowackého
+3799
+1441
+Slávièie údolie
+2032
+1714
+Smolenická
+2472
+2745
+Sokolská
+2530
+1590
+Solivarská
+3449
+1566
+Spa¾ovòa
+3679
+2779
+Spoloèenská
+3663
+1337
+Starohájska
+2794
+2501
+Stará Ivanská
+3837
+1360
+Stará Vajnorská
+3898
+916
+Staré ihrisko
+3152
+1126
+Starý kameòolom
+649
+1511
+Stavbárska
+4331
+2040
+Stavite¾ská
+3635
+869
+Stavivá
+3754
+852
+Stolárska
+3465
+465
+Strelnica
+2882
+3121
+Streènianska
+2592
+2876
+Strojnícka
+3871
+1845
+Stromová
+2418
+1490
+Studenohorská
+1637
+781
+Studená
+3903
+1106
+Studená-zastávka
+3860
+1029
+Svätoplukova
+3026
+1891
+Syslia
+3702
+1965
+SÚSCH
+2271
+1352
+Súhvezdná
+3861
+1552
+Súmraèná
+3703
+1628
+TECHNOPOL
+2675
+2702
+TERNO
+2449
+2686
+TESCO Hypermarket
+2426
+2809
+TV Markíza
+1218
+42
+Tbiliská
+3518
+306
+Technická
+3837
+1227
+Technická univerzita
+2693
+1753
+Technické sklo
+914
+611
+Tehelná
+2962
+1471
+Tehelòa
+168
+73
+Televízia
+1949
+1665
+Terminál
+3615
+2160
+Tokajícka
+3351
+1574
+Tománkova
+1583
+1759
+Tomášikova
+3587
+1638
+Topo¾èianska
+2600
+2733
+Toryská
+4379
+2125
+Trenèianska
+3166
+1786
+Trnavské mýto
+2963
+1617
+Trojdomy
+3083
+1074
+Trávna
+3496
+421
+Tunel
+2328
+2010
+Tupolevova
+2513
+2711
+Tupého
+2718
+1539
+Uhliská
+4293
+631
+Ul. 29. augusta
+2860
+1887
+Ul. 8. mája
+4584
+2306
+Ursínyho
+2888
+1526
+Uèite¾ská
+4505
+2340
+VD Úsvit
+3522
+1524
+VW Bratislava
+469
+55
+Vajnorská
+3704
+1005
+Vajnory
+4593
+456
+Vajnory-koneèná
+4624
+454
+Vajnory-nadjazd
+4253
+789
+Valašská
+2080
+1439
+Vazovova
+2820
+1711
+Viedenská cesta
+2538
+2111
+Vinohradnícka
+4630
+2438
+Vinárske závody
+3368
+463
+Vlárska
+2288
+1356
+Vlèie hrdlo
+3834
+2294
+Vlèie hrdlo-sídlisko
+3662
+2302
+Vlèie hrdlo-zastávka
+3931
+2286
+Vodostav
+3632
+2615
+Vodáreò
+1439
+1824
+Vojenská nemocnica
+1980
+1295
+Vojenský útvar
+4150
+388
+Vozovòa Jurajov Dvor
+3557
+1078
+Vozovòa Krasòany
+3120
+905
+Vozovòa Trnávka
+3630
+1233
+Vrakunská
+4253
+2127
+Vrakuòa-záhrady
+4158
+1698
+Vranèovièova
+1489
+781
+Vysoká
+2680
+1837
+Vyšehradská
+2572
+3058
+Váhostav
+4068
+1624
+Vápencová
+263
+310
+Vápenka
+498
+502
+Východné
+3699
+680
+Výstavisko
+2449
+2157
+Vývojová
+2888
+3219
+ZIPP
+3753
+941
+ZOO
+2024
+1522
+Za kameòolomom
+597
+1446
+Za mostom
+4152
+2042
+Zemiakové sklady
+4211
+886
+Zimný štadión
+3111
+1587
+Zlaté piesky
+3979
+900
+Zlaté schody
+1200
+1756
+Znievska
+2562
+2935
+Zochova
+2532
+1891
+Zvonèeková
+3371
+244
+ZŠ Budatínska
+2446
+2888
+ZŠ Devín
+403
+1304
+ZŠ Majerníkova
+1475
+1684
+Záhorská Bystrica
+1204
+6
+Záhorácka
+2060
+1366
+Záhradnícka
+3079
+1696
+Záhradníctvo
+4116
+1318
+Záhumenice
+3521
+370
+Záluhy
+1518
+980
+Zámocká
+2431
+1949
+Záporožská
+2404
+2378
+Zátišie
+3212
+1297
+Závadská
+3490
+344
+Závod Matador
+2384
+2540
+Závod SAD
+3485
+1463
+Šafranová
+2121
+1644
+Šafárikovo nám.
+2747
+1997
+Šancová
+2694
+1643
+Ševèenkova
+2433
+2523
+Šikmá
+4336
+2337
+Šintavská
+2595
+2807
+Šoltésovej
+2909
+1800
+Špitálska
+2780
+1820
+Športové letisko
+4146
+721
+Šprinclov majer
+4092
+326
+Št. hr. Jarovce
+2883
+3150
+Št. hr. Rusovce
+3041
+3171
+Štefana Králika
+317
+511
+Štefanièova
+2648
+1719
+Štepná
+1150
+850
+Štrbská
+347
+1202
+Štrkopiesky
+2803
+3090
+Štátne lesy
+4249
+3170
+Štátny majetok
+3036
+3132
+Šulekova
+2416
+1818
+Šustekova
+2935
+2364
+Švabinského
+2482
+2626
+Švantnerova
+1365
+1061
+Šípová
+4347
+1812
+Šíravská
+4380
+1905
+ŽST Devínska Nová Ves
+217
+180
+ŽST Lamaè
+1578
+1024
+ŽST Nové Mesto
+3304
+1326
+ŽST P. Biskupice
+4654
+2271
+ŽST Petržalka
+2427
+2453
+ŽST Rusovce
+2956
+3074
+ŽST Vajnory
+4358
+768
+ŽST Vinohrady
+3078
+967
+ŽST ÚNS
+3772
+1995
+Žatevná
+1170
+902
+Žehrianska
+2822
+3044
+Železnièná
+4439
+1865
+Železná studnièka
+2129
+885
+Žilinská
+2650
+1708
+Žitavská
+4540
+1988
+¼ubovnianska
+2747
+2961
+ÈOV Vlèie hrdlo
+3647
+2661
+ÈOV-Devínska Nová Ves
+739
+173
+Èachtická
+3460
+400
+Èernockého
+3319
+657
+Èervený kríž
+2277
+1806
+Èierna voda
+4797
+260
+Èierna voda-zastávka
+4764
+304
+Èierny chodník
+4346
+617
+Èiližská
+4503
+1934
+Èremchová
+2652
+1371
+Èulenova
+2854
+1953
+Èunovo
+3045
+3231
+Èunovo-námestie
+3043
+3212
+Èunovo-rázcestie
+3037
+3151
+Ïumbierska
+2161
+1368

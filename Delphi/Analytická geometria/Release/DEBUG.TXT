@@ -1,0 +1,7 @@
+THlavneOkno.FormCreate
+TBody.Create
+TPriamky.Create
+TNUHolniky.Create
+TVykres.Create
+TSubor.Create
+TSubor.Create

@@ -1,0 +1,192 @@
+unit UnitMainForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls;
+
+type
+  TMainForm = class(TForm)
+    ButtonStart: TButton;
+    Memo: TMemo;
+    procedure ButtonStartClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+    FileList : TStringList;
+
+    procedure MakeFileList;
+    procedure RepairAllFiles;
+      procedure ReadFile( FileName : string; Lines : TStringList );
+      procedure RepairFile( Lines : TStringList );
+      procedure WriteFile( FileName : string; Lines : TStringList );
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+uses Registry;
+
+{$R *.DFM}
+
+//==============================================================================
+//==============================================================================
+//
+//                                    Constructor
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  FileList := TStringList.Create;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                    Destructor
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  FileList.Free;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                  File processing
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMainForm.MakeFileList;
+var Reg : TRegistry;
+    Path : string;
+    SR : TSearchRec;
+begin
+  FileList.Clear;
+  
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+    Reg.OpenKey( '\Software\MHD\' , False );
+    Path := Reg.ReadString( 'Rozvrhy_dir' );
+  finally
+    Reg.Free;
+  end;
+
+  if FindFirst( Path+'\*.*' , faAnyFile - faDirectory , SR ) <> 0 then
+    begin
+      FindClose( SR );
+      exit;
+    end;
+  repeat
+    FileList.Add( Path+'\'+SR.Name );
+  until FindNext( SR ) <> 0;
+  FindClose( SR );
+end;
+
+procedure TMainForm.ReadFile( FileName : string; Lines : TStringList );
+var Fin : TextFile;
+    S : string;
+begin
+  AssignFile( Fin , FileName );
+  {$I-}
+  Reset( Fin );
+  {$I+}
+  if IOResult <> 0 then exit;
+
+  Lines.Clear;
+  while not EoF( Fin ) do
+    begin
+      Readln( Fin , S );
+      Lines.Add( S );
+    end;
+
+  CloseFile( Fin );
+end;
+
+procedure TMainForm.RepairFile( Lines : TStringList );
+var I : integer;
+begin
+  I := 0;
+  while I < Lines.Count do
+    begin
+      if (Lines[I] = '0 0 KONIEC') then
+        begin
+          Lines.Insert( I+1 , '3' );
+          break;
+        end;
+      Inc( I );
+    end;
+end;
+
+procedure TMainForm.WriteFile( FileName : string; Lines : TStringList );
+var I : integer;
+    Fout : TextFile;
+begin
+  AssignFile( Fout , FileName );
+  {$I-}
+  Rewrite( Fout );
+  {$I+}
+  if IOResult <> 0 then exit;
+
+  for I := 0 to Lines.Count-1 do
+    Writeln( Fout , Lines[I] );
+
+  CloseFile( Fout );
+end;
+
+procedure TMainForm.RepairAllFiles;
+var I : integer;
+    Lines : TStringList;
+begin
+  Memo.Clear;
+
+  Lines := TStringList.Create;
+  try
+    for I := 0 to FileList.Count-1 do
+      begin
+        ReadFile( FileList[I] , Lines );
+        RepairFile( Lines );
+        WriteFile( FileList[I] , Lines );
+
+        Memo.Lines.Add( FileList[I] );
+      end;
+  finally
+    Lines.Free;
+  end;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                      Events
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMainForm.ButtonStartClick(Sender: TObject);
+begin
+  Screen.Cursor := crHourGlass;
+  ButtonStart.Enabled := False;
+  try
+    MakeFileList;
+    RepairAllFiles;
+  finally
+    Screen.Cursor := crDefault;
+    ButtonStart.Enabled := True;
+  end;
+end;
+
+end.

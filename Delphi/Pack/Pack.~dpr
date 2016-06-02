@@ -1,0 +1,17 @@
+program Pack;
+
+uses
+  ClassPack in 'ClassPack.pas',
+  ClassTree in 'ClassTree.pas';
+
+var
+  Pack : TPack;
+
+begin
+  Pack := TPack.Create;
+  try
+    Pack.Pack( 'English.src' , 'English.pck' );
+  finally
+    Pack.Free;
+  end;
+end.

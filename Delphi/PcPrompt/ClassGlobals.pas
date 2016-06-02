@@ -1,0 +1,153 @@
+unit ClassGlobals;
+
+interface
+
+type TGlobals = class
+     private
+       FLastOpened   : string;
+
+       FDodacieDir   : string;
+       FDodacieExt   : string;
+
+       procedure     LoadFromReg;
+       procedure     SaveToReg;
+
+     public
+       constructor Create;
+       destructor  Destroy; override;
+
+       function    GetNewFileName( Dir : string; Ext : string ) : string;
+       procedure   ParseFileName( FileName : string; var Dir, Name, Ext : string );
+
+       property    LastOpened : string read FLastOpened write FLastOpened;
+       property    DodacieDir : string read FDodacieDir write FDodacieDir;
+       property    DodacieExt : string read FDodacieExt write FDodacieExt;
+     end;
+
+var Globals : TGlobals;
+
+implementation
+
+uses Windows, Registry, SysUtils;
+
+constructor TGlobals.Create;
+begin
+  FDodacieDir := '';
+  FDodacieExt := '';
+
+  LoadFromReg;
+end;
+
+destructor TGlobals.Destroy;
+begin
+  SaveToReg;
+end;
+
+//==============================================================================
+//  P R I V A T E
+//==============================================================================
+
+procedure TGlobals.LoadFromReg;
+var Reg : TRegistry;
+begin
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+    Reg.OpenKey( 'Software\PcPrompt' , true );
+
+    LastOpened := Reg.ReadString( 'LastOpened' );
+    DodacieDir := Reg.ReadString( 'DodacieDir' );
+    DodacieExt := Reg.ReadString( 'DodacieExt' );
+  finally
+    Reg.Free;
+  end;
+end;
+
+procedure TGlobals.SaveToReg;
+var Reg : TRegistry;
+begin
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+    Reg.OpenKey( 'Software\PcPrompt' , true );
+
+    Reg.WriteString( 'LastOpened' , LastOpened );
+    Reg.WriteString( 'DodacieDir' , DodacieDir );
+    Reg.WriteString( 'DodacieExt' , DodacieExt );
+  finally
+    Reg.Free;
+  end;
+end;
+
+//==============================================================================
+//  P U B L I C
+//==============================================================================
+
+function TGlobals.GetNewFileName( Dir : string; Ext : string ) : string;
+var F : TSearchRec;
+    Datum : string;
+    Subor : string;
+    I : integer;
+begin
+  Result := '';
+
+  // Get actual date
+  DateTimeToString( Datum , 'dd"-"mm"-"yyyy' , Date );
+
+  I := 1;
+  repeat
+    if (I div 100 <> 0) then
+      Subor := Datum + '-' + IntToStr( I )
+    else
+      if (I div 10 <> 0) then
+        Subor := Datum + '-0' + IntToStr( I )
+      else
+        Subor := Datum + '-00' + IntToStr( I );
+
+    Inc( I );
+  until ((FindFirst( Dir+'\'+Subor+'.'+Ext , faAnyFile , F ) <> 0) or (I = 999));
+
+  Result := Dir+'\'+Subor+'.'+Ext;
+end;
+
+procedure TGlobals.ParseFileName( FileName : string; var Dir, Name, Ext : string );
+var I : integer;
+    Index : integer;
+    Index2 : integer;
+begin
+  Dir  := '';
+  Name := '';
+  Ext  := '';
+
+  // Get index of last back-slash
+  Index := 0;
+  for I := 1 to Length( FileName ) do
+    if (FileName[I] = '\') then
+      Index := I;
+
+  if (Index = 0) then
+    exit;
+
+  // Copy directory
+  for I := 1 to Index-1 do
+    Dir := Dir + FileName[I];
+
+  // Get index of last comma
+  Index2 := 0;
+  for I := Index+1 to Length( FileName ) do
+    if (FileName[I] = '.') then
+      Index2 := I;
+
+  if (Index2 = 0) then
+    exit;
+
+  // Copy file name
+  for I := Index+1 to Index2-1 do
+    Name := Name + FileName[I];
+
+  // Copy extension
+  for I := Index2+1 to Length( FileName ) do
+    Ext := Ext + FileName[I];
+end;
+
+end.

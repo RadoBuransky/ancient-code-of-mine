@@ -1,0 +1,14 @@
+unit ClassPlayer;
+
+interface
+
+uses Types;
+
+type TPlayer = class
+     public
+       function MakeMove : TMove; virtual; abstract;
+     end;
+
+implementation
+
+end.

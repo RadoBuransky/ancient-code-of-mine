@@ -1,0 +1,22 @@
+program Dodacie;
+
+
+uses
+  Forms,
+  ClassFaktury in 'ClassFaktury.pas',
+  Typy in 'Typy.pas',
+  FormHlavneOkno in 'FormHlavneOkno.pas' {HlavneOkno},
+  ClassDBF in 'ClassDBF.pas',
+  DialogDodaciKFakture in 'DialogDodaciKFakture.pas' {DodaciKFakture},
+  ClassTlac in 'ClassTlac.pas',
+  FormText in 'FormText.pas' {Text};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(THlavneOkno, HlavneOkno);
+  Application.CreateForm(TDodaciKFakture, DodaciKFakture);
+  Application.CreateForm(TText, Text);
+  Application.Run;
+end.

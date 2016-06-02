@@ -1,0 +1,14 @@
+program NewImageTest;
+
+uses
+  Forms,
+  UnitMainForm in 'UnitMainForm.pas' {Form1},
+  ClassNewImage in 'ClassNewImage.pas';
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

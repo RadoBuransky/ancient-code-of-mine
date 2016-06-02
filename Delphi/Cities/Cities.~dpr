@@ -1,0 +1,15 @@
+program Cities;
+
+uses
+  Forms,
+  UnitMainForm in 'UnitMainForm.pas' {MainForm},
+  ClassCities in 'ClassCities.pas',
+  ClassPlayer in 'ClassPlayer.pas';
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TMainForm, MainForm);
+  Application.Run;
+end.

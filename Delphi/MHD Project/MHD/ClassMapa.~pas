@@ -1,0 +1,500 @@
+unit ClassMapa;
+
+interface
+
+uses ExtCtrls, Classes, Controls, Windows, Graphics, Forms, ClassData,
+     ClassHladanie;
+
+type TBackground = record
+       Src, Dest : TRect;
+       Bitmap : TBitmap;
+     end;
+
+     TMapa = class
+     private
+       Mapa : TImage;
+       ScrollBox : TScrollBox;
+       Povodny : TBitmap;
+
+       ImageList : TImageList;
+
+       PodZastavkou : TBackground;
+       PodStart, PodFinish : TBackground;
+
+       AllowLookAt : boolean;
+
+       FShowSpoj : PSpoj;
+       FLookAt : TPoint;
+       FShowZast : PZastavka;
+       FShowRes : PVysledok;
+       FStart : TPoint;
+       FFinish : TPoint;
+       procedure SetShowSpoj( Value : PSpoj );
+       procedure SetLookAt( Value : TPoint );
+       procedure SetShowZast( Value : PZastavka );
+       procedure SetShowRes( Value : PVysledok );
+       procedure SetStart( Value : TPoint );
+       procedure SetFinish( Value : TPoint );
+
+       procedure Repaint( Clear : boolean );
+         procedure PaintSpoj;
+         procedure PaintZastavka( PZast : PZastavka );
+     public
+       constructor Create( iMapa : TImage; iScrollBox : TScrollBox; iImageList : TImageList );
+       destructor Destroy; override;
+
+       procedure LookAtNearest( Point : TPoint );
+
+       property ShowZast : PZastavka read FShowZast write SetShowZast;
+       property ShowSpoj : PSpoj read FShowSpoj write SetShowSpoj;
+       property ShowRes : PVysledok read FShowRes write SetShowRes;
+       property LookAt : TPoint read FLookAt write SetLookAt;
+       property Start : TPoint read FStart write SetStart;
+       property Finish : TPoint read FFinish write SetFinish;
+     end;
+
+var Mapa : TMapa;
+
+implementation
+
+uses Konstanty;
+
+//==============================================================================
+//==============================================================================
+//
+//                                    Constructor
+//
+//==============================================================================
+//==============================================================================
+
+constructor TMapa.Create( iMapa : TImage; iScrollBox : TScrollBox; iImageList : TImageList );
+begin
+  inherited Create;
+  Mapa := iMapa;
+  ScrollBox := iScrollBox;
+  ImageList := iImageList;
+
+  //  Mapa
+  //Mapa.Picture.Bitmap.LoadFromFile( MAP_FILE );
+  Mapa.Width := Mapa.Picture.Width;
+  Mapa.Height := Mapa.Picture.Height;
+
+  Povodny := TBitmap.Create;
+  Povodny.Assign( Mapa.Picture.Bitmap );
+
+  PodZastavkou.Bitmap := TBitmap.Create;
+
+  AllowLookAt := True;
+  FShowSpoj := nil;
+  FShowRes := nil;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                    Destructor
+//
+//==============================================================================
+//==============================================================================
+
+destructor TMapa.Destroy;
+begin
+  Povodny.Free;
+  PodZastavkou.Bitmap.Free;
+  if (PodStart.Bitmap <> nil) then
+    PodStart.Bitmap.Free;
+  inherited;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                   Private
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMapa.PaintZastavka( PZast : PZastavka );
+begin
+  if PZast = nil then exit;
+
+  with Mapa.Canvas do
+    begin
+      if (PZast = FShowZast) then
+        begin
+          Pen.Color := clWhite;
+          Pen.Width := 1;
+          Brush.Color := clBlack;
+          Font.Color := clWhite;
+        end
+          else
+        begin
+          Pen.Color := clBlack;
+          Pen.Width := 1;
+          Brush.Color := clWhite;
+          Font.Color := clBlack;
+        end;
+      Font.Style := [fsBold];
+
+      Ellipse( PZast^.Sur.X - 3 ,
+               PZast^.Sur.Y - 3 ,
+               PZast^.Sur.X + 3 ,
+               PZast^.Sur.Y + 3 );
+
+      Rectangle( PZast^.Sur.X + 5 ,
+                 PZast^.Sur.Y - 5 ,
+                 PZast^.Sur.X + 15 +
+                 TextWidth( PZast^.Nazov ) ,
+                 PZast^.Sur.Y + 10 );
+
+      TextOut( PZast^.Sur.X + 10 ,
+               PZast^.Sur.Y - 4 ,
+               PZast^.Nazov );
+    end;
+end;
+
+procedure TMapa.PaintSpoj;
+var Spoj : PSpoj;
+begin
+  with Mapa.Canvas do
+    begin
+      Pen.Color := clBlack;
+      Pen.Width := 3;
+    end;
+
+  Spoj := ShowSpoj;
+  while Spoj <> nil do
+    begin
+      if Spoj = ShowSpoj then
+        Mapa.Canvas.MoveTo( Spoj^.NaZastavke^.Sur.X , Spoj^.NaZastavke^.Sur.Y )
+          else
+        Mapa.Canvas.LineTo( Spoj^.NaZastavke^.Sur.X , Spoj^.NaZastavke^.Sur.Y );
+
+      Spoj := Spoj^.Next;
+    end;
+
+  Spoj := ShowSpoj;
+  while Spoj <> nil do
+    begin
+      PaintZastavka( Spoj^.NaZastavke );
+      Spoj := Spoj^.Next;
+    end;
+end;
+
+procedure TMapa.Repaint( Clear : boolean );
+begin
+  Screen.Cursor := crHourGlass;
+  try
+    // Zmazanie obrazovky
+    if Clear then
+      Mapa.Picture.Bitmap.Assign( Povodny );
+
+    // Nakreslenie vybraneho spoja
+    if ShowSpoj <> nil then
+      PaintSpoj;
+  finally
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                  Properties
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMapa.SetShowSpoj( Value : PSpoj );
+var NeedClear : boolean;
+begin
+  if (FShowSpoj = Value) then exit;
+  if (FShowSpoj = nil) then NeedClear := False
+                       else NeedClear := True;
+  FShowSpoj := Value;
+
+  if ShowZast <> nil then
+    ShowZast := nil;
+
+  Repaint( NeedClear );
+
+  if (FShowSpoj <> nil) then
+    LookAt := FShowSpoj^.NaZastavke^.Sur;
+end;
+
+procedure TMapa.SetLookAt( Value : TPoint );
+begin
+  FLookAt := Value;
+
+  ScrollBox.HorzScrollBar.Position := FLookAt.X - (ScrollBox.ClientWidth div 2);
+  ScrollBox.VertScrollBar.Position := FLookAt.Y - (ScrollBox.ClientHeight div 2);
+end;
+
+procedure TMapa.SetShowZast( Value : PZastavka );
+begin
+  if (FShowZast = Value) then exit;
+
+  Screen.Cursor := crHourGlass;
+  try
+    if (FShowZast <> nil) then
+      Mapa.Canvas.CopyRect( PodZastavkou.Src , PodZastavkou.Bitmap.Canvas , PodZastavkou.Dest );
+
+    FShowZast := Value;
+    if (FShowZast = nil) then exit;
+
+    PodZastavkou.Bitmap.Canvas.Font.Style := [fsBold];
+    with PodZastavkou.Src do
+      begin
+        Left := FShowZast^.Sur.X-3;
+        Top := FShowZast^.Sur.Y-5;
+        Right := FShowZast^.Sur.X+15+PodZastavkou.Bitmap.Canvas.TextWidth( FShowZast^.Nazov );
+        Bottom := FShowZast^.Sur.Y+10;
+      end;
+
+    with PodZastavkou.Dest do
+      begin
+        Left := 0;
+        Top := 0;
+        Right := PodZastavkou.Src.Right - PodZastavkou.Src.Left;
+        Bottom := PodZastavkou.Src.Bottom - PodZastavkou.Src.Top;
+      end;
+
+    PodZastavkou.Bitmap.Width := PodZastavkou.Dest.Right;
+    PodZastavkou.Bitmap.Height := PodZastavkou.Dest.Bottom;
+    PodZastavkou.Bitmap.Canvas.CopyRect( PodZastavkou.Dest , Mapa.Canvas , PodZastavkou.Src );
+
+    PaintZastavka( FShowZast );
+    if AllowLookAt then
+      LookAt := FShowZast^.Sur;
+  finally
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TMapa.SetShowRes( Value : PVysledok );
+const C : array[0..2] of TColor = (clNavy,clOlive,clAqua);
+var I, J : integer;
+    Z : PZastavka;
+    S : PSpoj;
+
+procedure Spoj( A, B : TPoint; Farba : TColor; PenStyle : TPenStyle );
+begin
+  with Mapa.Canvas do
+    begin
+      Pen.Width := 3;
+      Pen.Color := Farba;
+      Pen.Style := PenStyle;
+      Brush.Color := Farba;
+
+      if not ((A.X = B.X) and (A.Y = B.Y)) then
+        begin
+          MoveTo( A.X , A.Y );
+          LineTo( B.X , B.Y );
+        end;
+
+      Ellipse( A.X-2 , A.Y-2 , A.X+2 , A.Y+2 );
+
+      Pen.Style := psSolid;
+    end;
+end;
+
+begin
+  if (Value = FShowRes) then exit;
+  FShowRes := Value;
+
+  Screen.Cursor := crHourGlass;
+  try
+    ShowZast := nil;
+    if (ShowSpoj = nil) then Mapa.Picture.Bitmap.Assign( Povodny )
+                        else ShowSpoj := nil;
+    if (FShowRes = nil) then exit;
+
+    if FShowRes^.FreePoint then Spoj( FShowRes^.A , FShowRes^.Zaciatok^.Sur , C[2] , psDot );
+
+    Z := nil;
+    for I := 0 to Length( FShowRes^.Prestupy )-1 do
+      begin
+        if (Z <> nil) and
+           (Z <> FShowRes^.Prestupy[I].Zaciatok^.NaZastavke) then
+          Spoj( Z^.Sur , FShowRes^.Prestupy[I].Zaciatok^.NaZastavke^.Sur , C[2] , psDot );
+
+        S := FShowRes^.Prestupy[I].Zaciatok;
+        J := 1;
+        while (S <> nil) and (J <= FShowRes^.Prestupy[I].Zastavky) do
+          begin
+            if (S^.Next <> nil) then
+              Spoj( S^.NaZastavke^.Sur , S^.Next^.NaZastavke^.Sur , C[I mod 2] , psSolid )
+                else
+              Spoj( S^.NaZastavke^.Sur , S^.NaZastavke^.Sur , C[I mod 2] , psSolid );
+
+            PaintZastavka( S^.NaZastavke );
+
+            S := S^.Next;
+            Inc( J );
+          end;
+      end;
+
+    PaintZastavka( FShowRes^.Koniec );
+
+    if FShowRes^.FreePoint then Spoj( FShowRes^.B , FShowRes^.Koniec^.Sur , C[2] , psDot );
+
+    LookAt := FShowRes^.Zaciatok^.Sur;
+  finally
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TMapa.LookAtNearest( Point : TPoint );
+var I, Min : integer;
+    R : integer;
+    Zast : PZastavka;
+begin
+  Screen.Cursor := crHourGlass;
+  try
+    Min := -1;
+    Zast := nil;
+    for I := 0 to Data.Zastavky.Count-1 do
+      begin
+        R := Round( Sqrt( Sqr(Point.X-TZastavka(Data.Zastavky[I]^).Sur.X) + Sqr(Point.Y-TZastavka(Data.Zastavky[I]^).Sur.Y) ) );
+        if (I = 0) or
+           (R < Min) then
+          begin
+            Min := R;
+            Zast := Data.Zastavky[I];
+          end;
+      end;
+    if Zast <> nil then
+      begin
+        AllowLookAt := False;
+        ShowZast := Zast;
+        AllowLookAt := True;
+      end;
+  finally
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TMapa.SetStart( Value : TPoint );
+var BMP : TBitmap;
+begin
+  FStart := Value;
+
+  // Zmaz zobrazenu zastavku
+  ShowZast := nil;
+
+  // Zmaz zobrazeny rozvrh
+  ShowSpoj := nil;
+
+  // Zmaz zobrazeny vysledok
+  ShowRes := nil;
+
+  // Zmaz predchadzajuci start
+  if (PodStart.Bitmap <> nil) then
+    Mapa.Canvas.CopyRect( PodStart.Dest , PodStart.Bitmap.Canvas , PodStart.Src );
+
+  if (FStart.X = -1) and
+     (FStart.Y = -1) then
+    begin
+      if (PodStart.Bitmap <> nil) then
+        begin
+          PodStart.Bitmap.Free;
+          PodStart.Bitmap := nil;
+        end;
+      exit;
+    end;
+
+  BMP := TBitmap.Create;
+  try
+    ImageList.GetBitmap( 4 , BMP );
+    BMP.TransparentColor := BMP.Canvas.Pixels[0,0];
+
+    with PodStart.Src do
+      begin
+        Left := 0;
+        Right := BMP.Width;
+        Top := 0;
+        Bottom := BMP.Height;
+      end;
+
+    with PodStart.Dest do
+      begin
+        Left := FStart.X - (BMP.Width div 2);
+        Right := FStart.X + (BMP.Width div 2);
+        Top := FStart.Y - (BMP.Height div 2);
+        Bottom := FStart.Y + (BMP.Height div 2);
+      end;
+
+    if (PodStart.Bitmap = nil) then
+      PodStart.Bitmap := TBitmap.Create;
+
+    PodStart.Bitmap.Width := BMP.Width;
+    PodStart.Bitmap.Height := BMP.Height;
+    PodStart.Bitmap.Canvas.CopyRect( PodStart.Src , Povodny.Canvas , PodStart.Dest );
+    Mapa.Canvas.Draw( PodStart.Dest.Left , PodStart.Dest.Top , BMP );
+  finally
+    BMP.Free;
+  end;
+end;
+
+procedure TMapa.SetFinish( Value : TPoint );
+var BMP : TBitmap;
+begin
+  FFinish := Value;
+
+  // Zmaz zobrazenu zastavku
+  ShowZast := nil;
+
+  // Zmaz zobrazeny rozvrh
+  ShowSpoj := nil;
+
+  // Zmaz zobrazeny vysledok
+  ShowRes := nil;
+
+  // Zmaz predchadzajuci Finish
+  if (PodFinish.Bitmap <> nil) then
+    Mapa.Canvas.CopyRect( PodFinish.Dest , PodFinish.Bitmap.Canvas , PodFinish.Src );
+
+  if (FFinish.X = -1) and
+     (FFinish.Y = -1) then
+    begin
+      if (PodFinish.Bitmap <> nil) then
+        begin
+          PodFinish.Bitmap.Free;
+          PodFinish.Bitmap := nil;
+        end;
+      exit;
+    end;
+
+  BMP := TBitmap.Create;
+  try
+    ImageList.GetBitmap( 5 , BMP );
+
+    with PodFinish.Src do
+      begin
+        Left := 0;
+        Right := BMP.Width;
+        Top := 0;
+        Bottom := BMP.Height;
+      end;
+
+    with PodFinish.Dest do
+      begin
+        Left := FFinish.X - (BMP.Width div 2);
+        Right := FFinish.X + (BMP.Width div 2);
+        Top := FFinish.Y - (BMP.Height div 2);
+        Bottom := FFinish.Y + (BMP.Height div 2);
+      end;
+
+    if (PodFinish.Bitmap = nil) then
+      PodFinish.Bitmap := TBitmap.Create;
+
+    PodFinish.Bitmap.Width := BMP.Width;
+    PodFinish.Bitmap.Height := BMP.Height;
+    PodFinish.Bitmap.Canvas.CopyRect( PodFinish.Src , Povodny.Canvas , PodFinish.Dest );
+    Mapa.Canvas.CopyRect( PodFinish.Dest , BMP.Canvas , PodFinish.Src );
+  finally
+    BMP.Free;
+  end;
+end;
+
+end.

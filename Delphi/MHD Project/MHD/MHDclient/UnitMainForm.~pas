@@ -1,0 +1,122 @@
+unit UnitMainForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ComCtrls, ExtCtrls, lgmPanel, ClassMHDClient;
+
+type
+  TMainForm = class(TForm)
+    lgmPanel1: TlgmPanel;
+    ListView: TListView;
+    StatusBar: TStatusBar;
+    ButtonCancel: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+    Last : array[0..2] of integer;
+
+    procedure StatusChange( Status : TStatus; StatusText : string );
+    procedure SessionBegin( SessionInfo : TSessionInfo );
+    procedure ItemChange( Typ : integer; Popis, Stav : string );
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.DFM}
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  MHDClient := TMHDClient.Create;
+  MHDClient.OnStatusChange := StatusChange;
+  MHDclient.OnSessionBegin := SessionBegin;
+  MHDclient.OnItemChange := ItemChange;
+end;
+
+procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  MHDClient.Free;
+end;
+
+procedure TMainForm.StatusChange( Status : TStatus; StatusText : string );
+begin
+  StatusBar.Panels[0].Text := StatusText;
+  if (Status = csFinish) then Close;
+end;
+
+procedure TMainForm.SessionBegin( SessionInfo : TSessionInfo );
+var NewLI : TListItem;
+    I, J : integer;
+begin
+  ListView.Items.Clear;
+  Last[0] := -1;
+  Last[1] := -1;
+  Last[2] := -1;
+  J := 0;
+  for I := 1 to SessionInfo.Rozvrhy do
+    begin
+      Inc( J );
+      NewLI := ListView.Items.Add;
+      NewLI.Caption := IntToStr( J );
+      NewLI.SubItems.Add( 'Rozvrh' );
+      NewLI.SubItems.Add( '' );
+      NewLI.SubItems.Add( 'Èaká sa ...' );
+    end;
+
+  for I := 1 to SessionInfo.Listky do
+    begin
+      Inc( J );
+      NewLI := ListView.Items.Add;
+      NewLI.Caption := IntToStr( J );
+      NewLI.SubItems.Add( 'Lístok' );
+      NewLI.SubItems.Add( '' );
+      NewLI.SubItems.Add( 'Èaká sa ...' );
+    end;
+
+  for I := 1 to SessionInfo.Zastavky do
+    begin
+      Inc( J );
+      NewLI := ListView.Items.Add;
+      NewLI.Caption := IntToStr( J );
+      NewLI.SubItems.Add( 'Zastávky' );
+      NewLI.SubItems.Add( '' );
+      NewLI.SubItems.Add( 'Èaká sa ...' );
+    end;
+end;
+
+procedure TMainForm.ItemChange( Typ : integer; Popis, Stav : string );
+var I, J : integer;
+    TypName : string;
+begin
+  J := -1;
+  case Typ of
+    0 : TypName := 'Rozvrh';
+    1 : TypName := 'Lístok';
+    2 : TypName := 'Zastávky';
+  end;
+
+  for I := 0 to ListView.Items.Count-1 do
+    if (ListView.Items[I].SubItems[0] = TypName) then
+      begin
+        Inc( J );
+        if (J > Last[Typ]) then
+          begin
+            Last[Typ] := J;
+            break;
+          end;
+      end;
+
+  if (J = -1) then exit;
+
+  ListView.Items[J].SubItems[1] := Popis;
+  ListView.Items[J].SubItems[2] := Stav;
+end;
+
+end.

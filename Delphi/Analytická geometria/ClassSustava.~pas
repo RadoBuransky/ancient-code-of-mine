@@ -1,0 +1,258 @@
+unit ClassSustava;
+
+interface
+
+uses Classes, Typy;
+
+type TBody = class
+             public
+               Pole : TList;
+
+               function Pridaj( NovyBod : TBod ) : PBod;
+               procedure Zmaz( CisloBodu : Word );
+
+               constructor Create;
+               destructor Destroy; override;
+             end;
+
+     TPriamky = class
+                public
+                  Pole : TList;
+
+                  function Pridaj( A : TBod; Smer : TVektor ) : PPriamka;
+
+                  constructor Create;
+                  destructor Destroy; override;
+                end;
+
+     TNUholniky = class
+                  public
+                    Pole : TList;
+
+                    function Pridaj( Novy : TNuholnik ) : PNUholnik;
+                    procedure Zmaz( Cislo : integer );
+
+                    constructor Create;
+                    destructor Destroy; override;
+                  end;
+
+     TSustava = class
+                public
+                  Body : TBody;
+                  Priamky : TPriamky;
+                  NUholniky : TNUholniky;
+
+                  constructor Create;
+                  destructor Destroy; override;
+                end;
+
+
+implementation
+
+uses SysUtils, Debugging;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                         Trieda B O D Y                                     ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+constructor TBody.Create;
+begin
+  inherited;
+  Napis( 'TBody.Create' );
+  Pole := TList.Create;
+end;
+
+destructor TBody.Destroy;
+var I : integer;
+begin
+  for I := 0 to Pole.Count-1 do Dispose( PBod( Pole.Items[I] ) );
+  Pole.Free;
+  inherited;
+end;
+
+
+function TBody.Pridaj( NovyBod : TBod ) : PBod;
+var PNovyBod : PBod;
+begin
+  try
+    New( PNovyBod )
+  except
+    on EOutOfMemory do
+      begin
+        Pole.Error( 'Nedostatok pamäte pre nový bod!' , SizeOf( NovyBod ) );
+        Result := nil;
+        exit;
+      end;
+  end;
+
+  PNovyBod^.X := NovyBod.X;
+  PNovyBod^.Y := NovyBod.Y;
+  PNovyBod^.Nazov := NovyBod.Nazov;
+
+  Result := PNovyBod;  
+
+  try
+    Pole.Add( PNovyBod )
+  except
+    on EOutOfMemory do
+      begin
+        Pole.Error( 'Nedostatok pamäte pre nový bod!' , SizeOf( NovyBod ) );
+        Dispose( PNovyBod );
+        Result := nil;
+      end;
+  end;
+end;
+
+procedure TBody.Zmaz( CisloBodu : Word );
+begin
+  Dispose( PBod( Pole[CisloBodu] ) );
+  Pole.Delete( CisloBodu );
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                         Trieda P R I A M K Y                               ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+constructor TPriamky.Create;
+begin
+  inherited;
+  Napis( 'TPriamky.Create' );
+  Pole := TList.Create;
+end;
+
+destructor TPriamky.Destroy;
+var I : integer;
+begin
+  for I := 0 to Pole.Count-1 do Dispose( PPriamka( Pole.Items[I] ) );
+  Pole.Free;
+  inherited;
+end;
+
+function TPriamky.Pridaj( A : TBod; Smer : TVektor ) : PPriamka;
+var PNovaPriamka : PPriamka;
+begin
+  try
+    New( PNovaPriamka )
+  except
+    on EOutOfMemory do
+      begin
+        Pole.Error( 'Nedostatok pamäte pre novú priamku!' , SizeOf( PNovaPriamka^ ) );
+        Result := nil;
+        exit;
+      end;
+  end;
+
+  PNovaPriamka^.A := A;
+  PNovaPriamka^.Smer := Smer;
+
+  Result := PNovaPriamka;
+
+  try
+    Pole.Add( PNovaPriamka )
+  except
+    on EOutOfMemory do
+      begin
+        Pole.Error( 'Nedostatok pamäte pre novú priamku!' , SizeOf( PNovaPriamka^ ) );
+        Dispose( PNovaPriamka );
+        Result := nil;
+      end;
+  end;
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                         Trieda N - U H O L N I K Y                         ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+constructor TNUholniky.Create;
+begin
+  inherited;
+  Pole := TList.Create;
+end;
+
+destructor TNUholniky.Destroy;
+var I : integer;
+begin
+  for I := 0 to Pole.Count-1 do
+    begin
+      TNUholnik( Pole[I]^ ).Body.Free;
+      Dispose( PNUholnik( Pole[I] ) );
+    end;
+  Pole.Free;
+  inherited;
+end;
+
+function TNuholniky.Pridaj( Novy : TNuholnik ) : PNUholnik;
+var PNovy : PNUholnik;
+begin
+  try
+    New( PNovy )
+  except
+    on EOutOfMemory do
+      begin
+        Pole.Error( 'Nedostatok pamäte pre nový N-Uholník!' , SizeOf( PNovy^ ) );
+        Result := nil;
+        exit;
+      end;
+  end;
+
+  PNovy^.Body := TList.Create;
+  PNovy^.Body := Novy.Body;
+  PNovy^.Nazov := Novy.Nazov;
+
+  Result := PNovy;
+
+  try
+    Pole.Add( PNovy )
+  except
+    on EOutOfMemory do
+      begin
+        Pole.Error( 'Nedostatok pamäte pre nový N-Uholník!' , SizeOf( PNovy^ ) );
+        Dispose( PNovy );
+        Result := nil;
+      end;
+  end;
+end;
+
+procedure TNuholniky.Zmaz( Cislo : integer );
+begin
+  Dispose( PNUholnik( Pole[Cislo] ) );
+  Pole.Delete( Cislo );
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                         Trieda S U S T A V A                               ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+constructor TSustava.Create;
+begin
+  inherited;
+
+  Body := TBody.Create;
+  Priamky := TPriamky.Create;
+  NUholniky := TNUholniky.Create;
+end;
+
+destructor TSustava.Destroy;
+begin
+  Body.Free;
+  Priamky.Free;
+  NUholniky.Free;
+  
+  inherited;
+end;
+
+end.

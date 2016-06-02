@@ -1,0 +1,363 @@
+unit ClassDodaci;
+
+interface
+
+uses Classes, Typy;
+
+type PDodaciPol = ^TDodaciPol;
+
+     TDodaciPol = record
+       Nazov    : string;
+       Jednotka : string;
+       Mnozstvo : string;
+       ZarDoba  : string;
+       SerCisla : array of string;
+     end;
+
+     TDodaci = class
+     private
+       FPolozky    : TList;
+       FKtoVys     : string;
+       FDatVys     : string;
+       FKtoPri     : string;
+       FDatPri     : string;
+       FKtoSch     : string;
+       FDatSch     : string;
+       FOdberatel  : TSpolocnost;
+
+       FFileName   : string;
+
+       function    GetPolozky( Polozka : pointer ) : TDodaciPol;
+       function    GetPolozkyCount : integer;
+       function    GetOdberatel( I : integer ) : string;
+       function    GetOdberatelCount : integer;
+       procedure   SetPolozky( Polozka : pointer; Pol : TDodaciPol );
+       procedure   SetOdberatel( I : integer; New : string );
+       procedure   SetOdberatelCount( New : integer );
+
+       procedure   Clear;
+
+     public
+       constructor Create;
+       destructor  Destroy; override;
+
+       procedure   New; overload;
+       function    New( Faktura : TFaktura ) : boolean; overload;
+       function    Open( FileName : string ) : boolean;
+       function    Save( FileName : string ) : boolean;
+
+       function    GetPolozka( Index : integer ) : pointer;
+       function    AddPolozka : pointer;
+       procedure   DeletePolozka( Polozka : pointer );
+       procedure   DeleteAllPolozky;
+
+       property    Polozky[Polozka : pointer] : TDodaciPol read GetPolozky write SetPolozky;
+       property    PolozkyCount : integer read GetPolozkyCount;
+       property    KtoVys : string read FKtoVys write FKtoVys;
+       property    DatVys : string read FDatVys write FDatVys;
+       property    KtoPri : string read FKtoPri write FKtoPri;
+       property    DatPri : string read FDatPri write FDatPri;
+       property    KtoSch : string read FKtoSch write FKtoSch;
+       property    DatSch : string read FDatSch write FDatSch;
+       property    Odberatel[I : integer] : string read GetOdberatel write SetOdberatel;
+       property    OdberatelCount : integer read GetOdberatelCount write SetOdberatelCount;
+       property    ICO : string read FOdberatel.ICO write FOdberatel.ICO;
+
+       property    FileName : string read FFileName;
+     end;
+
+var Dodaci : TDodaci;
+
+implementation
+
+uses ClassGlobals;
+
+constructor TDodaci.Create;
+begin
+  FPolozky          := TList.Create;
+  FKtoVys           := '';
+  FDatVys           := '';
+  FKtoPri           := '';
+  FDatPri           := '';
+  FKtoSch           := '';
+  FDatSch           := '';
+  FOdberatel.Adresa := TStringList.Create;
+  FOdberatel.ICO    := '';
+  FFileName         := '';
+end;
+
+destructor TDodaci.Destroy;
+begin
+  DeleteAllPolozky;
+  
+  FPolozky.Free;
+  FOdberatel.Adresa.Free;
+end;
+
+//==============================================================================
+//  P R I V A T E
+//==============================================================================
+
+function TDodaci.GetPolozky( Polozka : pointer ) : TDodaciPol;
+var I : integer;
+begin
+  I := FPolozky.IndexOf( Polozka );
+
+  if ((I < 0) or
+      (I >= FPolozky.Count)) then
+    begin
+      Result.Nazov    := '';
+      Result.Jednotka := '';
+      Result.Mnozstvo := '';
+      Result.ZarDoba  := '';
+      SetLength( Result.SerCisla , 0 );
+    end
+  else
+    Result := TDodaciPol( FPolozky[I]^ );
+end;
+
+function TDodaci.GetPolozkyCount : integer;
+begin
+  Result := FPolozky.Count;
+end;
+
+function TDodaci.GetOdberatel( I : integer ) : string;
+begin
+  if ((I < 0) or
+      (I >= FOdberatel.Adresa.Count)) then
+    Result := ''
+  else
+    Result := FOdberatel.Adresa[I];
+end;
+
+function TDodaci.GetOdberatelCount : integer;
+begin
+  Result := FOdberatel.Adresa.Count;
+end;
+
+procedure TDodaci.SetPolozky( Polozka : pointer; Pol : TDodaciPol );
+var I : integer;
+begin
+  I := FPolozky.IndexOf( Polozka );
+
+  if ((I < 0) or
+      (I >= FPolozky.Count)) then
+    exit
+  else
+    TDodaciPol( FPolozky[I]^ ) := Pol;
+end;
+
+procedure TDodaci.SetOdberatel( I : integer; New : string );
+begin
+  if ((I < 0) or
+      (I >= FOdberatel.Adresa.Count-1)) then
+    exit;
+
+  FOdberatel.Adresa[I] := New;
+end;
+
+procedure TDodaci.SetOdberatelCount( New : integer );
+var I, Count : integer;
+begin
+  Count := FOdberatel.Adresa.Count;
+
+  if (New > Count) then
+  begin
+    for I := Count to New do
+      FOdberatel.Adresa.Add( '' );
+  end
+    else
+    if (New < Count) then
+    begin
+      for I := New-1 to Count-1 do
+        FOdberatel.Adresa.Delete( I );
+    end
+end;
+
+procedure TDodaci.Clear;
+var I : integer;
+begin
+  for I := 0 to FPolozky.Count-1 do
+  begin
+    SetLength( PDodaciPol( FPolozky[I] )^.SerCisla , 0 );
+    Dispose( PDodaciPol( FPolozky[I] ) );
+    FPolozky[I] := nil;
+  end;
+
+  FPolozky.Clear;
+  FKtoVys           := '';
+  FDatVys           := '';
+  FKtoPri           := '';
+  FDatPri           := '';
+  FKtoSch           := '';
+  FDatSch           := '';
+  FOdberatel.Adresa.Clear;
+  FOdberatel.ICO    := '';
+end;
+
+//==============================================================================
+//  P U B L I C
+//==============================================================================
+
+procedure TDodaci.New;
+begin
+  Clear;
+  FFileName := Globals.GetNewFileName( Globals.DodacieDir , Globals.DodacieExt );
+end;
+
+function TDodaci.New( Faktura : TFaktura ) : boolean;
+begin
+  Result := false;
+
+  Clear;
+end;
+
+function TDodaci.Open( FileName : string ) : boolean;
+var F : TextFile;
+    I, J, Count, Count2 : integer;
+    Pol : ^TDodaciPol;
+    S : string;
+begin
+  Clear;
+
+  AssignFile( F , FileName );
+  Reset( F );
+
+  Readln( F , Count );
+  for I := 0 to Count-1 do
+  begin
+    System.New( Pol );
+    FPolozky.Add( Pol );
+
+    Readln( F , Pol^.Nazov );
+    Readln( F , Pol^.Jednotka );
+    Readln( F , Pol^.Mnozstvo );
+    Readln( F , Pol^.ZarDoba );
+
+    Readln( F , Count2 );
+    SetLength( Pol^.SerCisla , Count2 );
+    for J := 0 to Count2-1 do
+      Readln( F , Pol^.SerCisla[J] );
+  end;
+
+  Readln( F , FKtoVys );
+  Readln( F , FDatVys );
+  Readln( F , FKtoPri );
+  Readln( F , FDatPri );
+  Readln( F , FKtoSch );
+  Readln( F , FDatSch );
+
+  Readln( F , Count );
+  for I := 0 to Count-1 do
+  begin
+    Readln( F , S );
+    FOdberatel.Adresa.Add( S );
+  end;
+
+  Readln( F , FOdberatel.ICO );
+
+  CloseFile( F );
+
+  Result := true;
+
+  FFileName := FileName;
+end;
+
+function TDodaci.Save( FileName : string ) : boolean;
+var F : TextFile;
+    I, J : integer;
+    Pol : TDodaciPol;
+begin
+  AssignFile( F , FileName );
+  Rewrite( F );
+
+  // Save data
+  Writeln( F , FPolozky.Count );
+  for I := 0 to FPolozky.Count-1 do
+  begin
+    Pol := TDodaciPol( FPolozky[I]^ );
+
+    Writeln( F , Pol.Nazov );
+    Writeln( F , Pol.Jednotka );
+    Writeln( F , Pol.Mnozstvo );
+    Writeln( F , Pol.ZarDoba );
+
+    Writeln( F , Length( Pol.SerCisla ) );
+    for J := 0 to Length( Pol.SerCisla )-1 do
+      Writeln( F , Pol.SerCisla[J] );
+  end;
+
+  Writeln( F , FKtoVys );
+  Writeln( F , FDatVys );
+  Writeln( F , FKtoPri );
+  Writeln( F , FDatPri );
+  Writeln( F , FKtoSch );
+  Writeln( F , FDatSch );
+
+  Writeln( F , FOdberatel.Adresa.Count );
+  for I := 0 to FOdberatel.Adresa.Count-1 do
+    Writeln( F , FOdberatel.Adresa[I] );
+
+  Writeln( F , FOdberatel.ICO );
+
+  CloseFile( F );
+
+  Result := true;
+
+  FFileName := FileName;
+end;
+
+function TDodaci.GetPolozka( Index : integer ) : pointer;
+begin
+  Result := nil;
+
+  if ((Index < 0) or
+      (Index >= FPolozky.Count)) then
+    exit;
+
+  Result := FPolozky[Index];
+end;
+
+function TDodaci.AddPolozka : pointer;
+var Pol : ^TDodaciPol;
+begin
+  // Allocate memory
+  System.New( Pol );
+
+  // Set result value
+  Result := Pol;
+
+  // Add new item
+  FPolozky.Add( Pol );
+
+  // Reset values
+  Pol^.Nazov    := '';
+  Pol^.Jednotka := '';
+  Pol^.Mnozstvo := '';
+  Pol^.ZarDoba  := '';
+  SetLength( Pol^.SerCisla , 0 );
+end;
+
+procedure TDodaci.DeletePolozka( Polozka : pointer );
+var Index : integer;
+begin
+  Index := FPolozky.IndexOf( Polozka );
+
+  if ((Index < 0) or
+      (Index >= PolozkyCount)) then
+    exit;
+
+  // Free memory
+  System.Dispose( FPolozky.Items[Index] );
+  FPolozky.Delete( Index );
+end;
+
+procedure TDodaci.DeleteAllPolozky;
+var I : integer;
+begin
+  for I := 0 to FPolozky.Count-1 do
+    System.Dispose( FPolozky.Items[I] );
+  FPolozky.Clear;
+end;
+
+end.

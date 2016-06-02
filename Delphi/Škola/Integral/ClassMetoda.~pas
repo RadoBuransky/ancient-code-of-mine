@@ -1,0 +1,141 @@
+unit ClassMetoda;
+
+interface
+
+uses ExtCtrls, Windows;
+
+type TFunkcia = function( X : real ) : real;
+
+     TVysledok = record
+       Plocha : real;
+       Integral : real;
+     end;
+
+     TMetoda = class
+     private
+       procedure NakresliUsek( A , B, fA, fB : real );
+     protected
+       Image : TImage;
+
+       Funkcia : TFunkcia;
+       Integral : TFunkcia;
+     public
+       Stred : TPoint;
+
+       constructor Create( iImage : TImage );
+       destructor Destroy; override;
+
+       procedure NakresliFunkciu;
+       procedure NakresliInterval( A, B : real; n : longint ); virtual; abstract;
+
+       function Ries( A, B : real; n : longint ) : TVysledok; virtual; abstract;
+     end;
+
+implementation
+
+uses Graphics;
+
+//==============================================================================
+//==============================================================================
+//
+//                                   Funkcie
+//
+//==============================================================================
+//==============================================================================
+
+function Integral1( X : real ) : real;
+begin
+  X := X/20;
+  Result := (1/3)*X*X*X;
+end;
+
+function Funkcia1( X : real ) : real;
+begin
+  X := X/20;
+  Result := X*X;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                  Constructor
+//
+//==============================================================================
+//==============================================================================
+
+constructor TMetoda.Create( iImage : TImage );
+begin
+  inherited Create;
+
+  Image := iImage;
+  Stred.X := Image.Width div 2;
+  Stred.Y := Image.Height div 2;
+
+  Funkcia := Funkcia1;
+  Integral := Integral1;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                  Destructor
+//
+//==============================================================================
+//==============================================================================
+
+destructor TMetoda.Destroy;
+begin
+  inherited;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                              Pomocné funkcie
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMetoda.NakresliUsek( A , B, fA, fB : real );
+var X, fX : real;
+begin
+  X := (A+B)/2;
+  fX := Funkcia( X );
+  if Abs( fX ) <= Stred.Y then
+    Image.Canvas.Pixels[ Stred.X+Round( X ) , Stred.Y-Round( fX ) ] := clYellow;
+
+  if Sqrt( Sqr(A-X) + Sqr(fA-fX) ) >= 1 then
+    NakresliUsek( A , X , fA , fX );
+
+  if Sqrt( Sqr(B-X) + Sqr(fB-fX) ) >= 1 then
+    NakresliUsek( B , X , fB , fX );
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                            I N T E R F A C E
+//
+//==============================================================================
+//==============================================================================
+
+procedure TMetoda.NakresliFunkciu;
+begin
+  if Image = nil then exit;
+
+  with Image.Canvas do
+    begin
+      Pen.Color := clGray;
+      Brush.Color := clBlack;
+
+      FillRect( Image.ClientRect );
+      MoveTo( 0 , Stred.Y );
+      LineTo( Image.Width , Stred.Y );
+      MoveTo( Stred.X , 0 );
+      LineTo( Stred.X , Image.Height );
+    end;
+
+  NakresliUsek( -Stred.X , Stred.X, Funkcia( -Stred.X ) , Funkcia( Stred.X ) );
+end;
+
+end.

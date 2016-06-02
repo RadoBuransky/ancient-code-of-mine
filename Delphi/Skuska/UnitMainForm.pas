@@ -1,0 +1,115 @@
+unit UnitMainForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ScktComp;
+
+type
+  TMainForm = class(TForm)
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    CSocket: TClientSocket;
+    SSocket: TServerSocket;
+    Memo2: TMemo;
+    Memo1: TMemo;
+    Memo3: TMemo;
+    Memo4: TMemo;
+    procedure FormCreate(Sender: TObject);
+    procedure SSocketGetThread(Sender: TObject;
+      ClientSocket: TServerClientWinSocket;
+      var SocketThread: TServerClientThread);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+  TMHDServerThread = class( TServerClientThread )
+  private
+    ThreadStream : TWinSocketStream;
+  protected
+    procedure ClientExecute; override;
+  public
+    constructor Create( CreateSuspended: Boolean; ASocket: TServerClientWinSocket );
+    destructor Destroy; override;
+  end;
+
+var
+  MainForm: TMainForm;
+  MHDServerThread : TMHDServerThread;
+
+implementation
+
+{$R *.DFM}
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+  CSocket.Open;
+end;
+
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+  CSocket.Close;
+  SSocket.Close;
+end;
+
+procedure TMainForm.SSocketGetThread(Sender: TObject;
+  ClientSocket: TServerClientWinSocket;
+  var SocketThread: TServerClientThread);
+begin
+  MHDServerThread := TMHDServerThread.Create( False , ClientSocket );
+  SocketThread := MHDServerThread;
+end;
+
+//==============================================================================
+//==============================================================================
+//
+//                                   S E R V E R
+//
+//==============================================================================
+//==============================================================================
+
+//==============================================================================
+//  Constructor
+//==============================================================================
+
+constructor TMHDServerThread.Create( CreateSuspended: Boolean; ASocket: TServerClientWinSocket );
+begin
+  inherited;
+  ThreadStream := TWinSocketStream.Create( ASocket , 30000 );
+end;
+
+//==============================================================================
+//  Destructor
+//==============================================================================
+
+destructor TMHDServerThread.Destroy;
+begin
+  ThreadStream.Free;
+  inherited;
+end;
+
+procedure TMHDServerThread.ClientExecute;
+var FileStream : TFileStream;
+    Buffer : array [1..10] of char;
+begin
+  while (not Terminated) and
+        (ClientSocket.Connected) do
+    try
+      FileStream := TFileStream.Create( 'C:\Frunlog.txt' , fmOpenRead );
+      try
+        FileStream.Write( Buffer , 100 );
+        ThreadStream.Write( Buffer , 100 );
+      finally
+        FileStream.Free;
+      end;
+      break;
+    except
+      HandleException;
+    end;
+end;
+
+end.

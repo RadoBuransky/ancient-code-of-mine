@@ -1,0 +1,67 @@
+object MainForm: TMainForm
+  Left = 244
+  Top = 201
+  Width = 237
+  Height = 165
+  Caption = 'MainForm'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GaugeGDI: TGauge
+    Left = 120
+    Top = 8
+    Width = 100
+    Height = 100
+    BackColor = clBtnFace
+    BorderStyle = bsNone
+    ForeColor = clLime
+    Kind = gkPie
+    Progress = 0
+  end
+  object GaugeUser: TGauge
+    Left = 8
+    Top = 8
+    Width = 100
+    Height = 100
+    BackColor = clBtnFace
+    BorderStyle = bsNone
+    ForeColor = clYellow
+    Kind = gkPie
+    Progress = 0
+  end
+  object Label1: TLabel
+    Left = 38
+    Top = 112
+    Width = 41
+    Height = 20
+    Caption = 'User'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 153
+    Top = 115
+    Width = 34
+    Height = 20
+    Caption = 'GDI'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Timer: TTimer
+    OnTimer = TimerTimer
+  end
+end

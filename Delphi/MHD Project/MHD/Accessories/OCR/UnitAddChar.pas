@@ -1,0 +1,64 @@
+unit UnitAddChar;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, ClassChars;
+
+type
+  TFormAddChar = class(TForm)
+    Label1: TLabel;
+    Edit: TEdit;
+    ButtonOK: TButton;
+    Image: TImage;
+    ButtonBMP: TButton;
+    OpenDialog: TOpenDialog;
+    procedure ButtonOKClick(Sender: TObject);
+    procedure ButtonBMPClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure EditChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    NewChar : TData;
+  end;
+
+var
+  FormAddChar: TFormAddChar;
+
+implementation
+
+{$R *.DFM}
+
+procedure TFormAddChar.ButtonOKClick(Sender: TObject);
+begin
+  ModalResult := 1;
+end;
+
+procedure TFormAddChar.ButtonBMPClick(Sender: TObject);
+begin
+  if OpenDialog.Execute then
+    begin
+      Image.Picture.LoadFromFile( OpenDialog.FileName );
+      NewChar.BMPFileName := OpenDialog.FileName;
+      NewChar.BMP := Image.Picture.Bitmap;
+    end;
+end;
+
+procedure TFormAddChar.FormCreate(Sender: TObject);
+begin
+  NewChar.Value := #0;
+  NewChar.BMP := nil;
+end;
+
+procedure TFormAddChar.EditChange(Sender: TObject);
+begin
+  if Length( Edit.Text ) > 0 then
+    NewChar.Value := Edit.Text[1]
+      else
+    NewChar.Value := #0;
+end;
+
+end.

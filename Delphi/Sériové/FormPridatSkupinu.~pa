@@ -1,0 +1,54 @@
+unit FormPridatSkupinu;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls;
+
+type
+  TPridatSkupinu = class(TForm)
+    Label1: TLabel;
+    EditPridatSkupinu: TEdit;
+    ButtonPridat: TButton;
+    ButtonZrusit: TButton;
+    procedure ButtonPridatClick(Sender: TObject);
+    procedure ButtonZrusitClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PridatSkupinu: TPridatSkupinu;
+
+implementation
+
+Uses Data;
+
+{$R *.DFM}
+
+procedure TPridatSkupinu.ButtonPridatClick(Sender: TObject);
+begin
+  ModalResult := 1;
+end;
+
+procedure TPridatSkupinu.ButtonZrusitClick(Sender: TObject);
+begin
+  ModalResult := -1;
+end;
+
+procedure TPridatSkupinu.FormCreate(Sender: TObject);
+begin
+  if PocetSkupin = 0 then
+    begin
+      ButtonZrusit.Enabled := False;
+      while EditPridatSkupinu.Text = '' do ShowModal;
+      ButtonZrusit.Enabled := True;
+      PridajSkupinu( EditPridatSkupinu.Text );
+    end;
+end;
+
+end.

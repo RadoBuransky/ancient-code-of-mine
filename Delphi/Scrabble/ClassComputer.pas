@@ -1,0 +1,575 @@
+unit ClassComputer;
+
+interface
+
+uses ClassBoard, ClassLetters, ClassPlayer, ClassWords;
+
+const MAX_PLACES = 1000;
+
+type TOnTile = procedure of object;
+     TOnPlay = procedure of object;
+
+     TPlace = record
+                Valid : boolean;
+                Word  : string;
+                X, Y  : integer;
+                Score : integer;
+                Dir   : ( dRight, dDown );
+              end;
+
+     TComputer = class( TPlayer )
+     private
+       FOnPlay     : TOnPlay;
+       FOnTile     : TOnTile;
+       FWords      : TWords;
+       FBest       : array of TPlace;
+       FFirstMove  : boolean;
+
+       procedure   WordFound( Word : string );
+       function    PlaceWord( Word : string ) : TPlace;
+       procedure   AddPlaceToBest( Place : TPlace );
+       procedure   FilterCollisions;
+       procedure   PutBestWord;
+       procedure   MakeFirstMove( Word : string );
+
+     public
+       constructor Create( Letters : TLetters; Board : TBoard; OnPlay : TOnPlay;
+                           OnTile : TOnTile; Words : TWords );
+       destructor  Destroy; override;
+
+       procedure   MakeMove( FirstMove : boolean ); override;
+       function    EndMove : boolean; override;
+       procedure   ChangeSomeLetters; override;
+     end;
+
+implementation
+
+uses Forms, Controls;
+
+constructor TComputer.Create( Letters : TLetters; Board : TBoard; OnPlay : TOnPlay;
+                              OnTile : TOnTile; Words : TWords );
+begin
+  inherited Create( Letters , Board );
+  FOnPlay     := OnPlay;
+  FOnTile     := OnTile;
+  FWords      := Words;
+  FFirstMove  := false;
+  SetLength( FBest , 0 );
+end;
+
+destructor TComputer.Destroy;
+begin
+  inherited;
+end;
+
+//==============================================================================
+// P R I V A T E
+//==============================================================================
+
+procedure TComputer.WordFound( Word : string );
+var Place : TPlace;
+begin
+  if (Word = END_OF_WORDS) then
+    begin
+      FilterCollisions;
+      PutBestWord;
+    end
+  else
+    begin
+      if (not FFirstMove) then
+        begin
+          Place := PlaceWord( Word );
+
+          if (Place.Valid) then
+            AddPlaceToBest( Place );
+        end
+      else
+        MakeFirstMove( Word );
+    end;
+end;
+
+function TComputer.PlaceWord( Word : string ) : TPlace;
+var Has : array of boolean;
+    I, J, K, L, M : integer;
+    Jokers : integer;
+    Correct : boolean;
+    UsedLetter : boolean;
+begin
+  Result.Valid := false;
+
+  SetLength( Has , Length( Word ) );
+  for I := 0 to Length( Has )-1 do
+    Has[I] := false;
+
+  Jokers := 0;
+  for I := Low( FLtrStack.Stack ) to High( FLtrStack.Stack ) do
+    begin
+      if (FLtrStack.Stack[I].C = '?') then
+        Inc( Jokers )
+      else
+        for J := 1 to Length( Word ) do
+          if ((FLtrStack.Stack[I].C = Word[J]) and
+              (not Has[J-1])) then
+            begin
+              Has[J-1] := true;
+              break;
+            end;
+    end;
+
+  //Find horizontally
+  for I := Low( FBoard.Letters ) to High( FBoard.Letters ) do
+    for J := Low( FBoard.Letters[I] ) to High( FBoard.Letters[I] ) do
+      if (FBoard.Letters[I,J].Letter.C <> #0) then
+        for K := 1 to Length( Word ) do
+          if ((Word[K] = FBoard.Letters[I,J].Letter.C) and
+              (not Has[K-1])) then
+            begin
+              //Check the other letters if they fit to the board
+              if ((J-K < 0) or
+                  (J+(Length( Word )-K) > CNumCols)) then
+                continue;
+
+              M          := Jokers;
+              Correct    := true;
+              UsedLetter := false;
+
+              for L := J-K+1 to J-K+Length( Word ) do
+                begin
+                  if ((FBoard.Letters[I,L].Letter.C = #0) and
+                      (Has[L-(J-K)-1])) then
+                    begin
+                      UsedLetter := true;
+                      continue;
+                    end;
+
+                  if (FBoard.Letters[I,L].Letter.C = Word[L-(J-K)]) then
+                    continue;
+
+                  if ((FBoard.Letters[I,L].Letter.C = #0) and
+                      (not Has[L-(J-K)-1]) and
+                      (M > 0)) then
+                    begin
+                      UsedLetter := true;
+                      Dec( M );
+                      continue;
+                    end;
+
+                  Correct := false;
+                  break;
+                end;
+
+              if ((Correct) and
+                  (UsedLetter)) then
+                begin
+                  Result.Valid := true;
+                  Result.Word  := Word;
+                  Result.X     := J-K+1;
+                  Result.Y     := I;
+                  Result.Score := 0;
+                  Result.Dir   := dRight;
+
+                  exit;
+                end;
+            end;
+
+  //Find vertically
+  for I := Low( FBoard.Letters ) to High( FBoard.Letters ) do
+    for J := Low( FBoard.Letters[I] ) to High( FBoard.Letters[I] ) do
+      if (FBoard.Letters[I,J].Letter.C <> #0) then
+        for K := 1 to Length( Word ) do
+          if ((Word[K] = FBoard.Letters[I,J].Letter.C) and
+              (not Has[K-1])) then
+            begin
+              //Check the other letters if they fit to the board
+              if ((I-K < 0) or
+                  (I+(Length( Word )-K) > CNumRows)) then
+                continue;
+
+              M          := Jokers;
+              Correct    := true;
+              UsedLetter := false;
+
+              for L := I-K+1 to I-K+Length( Word ) do
+                begin
+                  if ((FBoard.Letters[L,J].Letter.C = #0) and
+                      (Has[L-(I-K)-1])) then
+                    begin
+                      UsedLetter := true;
+                      continue;
+                    end;
+
+                  if (FBoard.Letters[L,I].Letter.C = Word[L-(I-K)]) then
+                    continue;
+
+                  if ((FBoard.Letters[L,I].Letter.C = #0) and
+                      (not Has[L-(I-K)-1]) and
+                      (M > 0)) then
+                    begin
+                      UsedLetter := true;
+                      Dec( M );
+                      continue;
+                    end;
+
+                  Correct := false;
+                  break;
+                end;
+
+              if ((Correct) and
+                  (UsedLetter)) then
+                begin
+                  Result.Valid := true;
+                  Result.Word  := Word;
+                  Result.X     := J;
+                  Result.Y     := I-K+1;
+                  Result.Score := 0;
+                  Result.Dir   := dDown;
+
+                  exit;
+                end;
+            end;
+end;
+
+procedure TComputer.AddPlaceToBest( Place : TPlace );
+var I, J : integer;
+begin
+  if (Length( FBest ) < MAX_PLACES) then
+    begin
+      SetLength( FBest , Length( FBest ) + 1 );
+      FBest[Length( FBest )-1].Score := 0;
+    end;
+
+  for I := 0 to Length( FBest )-1 do
+    if (Place.Score >= FBest[I].Score) then
+      begin
+        for J := Length( FBest )-1 downto I+1 do
+          FBest[J] := FBest[J-1];
+        FBest[I] := Place;
+        break;
+      end;
+end;
+
+procedure TComputer.FilterCollisions;
+var I, J, K    : integer;
+    Word       : string;
+    IsNew      : boolean;
+    NewLetters : array[1..CNumRows,1..CNumCols] of boolean;
+    Chars      : array[1..CNumRows,1..CNumCols] of char;
+begin
+  // Initialize arrays
+  for I := Low( NewLetters ) to High( NewLetters ) do
+    for J := Low( NewLetters[I] ) to High( NewLetters[I] ) do
+      begin
+        NewLetters[I,J] := false;
+        Chars[I,J]      := FBoard.Letters[I,J].Letter.C;
+      end;
+
+  // Find collisions for each possible word
+  for I := Low( FBest ) to High( FBest ) do
+    begin
+      // Put word on table
+      if (FBest[I].Dir = dRight) then
+        begin
+          K := FBest[I].X+Length( FBest[I].Word )-1;
+          for J := FBest[I].X to K do
+            if (Chars[FBest[I].Y,J] = #0) then
+              begin
+                Chars[FBest[I].Y,J]      := FBest[I].Word[J-FBest[I].X+1];
+                NewLetters[FBest[I].Y,J] := true;
+              end;
+        end
+      else
+        begin
+          K := FBest[I].Y+Length( FBest[I].Word )-1;
+          for J := FBest[I].Y to K do
+            if (Chars[J,FBest[I].X] = #0) then
+              begin
+                Chars[J,FBest[I].X]      := FBest[I].Word[J-FBest[I].Y+1];
+                NewLetters[J,FBest[I].X] := true;
+              end;
+        end;
+
+      // Find new horizontal words
+      for J := Low( Chars ) to High( Chars ) do
+        begin
+          Word  := '';
+          IsNew := false;
+          for K := Low( Chars[J] ) to High( Chars[J] ) do
+            if (Chars[J,K] <> #0) then
+              begin
+                Word := Word + Chars[J,K];
+                if (NewLetters[J,K]) then
+                  IsNew := true;
+              end
+            else
+              begin
+                if ((Length( Word ) > 1) and
+                    (IsNew) and
+                    (not FWords.ExistsWord( Word ))) then
+                  begin
+                    FBest[I].Valid := false;
+                    break;
+                  end;
+
+                Word  := '';
+                IsNew := false;
+              end;
+
+          if (not FBest[I].Valid) then
+            break;
+
+          if ((Length( Word ) > 1) and
+              (IsNew) and
+              (not FWords.ExistsWord( Word ))) then
+            begin
+              FBest[I].Valid := false;
+              break;
+            end;
+        end;
+
+      // Find new vertical words
+      if (FBest[I].Valid) then
+        begin
+          for J := 1 to CNumCols do
+            begin
+              Word  := '';
+              IsNew := false;
+              for K := 1 to CNumRows do
+                if (Chars[K,J] <> #0) then
+                  begin
+                    Word := Word + Chars[K,J];
+                    if (NewLetters[K,J]) then
+                      IsNew := true;
+                  end
+                else
+                  begin
+                    if ((Length( Word ) > 1) and
+                        (IsNew) and
+                        (not FWords.ExistsWord( Word ))) then
+                      begin
+                        FBest[I].Valid := false;
+                        break;
+                      end;
+
+                    Word  := '';
+                    IsNew := false;
+                  end;
+
+              if (not FBest[I].Valid) then
+                break;
+
+              if ((Length( Word ) > 1) and
+                  (IsNew) and
+                  (not FWords.ExistsWord( Word ))) then
+                begin
+                  FBest[I].Valid := false;
+                  break;
+                end;
+            end;
+        end;
+
+      // Take new word back
+      if (FBest[I].Dir = dRight) then
+        begin
+          for J := FBest[I].X to CNumCols do
+            if (NewLetters[FBest[I].Y,J]) then
+              begin
+                NewLetters[FBest[I].Y,J] := false;
+                Chars[FBest[I].Y,J]      := #0
+              end;
+        end
+      else
+        begin
+          for J := FBest[I].Y to CNumRows do
+            if (NewLetters[J,FBest[I].X]) then
+              begin
+                NewLetters[J,FBest[I].X] := false;
+                Chars[J,FBest[I].X]      := #0
+              end;
+        end;
+    end;
+
+  // Delete all invalid words
+  K := 0;
+  for I := 0 to Length( FBest )-1 do
+    if (FBest[I].Valid) then
+      Inc( K )
+    else
+      for J := I+1 to Length( FBest )-1 do
+        if (FBest[J].Valid) then
+          begin
+            FBest[I]       := FBest[J];
+            FBest[J].Valid := false;
+            Inc( K );
+            break;
+          end;
+  SetLength( FBest , K );
+end;
+
+procedure TComputer.PutBestWord;
+var I, J, K : integer;
+    Letter : TLetter;
+begin
+  if (Length( FBest ) = 0) then
+    if (Assigned( FOnTile )) then
+      begin
+        FOnTile;
+        exit;
+      end;
+
+  J := 0;
+  K := 0;
+  for I := Low( FBest ) to High( FBest ) do
+    if (Length( FBest[I].Word ) > J) then
+      begin
+        J := Length( FBest[I].Word );
+        K := I;
+      end;
+
+  FBest[0] := FBest[K];
+
+  for I := 1 to Length( FBest[0].Word ) do
+    begin
+      if (FBest[0].Dir = dRight) then
+        begin
+          if (FBoard.Letters[FBest[0].Y,FBest[0].X+I-1].Letter.C <> #0) then
+            continue;
+        end
+      else
+        begin
+          if (FBoard.Letters[FBest[0].Y+I-1,FBest[0].X].Letter.C <> #0) then
+            continue;
+        end;
+
+      Letter.C := #0;
+      for J := Low( FLtrStack.Stack ) to High( FLtrStack.Stack ) do
+        if (FLtrStack.Stack[J].C = FBest[0].Word[I]) then
+          begin
+            Letter := FLtrStack.Stack[J];
+            FLtrStack.PopStack( [Letter] );
+            break;
+          end;
+
+      if (Letter.C = #0) then
+        begin
+          for J := Low( FLtrStack.Stack ) to High( FLtrStack.Stack ) do
+            if (FLtrStack.Stack[J].C = '?') then
+              begin
+                Letter := FLtrStack.Stack[J];
+                FLtrStack.PopStack( [Letter] );
+                Letter.C := FBest[0].Word[I];
+                break;
+              end;
+        end;
+
+      if (Letter.C <> #0) then
+        begin
+          SetLength( FLastMove , Length( FLastMove ) + 1 );
+          FLastMove[Length( FLastMove )-1].Letter := Letter;
+
+          if (FBest[0].Dir = dRight) then
+            begin
+              FBoard.AddLetter( FBest[0].X + (I-1) , FBest[0].Y , Letter );
+              FLastMove[Length( FLastMove )-1].X := FBest[0].X + (I-1);
+              FLastMove[Length( FLastMove )-1].Y := FBest[0].Y;
+            end
+          else
+            begin
+              FBoard.AddLetter( FBest[0].X , FBest[0].Y + (I-1) , Letter );
+              FLastMove[Length( FLastMove )-1].X := FBest[0].X;
+              FLastMove[Length( FLastMove )-1].Y := FBest[0].Y + (I-1);
+            end;
+        end;
+    end;
+end;
+
+procedure TComputer.MakeFirstMove( Word : string );
+var Found : boolean;
+    I, J : integer;
+    InStack : array[1..7] of char;
+begin
+  for I := Low( FLtrStack.Stack ) to High( FLtrStack.Stack ) do
+    InStack[I] := FLtrStack.Stack[I].C;
+
+  for I := 1 to Length( Word ) do
+    begin
+      Found := false;
+      for J := 1 to 7 do
+        if (Word[I] = InStack[J]) then
+          begin
+            InStack[J] := #0;
+            Found := true;
+            break;
+          end;
+
+      if (not Found) then
+        exit;
+    end;
+
+  if ((Length( FBest ) = 0) or
+      (Random( 100 ) = 0)) then
+    begin
+      if (Length( FBest ) = 0) then
+        SetLength( FBest , 1 );
+
+      FBest[0].Valid := true;
+      FBest[0].Word  := Word;
+      FBest[0].Score := 0;
+
+      if (Random(2) = 1) then
+        begin
+          FBest[0].X   := 8 - Random( Length( Word ) );
+          FBest[0].Y   := 8;
+          FBest[0].Dir := dRight;
+        end
+          else
+        begin
+          FBest[0].X   := 8;
+          FBest[0].Y   := 8 - Random( Length( Word ) );
+          FBest[0].Dir := dDown;
+        end;
+    end;
+end;
+
+//==============================================================================
+// P U B L I C
+//==============================================================================
+
+procedure TComputer.MakeMove( FirstMove : boolean );
+var C : TCursor;
+begin
+  C := Screen.Cursor;
+  Screen.Cursor := crHourglass;
+  try
+    SetLength( FBest , 0 );
+    SetLength( FLastMove , 0 );
+    FFirstMove  := FirstMove;
+    FWords.EnumWords( WordFound );
+  finally
+    Screen.Cursor := C;
+  end;
+end;
+
+function TComputer.EndMove : boolean;
+var I, Count : integer;
+begin
+  SetLength( FBest , 0 );
+
+  FLtrStack.TakeNew;
+  FBoard.EndMove;
+
+  Count := 0;
+  for I := 1 to 7 do
+    if (FLtrStack.Stack[I].C <> #0) then
+      Inc( Count );
+
+  if (Count = 0) then
+    Result := true
+  else
+    Result := false;
+end;
+
+procedure TComputer.ChangeSomeLetters;
+begin
+end;
+
+end.

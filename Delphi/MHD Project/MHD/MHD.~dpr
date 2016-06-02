@@ -1,0 +1,31 @@
+program MHD;
+{%ToDo 'MHD.todo'}
+
+uses
+  Forms,
+  FormHlavneOkno in 'FormHlavneOkno.pas' {HlavneOkno},
+  ClassData in 'ClassData.pas',
+  DialogProgress in 'DialogProgress.pas' {DlgProgress},
+  FrmNastavenieCasu in 'FrmNastavenieCasu.pas' {FormNastavenieCasu},
+  ClassHladanie in 'ClassHladanie.pas',
+  ClassMapa in 'ClassMapa.pas',
+  FrmDetail in 'FrmDetail.pas' {FormDetail},
+  Konstanty in 'Konstanty.pas',
+  ClassMHDclient in 'MHDclient\ClassMHDclient.pas',
+  FrmSynchro in 'FrmSynchro.pas' {FormSynchro},
+  FrmHotovo in 'FrmHotovo.pas' {FormHotovo},
+  FrmAddTicket in 'FrmAddTicket.pas' {FormAddTicket};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.Title := 'MHD 2001';
+  Application.CreateForm(THlavneOkno, HlavneOkno);
+  Application.CreateForm(TFormDetail, FormDetail);
+  Application.CreateForm(TFormNastavenieCasu, FormNastavenieCasu);
+  Application.CreateForm(TFormSynchro, FormSynchro);
+  Application.CreateForm(TFormHotovo, FormHotovo);
+  Application.CreateForm(TFormAddTicket, FormAddTicket);
+  Application.Run;
+end.

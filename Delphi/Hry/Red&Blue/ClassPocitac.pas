@@ -1,0 +1,58 @@
+unit ClassPocitac;
+
+interface
+
+uses Typy, ClassHrac, Graphics;
+
+type TPocitac = class(THrac)
+     private
+       Pole : PPole;
+     public
+       Farba : TColor;
+
+       constructor Create( iFarba : TColor; iPole : PPole );
+
+       function UrobTah : TSur; override;
+     end;
+
+implementation
+
+//==============================================================================
+//==============================================================================
+//
+//                                 Constructor
+//
+//==============================================================================
+//==============================================================================
+
+constructor TPocitac.Create( iFarba : TColor; iPole : PPole );
+begin
+  inherited;
+  Farba := iFarba;
+  Pole := iPole;
+end;
+
+function TPocitac.UrobTah : TSur;
+var I, J : integer;
+    Max : integer;
+    Hodnota : integer;
+begin
+  Max := 0;
+  result.X := 0;
+  result.Y := 0;
+  for I := 1 to 14 do
+    for J := 1 to 14 do
+      if (Pole[I,J] = 0) and
+         MoznoPolozit( I , J , 2 ) then
+        begin
+          Hodnota := HodnotaTahu( I , J , 2 );
+          if Hodnota > Max then
+            begin
+              Max := Hodnota;
+              result.X := I;
+              result.Y := J;
+            end;
+        end;
+end;
+
+end.

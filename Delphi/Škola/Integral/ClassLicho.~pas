@@ -1,0 +1,89 @@
+unit ClassLicho;
+
+interface
+
+uses ClassMetoda;
+
+type TLicho = class( TMetoda )
+     public
+       procedure NakresliInterval( A, B : real; n : longint ); override;
+       function Ries( A, B : real; n : longint ) : TVysledok; override;
+     end;
+
+var Licho : TLicho;
+
+implementation
+
+uses Graphics, Windows;
+
+procedure TLicho.NakresliInterval( A, B : real; n : longint );
+var I : longint;
+    Left, Right : real;
+    k, l : real;
+    X1, X2, Y1, Y2 : integer;
+    Lichobeznik : array[1..5] of TPoint;
+begin
+  Left := A;
+  Right := B;
+
+  Image.Canvas.Pen.Color := clRed;
+  for I := 1 to N do
+    begin
+       k := Left;
+       l := Left+((Right-Left)/((N+1)-I));
+
+       X1 := Stred.X+Round( k );
+       X2 := Stred.X+Round( l );
+
+       Y1 := Stred.Y-Round( Funkcia( k ) );
+       Y2 := Stred.Y-Round( Funkcia( l ) );
+
+       Lichobeznik[1].x := X1;
+       Lichobeznik[1].y := Stred.Y;
+
+       Lichobeznik[2].x := X2;
+       Lichobeznik[2].y := Stred.Y;
+
+       Lichobeznik[3].x := X2;
+       Lichobeznik[3].y := Y2;
+
+       Lichobeznik[4].x := X1;
+       Lichobeznik[4].y := Y1;
+
+       Lichobeznik[5] := Lichobeznik[1];
+
+      Image.Canvas.Polyline( Lichobeznik );
+
+      Left := l;
+    end;
+end;
+
+function TLicho.Ries( A, B : real; n : longint ) : TVysledok;
+var I : longint;
+    Left, Right : real;
+    k, l, o, p : real;
+    X1, X2, Y1, Y2 : integer;
+begin
+  Left := A;
+  Right := B;
+
+  Result.Plocha := 0;
+
+  for I := 1 to N do
+    begin
+       k := Left;
+       l := Left+((Right-Left)/((N+1)-I));
+
+       o := Funkcia( k );
+       p := Funkcia( l );
+
+       if o < p then Result.Plocha := Result.Plocha + (l-k)*(o + (p-o)/2)
+                else Result.Plocha := Result.Plocha + (l-k)*(p + (o-p)/2);
+
+       Left := l;
+    end;
+
+  Result.Integral := Integral( B ) - Integral( A );
+end;
+
+end.

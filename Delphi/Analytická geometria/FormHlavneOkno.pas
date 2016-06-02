@@ -1,0 +1,856 @@
+unit FormHlavneOkno;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ComCtrls, Tabs, StdCtrls, ClassSustava, ExtCtrls, Menus, ColorGrd, Typy,
+  VypoctyBody, Buttons, ClassVykres, ClassSubor;
+
+type
+  THlavneOkno = class(TForm)
+    MainMenu: TMainMenu;
+    MainSubor: TMenuItem;
+    SuborKoniec: TMenuItem;
+
+    PageControlMain: TPageControl;
+    TabSheetMainEdit: TTabSheet;
+    TabSheetMainVykres: TTabSheet;
+    TabSheetBody: TTabSheet;
+    TabSheetNUholniky: TTabSheet;
+    TabSheetPriamky: TTabSheet;
+    TabSheetPolpriamky: TTabSheet;
+    TabSheetUsecky: TTabSheet;
+    TabSheetFunkcie: TTabSheet;
+    ListBody: TListView;
+    Label1: TLabel;
+    Label4: TLabel;
+    ButtonPridatBod: TButton;
+    EditNazovBodu: TEdit;
+    Label1_2a: TLabel;
+    ListNUholniky: TListView;
+    ButtonZmazatBod: TButton;
+    ButtonPridatNUholnik: TButton;
+    ButtonZmazatNUholnik: TButton;
+    Label1_2b: TLabel;
+    EditNazovNUholnika: TEdit;
+    ListNuh2: TListView;
+    TabSheetMainVypocty: TTabSheet;
+    PageControl1: TPageControl;
+    TabSheetVypoctyBody: TTabSheet;
+    Label5: TLabel;
+    ComboBoxVypB: TComboBox;
+    NotebookVypoctyBody: TNotebook;
+    Label2_1_1: TLabel;
+    Button2_1_1c: TButton;
+    MemoVypB1: TMemo;
+    ListVypB1a: TListView;
+    ListVypB1b: TListView;
+    Button2_1_1a: TButton;
+    Button2_1_1b: TButton;
+    Label2_1_2: TLabel;
+    ListVypB2a: TListView;
+    Button2_1_2a: TButton;
+    Button2_1_2b: TButton;
+    ListVypB2b: TListView;
+    Button2_1_2c: TButton;
+    MemoVypB2: TMemo;
+    ListNUh1: TListView;
+    ButtonPridatNuh12: TButton;
+    ButtonZmazatNUh12: TButton;
+    TabSheetVypoctyNUholniky: TTabSheet;
+    ComboBoxVypoctyNUholniky: TComboBox;
+    Label6: TLabel;
+    Label7: TLabel;
+    ListViewPriamky: TListView;
+    Button1_3a: TButton;
+    Button1_3b: TButton;
+    Label8: TLabel;
+    EditNazovPriamky: TEdit;
+    GroupBoxVykresPozicia: TGroupBox;
+    ButtonVykresHore: TBitBtn;
+    ButtonVykresDolava: TBitBtn;
+    ButtonVykresStred: TButton;
+    ButtonVykresDoprava: TBitBtn;
+    ButtonVykresDole: TBitBtn;
+    GroupBoxVykresZvacsenie: TGroupBox;
+    ButtonVykresZmensi: TButton;
+    ButtonVykresZvacsi: TButton;
+    LabelVykresZvacsenie: TLabel;
+    LabelVykresPoziciaY: TLabel;
+    LabelVykresPoziciaX: TLabel;
+    EditVykresPoziciaX: TEdit;
+    EditVykresPoziciaY: TEdit;
+    EditVykresZvacsenie: TEdit;
+    CheckBoxVykresZobrazitNazvy: TCheckBox;
+    PanelVykres: TPanel;
+    ImageVykres: TImage;
+    CheckBoxVykresZobrazitOsi: TCheckBox;
+    SuborNovy: TMenuItem;
+    SuborOtvorit: TMenuItem;
+    SuborUlozit: TMenuItem;
+    SuborUlozitAko: TMenuItem;
+    MainData: TMenuItem;
+    DataVlozitZoSuboru: TMenuItem;
+    EditNovyBodX: TEdit;
+    EditNovyBodY: TEdit;
+    Label3: TLabel;
+    Label2: TLabel;
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ButtonPridatBodClick(Sender: TObject);
+    procedure SuborKoniecClick(Sender: TObject);
+    procedure PageControl1Exit(Sender: TObject);
+    procedure ButtonZmazatBodClick(Sender: TObject);
+    procedure Button2_1_1aClick(Sender: TObject);
+    procedure Button2_1_1bClick(Sender: TObject);
+    procedure Button2_1_1cClick(Sender: TObject);
+    procedure ComboBoxVypBChange(Sender: TObject);
+    procedure Button2_1_2aClick(Sender: TObject);
+    procedure Button2_1_2bClick(Sender: TObject);
+    procedure Button2_1_2cClick(Sender: TObject);
+    procedure ButtonPridatNuh12Click(Sender: TObject);
+    procedure ButtonZmazatNUh12Click(Sender: TObject);
+    procedure ButtonPridatNUholnikClick(Sender: TObject);
+    procedure ButtonZmazatNUholnikClick(Sender: TObject);
+    procedure PageControlMainChange(Sender: TObject);
+    procedure ButtonVykresHoreClick(Sender: TObject);
+    procedure ButtonVykresDoleClick(Sender: TObject);
+    procedure ButtonVykresDolavaClick(Sender: TObject);
+    procedure ButtonVykresDopravaClick(Sender: TObject);
+    procedure ButtonVykresStredClick(Sender: TObject);
+    procedure CheckBoxVykresZobrazitNazvyClick(Sender: TObject);
+    procedure CheckBoxVykresZobrazitOsiClick(Sender: TObject);
+    procedure EditVykresPoziciaXKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure EditVykresPoziciaYKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure ButtonVykresZvacsiClick(Sender: TObject);
+    procedure ButtonVykresZmensiClick(Sender: TObject);
+    procedure EditVykresZvacsenieKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    { Private declarations }
+
+    //Inicializacia prvkov formulara :
+    procedure Inicializacia;
+
+    procedure TabSheetBodyIni;
+    procedure TabSheetVypoctyBodyIni;
+
+              //Nahadzanie dat zo suboru (Sustavy) do formulara :
+              procedure NacitajBody;
+              procedure NacitajNUholniky;
+  public
+    { Public declarations }
+  protected
+    procedure UpdateBodyLists;
+  end;
+
+var
+  HlavneOkno: THlavneOkno;
+
+  Sustava : TSustava;
+  Subor : TSubor;
+  Vykres : TVykres;
+
+implementation
+
+uses Debugging;
+
+{$R *.DFM}
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                             Inicializacia                                  ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.TabSheetBodyIni;
+begin
+  ListBody.Columns[0].Width := 117;
+  ListBody.Columns[1].Width := 60;
+  ListBody.Columns[2].Width := 60;
+end;
+
+procedure THlavneOkno.TabSheetVypoctyBodyIni;
+begin
+  ComboBoxVypB.ItemIndex := 0;
+end;
+
+procedure THlavneOkno.NacitajBody;
+var I : integer;
+    NewItem : TListItem;
+    BodObject : TBodObject;
+    
+begin
+  for I := 0 to Sustava.Body.Pole.Count-1 do
+    begin
+      NewItem := ListBody.Items.Add;
+
+      BodObject := TBodObject.Create;
+      BodObject.p_Bod :=  Sustava.Body.Pole[I];
+
+      NewItem.Caption := TBod( Sustava.Body.Pole[I]^ ).Nazov;
+      NewItem.SubItems.Add( FloatToStr( TBod( Sustava.Body.Pole[I]^ ).X ) );
+      NewItem.SubItems.Add( FloatToStr( TBod( Sustava.Body.Pole[I]^ ).Y ) );
+      NewItem.SubItems.Objects[0] := BodObject;
+    end;
+  UpdateBodyLists;
+end;
+
+procedure THlavneOkno.NacitajNUholniky;
+var I, J : integer;
+    NewItem : TListItem;
+    Zoznam : string;
+begin
+  for I := 0 to Sustava.NUholniky.Pole.Count-1 do
+    begin
+      NewItem := ListNUholniky.Items.Add;
+      NewItem.Caption := TNUholnik( Sustava.NUholniky.Pole[I]^ ).Nazov;
+
+      Zoznam := '[';
+
+      for J := 0 to TNuholnik( Sustava.NUholniky.Pole[I]^ ).Body.Count-1 do
+        Zoznam := Zoznam + ' ' +  TBod( TNuholnik( Sustava.NUholniky.Pole[I]^ ).Body[J]^ ).Nazov  + ' ';
+
+      Zoznam := Zoznam + ']';
+
+      NewItem.SubItems.Add( Zoznam );
+    end;
+end;
+
+procedure THlavneOkno.Inicializacia;
+begin
+  TabSheetBodyIni;
+  TabSheetVypoctyBodyIni;
+
+  NacitajBody;
+  NacitajNUholniky;
+end;
+
+procedure THlavneOkno.FormCreate(Sender: TObject);
+begin
+  Otvor;
+  Napis( 'THlavneOkno.FormCreate' );
+
+  Sustava := TSustava.Create;
+  Vykres := TVykres.Create( ImageVykres , Sustava );
+
+  //Naèítanie dát zo súboru do sústavy :
+  Subor := TSubor.Create( Sustava , 'subor.geo' , fmOpenRead );
+  Subor.Nacitaj( frBody or frNUholniky );
+  Subor.Free;
+
+  Inicializacia;
+end;
+
+procedure THlavneOkno.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  //Zápis dát do súboru zo sústavy :
+  Subor := TSubor.Create( Sustava , 'subor.geo' , fmCreate );
+  Subor.Zapis;
+  Subor.Free;
+
+  Sustava.Free;
+  Vykres.Free;
+
+  Zatvor;
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                                Main Menu                                   ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.SuborKoniecClick(Sender: TObject);
+begin
+  HlavneOkno.Close;
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                         TabSheet B O D Y                                   ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.UpdateBodyLists;
+begin
+  ListVypB1a.Items.Assign( ListBody.Items );
+  ListVypB2a.Items.Assign( ListBody.Items );
+
+  ListNUh1.Items.Assign( ListBody.Items );
+end;
+
+procedure THlavneOkno.ButtonPridatBodClick(Sender: TObject);
+var I,J,K : integer;
+    Bod : TBod;
+    Polozka : TListItem;
+    NovyNazov : string;
+    BodObject : TBodObject;
+begin
+  if (EditNovyBodX.Text = '') or
+     (EditNovyBodY.Text = '') or
+     (EditNazovBodu.Text = '') then
+       begin
+         MessageDlg( 'Zadané hodnoty sú nedostatoèné' , mtError , [mbOk] , 0 );
+         Exit;
+       end;
+
+  try
+    StrToFloat( EditNovyBodY.Text );
+  except
+    on EConvertError do
+      begin
+        MessageDlg( 'Zadaná hodnota nie je reálne èíslo' , mtError , [mbOk] , 0 );
+        HlavneOkno.FocusControl( EditNovyBodY );
+        EditNovyBodY.SelectAll;
+
+        exit;
+      end;
+  end;
+
+  try
+    StrToFloat( EditNovyBodX.Text );
+  except
+    on EConvertError do
+      begin
+        MessageDlg( 'Zadaná hodnota nie je reálne èíslo' , mtError , [mbOk] , 0 );
+        HlavneOkno.FocusControl( EditNovyBodX );
+        EditNovyBodX.SelectAll;
+
+        exit;
+      end;
+  end;
+
+  Bod.Nazov := EditNazovBodu.Text;
+  Bod.X := StrToFloat( EditNovyBodX.Text );
+  Bod.Y := StrToFloat( EditNovyBodY.Text );
+
+  for I := 0 to ListBody.Items.Count-1 do
+    if ListBody.Items.Item[I].Caption = Bod.Nazov then
+      begin
+        J := 0;
+        repeat
+          if J = MaxInt then
+            begin
+              MessageDlg( 'Zadaný názov sa už vyskytuje' , mtError , [mbOk] , 0 );
+              HlavneOkno.FocusControl( EditNazovBodu );
+              EditNazovBodu.SelectAll;
+              Exit;
+            end;
+          Inc( J );
+          NovyNazov := Bod.Nazov + IntToStr( J );
+          for K := 0 to ListBody.Items.Count-1 do
+            if ListBody.Items.Item[K].Caption = NovyNazov then NovyNazov := '';
+        until NovyNazov <> '';
+        Bod.Nazov := NovyNazov;
+        Break;
+      end;
+
+  BodObject := TBodObject.Create;
+  BodObject.p_Bod :=  Sustava.Body.Pridaj( Bod );
+
+  Polozka := ListBody.Items.Add;
+  Polozka.SubItems.Add( FloatToStr( Bod.X ) );
+  Polozka.SubItems.Add( FloatToStr( Bod.Y ) );
+  Polozka.SubItems.Objects[0] := BodObject;
+  Polozka.Caption := Bod.Nazov;
+
+  UpdateBodyLists;
+end;
+
+procedure THlavneOkno.ButtonZmazatBodClick(Sender: TObject);
+begin
+  if ListBody.SelCount = 0 then Exit;
+  Sustava.Body.Zmaz( ListBody.Selected.Index );
+  ListBody.Items.Delete( ListBody.Selected.Index );
+
+  UpdateBodyLists;
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                       TabSheet N - U H O L N I K Y                         ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.ButtonPridatNuh12Click(Sender: TObject);
+var I : integer;
+    Kopirovana, NovaPolozka : TListItem;
+begin
+  if ListNUh1.SelCount = 0 then exit;
+
+  Kopirovana := ListNUh1.Selected;
+  NovaPolozka := ListNUh2.Items.Add;
+  NovaPolozka.SubItems := Kopirovana.SubItems;
+  NovaPolozka.Caption := Kopirovana.Caption;
+
+  for I := 2 to ListNUh1.SelCount do
+    begin
+      Kopirovana := ListNUh1.GetNextItem( Kopirovana ,
+                                               sdAll ,
+                                               [ isSelected ] );
+      NovaPolozka := ListNUh2.Items.Add;
+      NovaPolozka.SubItems := Kopirovana.SubItems;
+      NovaPolozka.Caption := Kopirovana.Caption;
+    end;
+end;
+
+procedure THlavneOkno.ButtonZmazatNUh12Click(Sender: TObject);
+begin
+  if ListNUh2.SelCount = 0 then exit;
+  ListNUh2.Items.Delete( ListNUh2.Selected.Index );
+end;
+
+procedure THlavneOkno.ButtonPridatNUholnikClick(Sender: TObject);
+var I,J,K : integer;
+    Vrcholy : string;
+    p_Bod : PBod;
+    Polozka : TListItem;
+    Novy : TNUholnik;
+    NovyNazov : string;
+
+function NacitajBody : TList;
+var I : integer;
+    BodObject : TBodObject;
+    Bod : PBod;
+begin
+  Result := TList.Create;
+  BodObject := TBodObject.Create;
+
+  for I := 0 to ListNUh2.Items.Count-1 do
+    begin
+      BodObject := TBodObject( ListNUh2.Items[I].SubItems.Objects[0] );
+      Bod := BodObject.p_Bod;
+      Result.Add( Bod );
+    end;
+
+  BodObject.Free;
+end;
+
+function JeToNUholnik( NUholnik : TNUholnik ) : boolean;
+begin
+  Result := True;
+end;
+
+begin
+  if ListNUh2.Items.Count = 0 then
+    begin
+      ShowMessage( 'Nevybrali ste žiadne vrcholy pre nový N-uholník' );
+      Exit;
+    end;
+  if EditNazovNUholnika.Text = '' then
+    begin
+      ShowMessage( 'Nezadali ste názov nového N-uholníka' );
+      Exit;
+    end;
+
+  Novy.Nazov := EditNazovNuholnika.Text;
+
+  for I := 0 to ListNUholniky.Items.Count-1 do
+    if ListNUholniky.Items.Item[I].Caption = Novy.Nazov then
+      begin
+        J := 0;
+        repeat
+          if J = MaxInt then
+            begin
+              MessageDlg( 'Zadaný názov sa už vyskytuje' , mtError , [mbOk] , 0 );
+              HlavneOkno.FocusControl( EditNazovNuholnika );
+              EditNazovNuholnika.SelectAll;
+              Exit;
+            end;
+          Inc( J );
+          NovyNazov := Novy.Nazov + IntToStr( J );
+          for K := 0 to ListNUholniky.Items.Count-1 do
+            if ListNUholniky.Items.Item[K].Caption = NovyNazov then NovyNazov := '';
+        until NovyNazov <> '';
+        Novy.Nazov := NovyNazov;
+        Break;
+      end;
+
+  Novy.Body := NacitajBody;
+
+  if not JeToNUholnik( Novy ) then
+    begin
+      MessageDlg( 'Zadané body netvoria N-uholník! (dve hrany sa krížia)' , mtError , [mbOk] , 0 );
+      Exit;
+    end;
+
+  Sustava.NUholniky.Pridaj( Novy );
+
+  Vrcholy := '[';
+
+  for I := 0 to Novy.Body.Count-1 do
+    begin
+      p_Bod := Novy.Body.Items[I];
+      Vrcholy := Vrcholy + ' ' + p_Bod.Nazov + ' ';
+    end;
+
+  Vrcholy := Vrcholy + ']';
+
+  Polozka := ListNUholniky.Items.Add;
+  Polozka.SubItems.Add( Vrcholy );
+  Polozka.Caption := Novy.Nazov;
+
+end;
+
+procedure THlavneOkno.ButtonZmazatNUholnikClick(Sender: TObject);
+begin
+  if ListNUholniky.SelCount = 0 then Exit;
+  Sustava.NUholniky.Zmaz( ListNUholniky.Selected.Index );
+  ListNUholniky.Items.Delete( ListNUholniky.Selected.Index );
+end;
+
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                      TabSheet V Y P O C T Y                                ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+
+procedure THlavneOkno.PageControl1Exit(Sender: TObject);
+begin
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                      TabSheet V Y P O C T Y  BODY                          ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.ComboBoxVypBChange(Sender: TObject);
+begin
+  NotebookVypoctyBody.PageIndex := ComboBoxVypB.ItemIndex;
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||          TabSheet V Y P O C T Y B O D Y - Vzdialenost bodov                ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.Button2_1_1aClick(Sender: TObject);
+var I : integer;
+    Kopirovana, NovaPolozka : TListItem;
+begin
+  if ListVypB1a.SelCount = 0 then exit;
+
+  Kopirovana := ListVypB1a.Selected;
+  NovaPolozka := ListVypB1b.Items.Add;
+  NovaPolozka.SubItems := Kopirovana.SubItems;
+  NovaPolozka.Caption := Kopirovana.Caption;
+
+  for I := 2 to ListVypB1a.SelCount do
+    begin
+      Kopirovana := ListVypB1a.GetNextItem( Kopirovana ,
+                                                sdAll ,
+                                                [ isSelected ] );
+      NovaPolozka := ListVypB1b.Items.Add;
+      NovaPolozka.SubItems := Kopirovana.SubItems;
+      NovaPolozka.Caption := Kopirovana.Caption;
+    end;
+end;
+
+procedure THlavneOkno.Button2_1_1bClick(Sender: TObject);
+begin
+  if ListVypB1b.SelCount = 0 then exit;
+  ListVypB1b.Items.Delete( ListVypB1b.Selected.Index );
+end;
+
+procedure THlavneOkno.Button2_1_1cClick(Sender: TObject);
+var Sucet : real;
+    I : integer;
+    A, B : TBod;
+    S : string;
+begin
+  if ListVypB1b.Items.Count < 2 then exit;
+  Sucet := 0;
+  S := 'Súèet vzdialeností bodov ';
+  for I := 0 to ListVypB1b.Items.Count-2 do
+    begin
+      S := S + ListVypB1b.Items.Item[I].Caption+'-';
+
+      A.X := StrToFloat( ListVypB1b.Items.Item[I].SubItems[0] );
+      A.Y := StrToFloat( ListVypB1b.Items.Item[I].SubItems[1] );
+
+      B.X := StrToFloat( ListVypB1b.Items.Item[I+1].SubItems[0] );
+      B.Y := StrToFloat( ListVypB1b.Items.Item[I+1].SubItems[1] );
+
+      Sucet := Sucet + VzdialenostDvochBodov( A , B);
+    end;
+  S := S + ListVypB1b.Items.Item[ListVypB1b.Items.Count-1].Caption;
+  S := S + ' je ' + FloatToStr( Sucet );
+  MemoVypB1.Lines.Add( S );
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||           TabSheet V Y P O C T Y B O D Y - ažisko bodov                   ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.Button2_1_2aClick(Sender: TObject);
+var I : integer;
+    Kopirovana, NovaPolozka : TListItem;
+begin
+  if ListVypB2a.SelCount = 0 then exit;
+
+  Kopirovana := ListVypB2a.Selected;
+  NovaPolozka := ListVypB2b.Items.Add;
+  NovaPolozka.SubItems := Kopirovana.SubItems;
+  NovaPolozka.Caption := Kopirovana.Caption;
+
+  for I := 2 to ListVypB2a.SelCount do
+    begin
+      Kopirovana := ListVypB2a.GetNextItem( Kopirovana ,
+                                                sdAll ,
+                                                [ isSelected ] );
+      NovaPolozka := ListVypB2b.Items.Add;
+      NovaPolozka.SubItems := Kopirovana.SubItems;
+      NovaPolozka.Caption := Kopirovana.Caption;
+    end;
+end;
+
+procedure THlavneOkno.Button2_1_2bClick(Sender: TObject);
+begin
+  if ListVypB2b.SelCount = 0 then exit;
+  ListVypB2b.Items.Delete( ListVypB2b.Selected.Index );
+end;
+
+procedure THlavneOkno.Button2_1_2cClick(Sender: TObject);
+var Tazisko : TBod;
+    S : string;
+    I : word;
+begin
+  Tazisko := TaziskoBodov( ListVypB2b.Items );
+  S := 'ažisko bodov ';
+  with ListVypB2b do
+    begin
+      for I := 1 to Items.Count-1 do
+        S := S + Items.Item[I-1].Caption + '-';
+      S := S + Items.Item[Items.Count-1].Caption;
+    end;
+  S := S + ' je T[ ' + FloatToStr( Tazisko.X ) + ' , ' + FloatToStr( Tazisko.Y ) + ' ]';
+  MemoVypB2.Lines.Add( S );
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                            TabSheet - VYKRES                               ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.ButtonVykresHoreClick(Sender: TObject);
+var Krok : real;
+    A1, A2 : TPoint;
+    B : TBod;
+begin
+  A1.X := 10;
+  A1.Y := 0;
+
+  A2.X := 0;
+  A2.Y := 0;
+
+  Krok := Abs( Vykres.ImToSus( A2 ).X - Vykres.ImToSus( A1 ).X );
+
+  B.X := Vykres.Pozicia.X;
+  B.Y := Vykres.Pozicia.Y + Krok;
+
+  Vykres.Pozicia := B;
+
+  EditVykresPoziciaY.Text := FloatToStr( B.Y );
+end;
+
+procedure THlavneOkno.ButtonVykresDoleClick(Sender: TObject);
+var Krok : real;
+    A1, A2 : TPoint;
+    B : TBod;
+begin
+  A1.X := 10;
+  A1.Y := 0;
+
+  A2.X := 0;
+  A2.Y := 0;
+
+  Krok := Abs( Vykres.ImToSus( A2 ).X - Vykres.ImToSus( A1 ).X );
+
+  B.X := Vykres.Pozicia.X;
+  B.Y := Vykres.Pozicia.Y - Krok;
+
+  Vykres.Pozicia := B;
+
+  EditVykresPoziciaY.Text := FloatToStr( B.Y );
+end;
+
+procedure THlavneOkno.ButtonVykresDolavaClick(Sender: TObject);
+var Krok : real;
+    A1, A2 : TPoint;
+    B : TBod;
+begin
+  A1.X := 10;
+  A1.Y := 0;
+
+  A2.X := 0;
+  A2.Y := 0;
+
+  Krok := Abs( Vykres.ImToSus( A2 ).X - Vykres.ImToSus( A1 ).X );
+
+  B.X := Vykres.Pozicia.X - Krok;
+  B.Y := Vykres.Pozicia.Y;
+
+  Vykres.Pozicia := B;
+
+  EditVykresPoziciaX.Text := FloatToStr( B.X );
+end;
+
+procedure THlavneOkno.ButtonVykresDopravaClick(Sender: TObject);
+var Krok : real;
+    A1, A2 : TPoint;
+    B : TBod;
+begin
+  A1.X := 10;
+  A1.Y := 0;
+
+  A2.X := 0;
+  A2.Y := 0;
+
+  Krok := Abs(Vykres.ImToSus( A2 ).X - Vykres.ImToSus( A1 ).X);
+
+  B.X := Vykres.Pozicia.X + Krok;
+  B.Y := Vykres.Pozicia.Y;
+
+  Vykres.Pozicia := B;
+
+  EditVykresPoziciaX.Text := FloatToStr( B.X );
+end;
+
+procedure THlavneOkno.ButtonVykresStredClick(Sender: TObject);
+var A : TBod;
+begin
+  A.X := 0;
+  A.Y := 0;
+
+  Vykres.Pozicia := A;
+
+  EditVykresPoziciaY.Text := '0';
+  EditVykresPoziciaX.Text := '0';
+end;
+
+procedure THlavneOkno.CheckBoxVykresZobrazitNazvyClick(Sender: TObject);
+begin
+  if CheckBoxVykresZobrazitNazvy.Checked then Vykres.ZobrazitNazvy := True
+                                         else Vykres.ZobrazitNazvy := False;
+end;
+
+procedure THlavneOkno.CheckBoxVykresZobrazitOsiClick(Sender: TObject);
+begin
+  if CheckBoxVykresZobrazitOsi.Checked then Vykres.ZobrazitOsi := True
+                                       else Vykres.ZobrazitOsi := False;
+end;
+
+procedure THlavneOkno.EditVykresPoziciaXKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var A : TBod;
+begin
+  if Key <> VK_RETURN then exit;
+  try
+    A.X := StrToFloat( EditVykresPoziciaX.Text );
+  except
+    on EConvertError do MessageDlg( 'Zadaná hodnota nie je èíslo' , mtError , [mbOk] , 0 );
+  end;
+  if A.X > 1e+18 then
+    begin
+      MessageDlg( 'Zadaná hodnota je príliš ve¾ká' , mtError , [mbOk] , 0 );
+      A.X := 1e+18;
+      EditVykresPoziciaX.Text := FloatToStr( A.X );
+    end;
+  A.Y := Vykres.Pozicia.Y;
+  Vykres.Pozicia := A;
+end;
+
+procedure THlavneOkno.EditVykresPoziciaYKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var A : TBod;
+begin
+  if Key <> VK_RETURN then exit;
+  try
+    A.Y := StrToFloat( EditVykresPoziciaY.Text );
+  except
+    on EConvertError do MessageDlg( 'Zadaná hodnota nie je èíslo' , mtError , [mbOk] , 0 );
+  end;
+  A.X := Vykres.Pozicia.X;
+  Vykres.Pozicia := A;
+end;
+
+procedure THlavneOkno.ButtonVykresZvacsiClick(Sender: TObject);
+begin
+  Vykres.Zoom := Vykres.Zoom+1;
+  EditVykresZvacsenie.Text := FloatToStr( Vykres.Zoom );
+end;
+
+procedure THlavneOkno.ButtonVykresZmensiClick(Sender: TObject);
+begin
+  if Vykres.Zoom <= 1 then
+    begin
+      MessageDlg( 'Zväèšenie musí by väèšie ako nula' , mtError , [mbOk] , 0 );
+      exit;
+    end;
+  Vykres.Zoom := Vykres.Zoom-1;
+  EditVykresZvacsenie.Text := FloatToStr( Vykres.Zoom );
+end;
+
+procedure THlavneOkno.EditVykresZvacsenieKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var Zoom : real;
+begin
+  if Key <> VK_RETURN then exit;
+  Zoom := 1;
+  try
+    Zoom := StrToFloat( EditVykresZvacsenie.Text );
+  except
+    on EConvertError do MessageDlg( 'Zadaná hodnota nie je èíslo' , mtError , [mbOk] , 0 );
+  end;
+  if Zoom <= 0 then
+    begin
+      MessageDlg( 'Zväèšenie musí by väèšie ako nula' , mtError , [mbOk] , 0 );
+      exit;
+    end;
+  Vykres.Zoom := Zoom;
+end;
+
+(*
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+||                            TabSheet - OSTATNE                              ||
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+*)
+
+procedure THlavneOkno.PageControlMainChange(Sender: TObject);
+begin
+  if (PageControlMain.ActivePage.PageIndex = 2) then Vykres.Prekresli;
+end;
+
+end.

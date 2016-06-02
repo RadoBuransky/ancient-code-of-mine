@@ -1,0 +1,279 @@
+unit ClassCities;
+
+interface
+
+uses ExtCtrls, ClassPlayer;
+
+type TCities = class
+     private
+       NaTahu : integer;
+       Koniec : boolean;
+
+       Human, Computer : TPlayer;
+       Table : TTable;
+
+       Image : TImage;
+
+       FFinish : boolean;
+
+       procedure ClearTable;
+       procedure PaintTable;
+       procedure PaintGame;
+       procedure ProcessMove( Move : TPos );
+       procedure FillCity( X, Y : integer );
+
+       procedure SetFinish( Value : boolean );
+     public
+       constructor Create( iHuman, iComputer : TPlayer; iImage : TImage );
+       destructor Destroy; override;
+
+       procedure NewGame;
+
+       property Finish : boolean read FFinish write SetFinish;
+     end;
+
+var Cities : TCities;
+
+implementation
+
+uses Windows, Graphics;
+
+//******************************************************************************
+//   Constructor
+//******************************************************************************
+
+constructor TCities.Create( iHuman, iComputer : TPlayer; iImage : TImage );
+begin
+  Human := iHuman;
+  Computer := iComputer;
+  Image := iImage;
+end;
+
+//******************************************************************************
+//   Destructor
+//******************************************************************************
+
+destructor TCities.Destroy;
+begin
+  Human.Free;
+  Computer.Free;
+end;
+
+//******************************************************************************
+//   Properties
+//******************************************************************************
+
+procedure TCities.SetFinish( Value : boolean );
+begin
+  if (Value = FFinish) then
+    exit;
+
+  FFinish := Value;
+  Koniec := Value;
+
+  Human.Finish := True;
+end;
+
+//******************************************************************************
+//   Game management
+//******************************************************************************
+
+procedure TCities.ClearTable;
+var I, J : integer;
+begin
+  for I := 1 to XMAX do
+    for J := 1 to YMAX do
+      Table[I,J] := -1;
+end;
+
+procedure TCities.PaintTable;
+var I : integer;
+    d : double;
+begin
+  with Image.Canvas do
+    begin
+      Pen.Color := clGray;
+      Brush.Color := clBlack;
+
+      FillRect( Image.ClientRect );
+      Rectangle( Image.ClientRect );
+
+      d := Image.Width / XMAX;
+      for I := 1 to XMAX-1 do
+        begin
+          MoveTo( Round( d * I ) , 0 );
+          LineTo( Round( d * I ) , Image.Height );
+        end;
+
+      d := Image.Height / YMAX;
+      for I := 1 to YMAX-1 do
+        begin
+          MoveTo( 0 , Round( d * I ) );
+          LineTo( Image.Width , Round( d * I ) );
+        end;
+    end;
+end;
+
+procedure TCities.PaintGame;
+var I, J : integer;
+    d, b : double;
+    Color : TColor;
+begin
+  d := Image.Height / YMAX;
+  b := Image.Width / XMAX;
+  for I := 1 to XMAX do
+    for J := 1 to YMAX do
+      begin
+        case Table[I,J] of
+          0 : Color := clBlue;
+          1 : Color := clRed;
+          2 : Color := clLtGray;
+          else Color := clBlack;
+        end;
+
+        Image.Canvas.Brush.Color := Color;
+
+        if (Table[I,J] < 2) then
+          Image.Canvas.FloodFill( Round( b * (I-1) ) + 1 , Round( d * (J-1) ) + 1 , clGray , fsBorder )
+            else
+          Image.Canvas.Ellipse( Round( b * (I-1) ) + 1 , Round( d * (J-1) ) + 1 ,
+                                Round( b * I ) , Round( d * J ) );
+      end;
+end;
+
+procedure TCities.FillCity( X, Y : integer );
+begin
+  if (Table[X,Y] = 2) then
+    exit;
+
+  if (Table[X,Y] = -1) then
+    Table[X,Y] := 2;
+
+  if (Table[X,Y] = 1-NaTahu) then
+    Table[X,Y] := NaTahu;
+
+  {dole}
+  if (Y < YMAX) and
+     (Table[X,Y+1] <> NaTahu) then
+    FillCity( X , Y+1 );
+
+  {hore}
+  if (Y > 1) and
+     (Table[X,Y-1] <> NaTahu) then
+    FillCity( X , Y-1 );
+
+  {doprava}
+  if (X < XMAX) and
+     (Table[X+1,Y] <> NaTahu) then
+    FillCity( X+1 , Y );
+
+  {dolava}
+  if (X > 1) and
+     (Table[X-1,Y] <> NaTahu) then
+    FillCity( X-1 , Y );
+end;
+
+procedure TCities.ProcessMove( Move : TPos );
+var I, J : integer;
+    Backup : TTable;
+    City : boolean;
+
+procedure FloodFill( X, Y : integer );
+begin
+  Backup[X,Y] := 3;
+
+  {dole}
+  if (Y = YMAX) then
+    City := False
+      else
+    if (Backup[X,Y+1] <> NaTahu) and
+       (Backup[X,Y+1] <> 3) then
+      FloodFill( X , Y+1 );
+
+  {hore}
+  if (Y = 1) then
+    City := False
+      else
+    if (Backup[X,Y-1] <> NaTahu) and
+       (Backup[X,Y-1] <> 3) then
+      FloodFill( X , Y-1 );
+
+  {doprava}
+  if (X = XMAX) then
+    City := False
+      else
+    if (Backup[X+1,Y] <> NaTahu) and
+       (Backup[X+1,Y] <> 3)  then
+      FloodFill( X+1 , Y );
+
+  {dolava}
+  if (X = 1) then
+    City := False
+      else
+    if (Backup[X-1,Y] <> NaTahu) and
+       (Backup[X-1,Y] <> 3)  then
+      FloodFill( X-1 , Y );
+end;
+
+begin
+  if (Koniec) then
+    exit;
+
+  Table[Move.X,Move.Y] := NaTahu;
+
+  Backup := Table;
+
+  for I := -1 to 1 do
+    for J := -1 to 1 do
+      if (Move.X+I >= 1) and
+         (Move.X+I <= XMAX) and
+         (Move.Y+J >= 1) and
+         (Move.Y+J <= YMAX) and
+         (Backup[Move.X+I,Move.X+J] <> NaTahu) and
+         (Backup[Move.X+I,Move.X+J] < 2) then
+        begin
+          City := True;
+          FloodFill( Move.X+I , Move.Y+J );
+
+          if (City) then
+            FillCity( Move.X+I , Move.Y+J );
+        end;
+
+  PaintGame;
+
+  Koniec := True;
+  for I := 1 to XMAX do
+    for J := 1 to YMAX do
+      if (Table[I,J] = -1) then
+        begin
+          Koniec := False;
+          exit;
+        end;
+end;
+
+//******************************************************************************
+//   INTERFACE
+//******************************************************************************
+
+procedure TCities.NewGame;
+var Tah : TPos;
+begin
+  ClearTable;
+  PaintTable;
+
+  NaTahu := 1;
+  Koniec := False;
+
+  repeat
+    case NaTahu of
+      0 : Tah := Human.MakeMove( Table );
+      1 : Tah := Computer.MakeMove( Table );
+    end;
+
+    ProcessMove( Tah );
+
+    NaTahu := 1 - NaTahu;
+  until Koniec;
+end;
+
+end.

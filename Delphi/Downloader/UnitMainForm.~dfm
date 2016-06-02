@@ -1,0 +1,43 @@
+object MainForm: TMainForm
+  Left = 192
+  Top = 107
+  Width = 544
+  Height = 375
+  Caption = 'Downloader'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object WebBrowser: TWebBrowser
+    Left = 8
+    Top = 8
+    Width = 705
+    Height = 537
+    TabOrder = 0
+    OnDocumentComplete = WebBrowserDocumentComplete
+    ControlData = {
+      4C000000DD480000803700000000000000000000000000000000000000000000
+      000000004C000000000000000000000001000000E0D057007335CF11AE690800
+      2B2E12620C000000000000004C0000000114020000000000C000000000000046
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000100000000000000000000000000000000000000}
+  end
+  object ButtonStart: TButton
+    Left = 720
+    Top = 520
+    Width = 75
+    Height = 25
+    Caption = 'Start'
+    Default = True
+    TabOrder = 1
+    OnClick = ButtonStartClick
+  end
+end

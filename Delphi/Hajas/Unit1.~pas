@@ -1,0 +1,595 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Menus, ExtCtrls, ComCtrls, ToolWin, StdCtrls, Buttons;
+
+type
+  TForm1 = class(TForm)
+    MainMenu1: TMainMenu;
+    Game1: TMenuItem;
+    New1: TMenuItem;
+    Giveup1: TMenuItem;
+    Done1: TMenuItem;
+    N1: TMenuItem;
+    Exit1: TMenuItem;
+    Setings1: TMenuItem;
+    Size1: TMenuItem;
+    Balls1: TMenuItem;
+    N8x81: TMenuItem;
+    N10x101: TMenuItem;
+    N12x121: TMenuItem;
+    N41: TMenuItem;
+    N61: TMenuItem;
+    N81: TMenuItem;
+    Board: TImage;
+    N2: TMenuItem;
+    Tutorial1: TMenuItem;
+    BitBtn1: TBitBtn;
+    Label1: TLabel;
+    Label2: TLabel;
+    BitBtn2: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure OptLabels;
+    procedure LoadImages;
+    procedure NewGame(FieldSize,PBalls:integer;Tutorial:boolean);
+    procedure Exit1Click(Sender: TObject);
+    function Skonci:boolean;
+    function GetPosit(px,py:integer):integer;
+    function IsBall(bx,by:integer):boolean;
+    procedure Skontroluj;
+    procedure ShowBalls;
+    procedure Svetlo(lx,ly,sx,sy:integer);
+    procedure New1Click(Sender: TObject);
+    procedure Tutorial1Click(Sender: TObject);
+    procedure N8x81Click(Sender: TObject);
+    procedure N10x101Click(Sender: TObject);
+    procedure N12x121Click(Sender: TObject);
+    procedure N41Click(Sender: TObject);
+    procedure N61Click(Sender: TObject);
+    procedure N81Click(Sender: TObject);
+    procedure BoardMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure BoardMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure Done1Click(Sender: TObject);
+    procedure Giveup1Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+  private
+    Imag:array[1..11] of TBitmap;
+    mx,my:integer;
+    Posit:integer;
+  protected
+    field: array[0..13,0..13] of integer;
+    ball: array[1..8] of record
+                           x,y:integer;
+                         end;
+    PlacedBalls,Score: integer;
+    Counter:integer;
+  public
+    tut: boolean;
+    size: integer;
+    balls: integer;
+    endgame: boolean;
+  end;
+
+const
+  names:array[1..11] of string=
+         ('blank.bmp'   ,'empty.bmp'   ,
+          'ball_tmp.bmp','ball_err.bmp','ball_tut.bmp',
+          'light_up.bmp','light_dn.bmp',
+          'face_def.bmp','face_clk.bmp','face_suc.bmp','face_err.bmp');
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.DFM}
+
+procedure TForm1.LoadImages;
+var i:integer;
+begin
+  for i:=1 to 11 do
+    begin
+      Imag[i]:=TBitmap.Create;
+      Imag[i].LoadFromFile(names[i]);
+    end;
+end;
+
+procedure TForm1.OptLabels;
+begin
+  Label1.Width:=49;
+  Label1.Height:=33;
+  Label2.Width:=49;
+  Label2.Height:=33;
+end;
+
+procedure TForm1.NewGame(FieldSize,PBalls:integer;Tutorial:boolean);
+var a,b:integer;
+    j:array[1..8] of word;
+
+procedure GameSize(NSize:integer);
+var farba : TColor;
+begin
+  Width:=321+(NSize-8)*24;
+  Height:=369+(NSize-8)*24;
+
+  BitBtn1.Left:=136+(NSize-8)*12;
+  Label2.Left:=200+(NSize-8)*24;
+
+  with Board do
+    begin
+      Width:=NSize*40+48;
+      Height:=NSize*24+48;
+
+      Canvas.Brush.Color := clWhite;
+      Canvas.FillRect( Board.ClientRect );
+    end;
+end;
+
+function ine(Coun:integer):boolean;
+var Vpor:boolean;
+    i:integer;
+begin
+  Vpor:=true;
+  for i:=1 to Coun-1 do
+    if j[i]=j[Coun] then
+      Vpor:=false;
+  ine:=Vpor;
+end;
+
+procedure NewBalls(NBalls:integer);
+var i:integer;
+begin
+  j[1]:=random(FieldSize*FieldSize);
+  for i:=2 to NBalls do
+    repeat
+      j[i]:=random(FieldSize*FieldSize);
+    until ine(i);
+  for i:=1 to NBalls do
+    begin
+      ball[i].x:=j[i] mod FieldSize+1;
+      ball[i].y:=j[i] div FieldSize+1;
+    end;
+end;
+
+begin
+  if FieldSize<>size then GameSize(FieldSize);
+  NewBalls(PBalls);
+  for a:=1 to FieldSize do
+    for b:=1 to FieldSize do
+      Board.Canvas.Draw(a*24,b*24,Imag[2]);
+  for a:=1 to FieldSize do
+    begin
+      Board.Canvas.Draw(a*24,0,Imag[6]);
+      Board.Canvas.Draw(a*24,FieldSize*24+24,Imag[6]);
+    end;
+  for a:=1 to FieldSize do
+    begin
+      Board.Canvas.Draw(0              ,a*24,Imag[6]);
+      Board.Canvas.Draw(FieldSize*24+24,a*24,Imag[6]);
+    end;
+  Board.Canvas.Draw(0              ,0              ,Imag[1]);
+  Board.Canvas.Draw(FieldSize*24+24,0              ,Imag[1]);
+  Board.Canvas.Draw(0              ,FieldSize*24+24,Imag[1]);
+  Board.Canvas.Draw(FieldSize*24+24,FieldSize*24+24,Imag[1]);
+
+  if Tutorial then
+    for a:=1 to PBalls do
+      Board.Canvas.Draw(Ball[a].x*24,Ball[a].y*24,Imag[5]);
+
+  for a:=0 to FieldSize+1 do
+    for b:=0 to FieldSize+1 do
+      field[a,b]:=0;
+  PlacedBalls:=0;
+  Score:=0;
+  size:=FieldSize;
+  Balls:=PBalls;
+  Counter:=1;
+  tut:=Tutorial;
+  endgame:=false;
+
+  BitBtn2.Enabled:=true;
+  Done1.Enabled:=true;
+  Giveup1.Enabled:=true;
+
+  Label1.Caption:='0';
+  Label2.Caption:='0/'+inttostr(Balls);
+
+  OptLabels;
+end;
+
+procedure TForm1.Skontroluj;
+var i:integer;
+    spravne:boolean;
+begin
+  spravne:=true;
+  for i:=1 to balls do
+    if Field[ball[i].x,ball[i].y]=0 then
+      spravne:=false;
+  if spravne then
+    messagedlg('Puzzle solved! Your final score is: '+inttostr(score),
+               mtInformation,[MbOK],0)
+  else
+    messagedlg('The balls were not placed correctly.',
+               mtInformation,[MbOK],0);
+  endgame:=true;
+
+  BitBtn2.Enabled:=false;
+  Done1.Enabled:=false;
+  Giveup1.Enabled:=false;
+
+  ShowBalls;
+end;
+
+procedure TForm1.ShowBalls;
+var a,b:integer;
+begin
+  for a:=1 to Balls do
+    if Field[ball[a].x,ball[a].y]=0 then
+      Board.Canvas.Draw(ball[a].x*24,ball[a].y*24,Imag[5])
+    else Field[ball[a].x,ball[a].y]:=2;
+  for a:=1 to Size do
+    for b:=1 to Size do
+      if Field[a,b]=1 then
+        Board.Canvas.Draw(a*24,b*24,Imag[4]);
+end;
+
+procedure TForm1.Svetlo(lx,ly,sx,sy:integer);
+var h,pol:integer;
+    koniec:boolean;
+
+procedure napis;
+var s:string;
+begin
+  case h of
+    -1:s:='R';
+    0:s:='H';
+    1:begin
+        s:=inttostr(Counter);
+        inc(Counter);
+        Board.Canvas.TextOut(lx*24+2,ly*24+2,s);
+        Field[lx,ly]:=1;
+      end;
+  end;
+  Board.Canvas.TextOut(mx*24+2,my*24+2,s);
+  Field[mx,my]:=1;
+end;
+
+begin
+  h:=10;
+  if isball(lx+sx,ly+sy) then
+    h:=0
+  else
+    case abs(sx) of
+      0:if (isball(lx+1,ly+sy)) or (isball(lx-1,ly+sy)) then
+          h:=-1;
+      1:if (isball(lx+sx,ly+1)) or (isball(lx+sx,ly-1)) then
+          h:=-1;
+    end;
+  koniec:=false; pol:=2;
+  if h>0 then
+    begin
+      h:=1;
+      while not koniec do
+        case abs(sx) of
+          0:begin
+              if (ly+sy*pol=0) or (ly+sy*pol=size+1) then
+                begin
+                  ly:=ly+sy*pol;
+                  if (lx=mx) and (ly=my) then
+                    h:=-1;
+                  koniec:=true;
+                end
+              else
+                if isball(lx,ly+sy*pol) then
+                  begin
+                    h:=0;
+                    koniec:=true;
+                  end
+                else
+                  if isball(lx-1,ly+sy*pol) then
+                    begin
+                      ly:=ly+sy*(pol-1);
+                      sx:=1;
+                      sy:=0;
+                      pol:=0;
+                    end
+                  else
+                    if isball(lx+1,ly+sy*pol) then
+                      begin
+                        ly:=ly+sy*(pol-1);
+                        sx:=-1;
+                        sy:=0;
+                        pol:=0;
+                      end;
+              inc(pol);
+            end;
+          1:begin
+              if (lx+sx*pol=0) or (lx+sx*pol=size+1) then
+                begin
+                  lx:=lx+sx*pol;
+                  if (lx=mx) and (ly=my) then
+                    h:=-1;
+                  koniec:=true;
+                end
+              else
+                if isball(lx+sx*pol,ly) then
+                  begin
+                    h:=0;
+                    koniec:=true;
+                  end
+                else
+                  if isball(lx+sx*pol,ly-1) then
+                    begin
+                      lx:=lx+sx*(pol-1);
+                      sx:=0;
+                      sy:=1;
+                      pol:=0;
+                    end
+                  else
+                    if isball(lx+sx*pol,ly+1) then
+                      begin
+                        lx:=lx+sx*(pol-1);
+                        sx:=0;
+                        sy:=-1;
+                        pol:=0;
+                      end;
+              inc(pol);
+            end;
+        end;
+    end;
+  Napis;
+  inc(Score);
+  Label1.Caption:=inttostr(Score);
+  OptLabels;
+end;
+
+function TForm1.Skonci:boolean;
+var i:integer;
+    w:word;
+    ds:boolean;
+begin
+  w:=messagedlg('Quit?',mtConfirmation,[mbYes,mbNo],0);
+  if w=mrYes then
+    begin
+      for i:=1 to 11 do
+        Imag[i].Destroy;
+
+      ds:=true;
+    end
+  else
+    ds:=false;
+  Skonci:=ds;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+var i,j:integer;
+begin
+  size:=0;
+  for i:=0 to 13 do
+    for j:=0 to 13 do
+      field[i,j]:=0;
+  LoadImages;
+  Board.Canvas.Font.Color:=clBtnText;
+  NewGame(8,4,false);
+end;
+
+procedure TForm1.Exit1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TForm1.New1Click(Sender: TObject);
+begin
+  NewGame(Size,Balls,Tut);
+end;
+
+procedure TForm1.Tutorial1Click(Sender: TObject);
+begin
+  if tut then
+    Tutorial1.Checked:=false
+  else
+    Tutorial1.Checked:=true;
+  NewGame(Size,Balls,not tut);
+end;
+
+procedure TForm1.N8x81Click(Sender: TObject);
+begin
+  if Size<>8 then
+    begin
+      N8x81.Checked:=true;
+      N10x101.Checked:=false;
+      N12x121.Checked:=false;
+      NewGame(8,Balls,tut);
+    end;
+end;
+
+procedure TForm1.N10x101Click(Sender: TObject);
+begin
+  if Size<>10 then
+    begin
+      N8x81.Checked:=false;
+      N10x101.Checked:=true;
+      N12x121.Checked:=false;
+      NewGame(10,Balls,tut);
+    end;
+end;
+
+procedure TForm1.N12x121Click(Sender: TObject);
+begin
+  if Size<>12 then
+    begin
+      N8x81.Checked:=false;
+      N10x101.Checked:=false;
+      N12x121.Checked:=true;
+      NewGame(12,Balls,tut);
+    end;
+end;
+
+procedure TForm1.N41Click(Sender: TObject);
+begin
+  if Balls<>4 then
+    begin
+      N41.Checked:=true;
+      N61.Checked:=false;
+      N81.Checked:=false;
+      NewGame(Size,4,tut);
+    end;
+end;
+
+procedure TForm1.N61Click(Sender: TObject);
+begin
+  if Balls<>6 then
+    begin
+      N41.Checked:=false;
+      N61.Checked:=true;
+      N81.Checked:=false;
+      NewGame(Size,6,tut);
+    end;
+end;
+
+procedure TForm1.N81Click(Sender: TObject);
+begin
+  if Balls<>8 then
+    begin
+      N41.Checked:=false;
+      N61.Checked:=false;
+      N81.Checked:=true;
+      NewGame(Size,8,tut);
+    end;
+end;
+
+function TForm1.GetPosit(px,py:integer):integer;
+var pom:integer;
+begin
+  pom:=maxint;
+  if (px>0) and (px<Size+1) and (py<1) then
+    pom:=1;
+  if (px>0) and (px<Size+1) and (py>Size) then
+    pom:=3;
+  if (py>0) and (py<Size+1) and (px<1) then
+    pom:=4;
+  if (py>0) and (py<Size+1) and (px>Size) then
+    pom:=2;
+  if (px>0) and (px<Size+1) and (py>0) and (py<Size+1) then
+    pom:=5;
+  getposit:=pom;
+end;
+
+function TForm1.IsBall(bx,by:integer):boolean;
+var i:integer;
+    pb:boolean;
+begin
+  pb:=false;
+  for i:=1 to balls do
+    if (ball[i].x=bx) and (ball[i].y=by) then
+      pb:=true;
+  IsBall:=pb;
+end;
+
+procedure TForm1.BoardMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+
+begin
+  if not endgame then
+    begin
+      mx:=(x+1) div 24;
+      my:=(y+1) div 24;
+      posit:=getposit(mx,my);
+
+      if posit<5 then
+        if Field[mx,my]=0 then
+          Board.Canvas.Draw(mx*24,my*24,Imag[7]);
+      if posit=5 then
+        if field[mx,my]=0 then
+          Board.Canvas.Draw(mx*24,my*24,Imag[3])
+        else
+          if (tut) and (isball(mx,my)) then
+             Board.Canvas.Draw(mx*24,my*24,Imag[5])
+          else
+             Board.Canvas.Draw(mx*24,my*24,Imag[2]);
+    end;
+end;
+
+procedure TForm1.BoardMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if not endgame then
+    begin
+      if posit<5 then
+        if Field[mx,my]=0 then
+          begin
+            Board.Canvas.Draw(mx*24,my*24,Imag[6]);
+            if ((x+1) div 24=mx) and ((y+1) div 24=my) then
+              svetlo(mx,my,abs(posit-2)-1,abs(posit-3)-1);
+          end;
+      if posit=5 then
+        if Field[mx,my]=0 then
+          begin
+            Field[mx,my]:=1;
+            inc(PlacedBalls);
+          end
+        else
+          begin
+            Field[mx,my]:=0;
+            dec(PlacedBalls);
+          end;
+      Label2.Caption:=inttostr(PlacedBalls)+'/'+inttostr(Balls);
+
+      OptLabels;
+    end;
+end;
+
+procedure TForm1.BitBtn1Click(Sender: TObject);
+begin
+  NewGame(Size,Balls,tut);
+end;
+
+procedure TForm1.BitBtn2Click(Sender: TObject);
+begin
+  if PlacedBalls=Balls then Skontroluj
+  else
+    messagedlg(inttostr(balls)+' balls are reqiured to place.',
+               mtInformation,[mbOk],0);
+end;
+
+procedure TForm1.Done1Click(Sender: TObject);
+begin
+  if PlacedBalls=Balls then Skontroluj
+  else
+    messagedlg(inttostr(balls)+' balls are reqiured to place.',
+               mtInformation,[mbOk],0);
+end;
+
+procedure TForm1.Giveup1Click(Sender: TObject);
+var w:word;
+begin
+  w:=messagedlg('Realy want to end this game?',mtConfirmation,
+                [mbYes,mbNo],0);
+  if w=mrYes then
+    begin
+      endgame:=true;
+
+      BitBtn2.Enabled:=false;
+      Done1.Enabled:=false;
+      Giveup1.Enabled:=false;
+
+      ShowBalls;
+    end;
+end;
+
+procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  if Skonci then
+    CanClose:=true
+  else
+    CanClose:=false;
+end;
+
+end.

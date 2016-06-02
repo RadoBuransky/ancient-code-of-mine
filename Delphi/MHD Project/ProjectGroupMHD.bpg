@@ -1,0 +1,46 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = MHD.exe ARozvrhy.exe AZastavky.exe AEditor.exe OCR.exe ARepair.exe \
+  MHDserver.exe MHDclient.exe ATest.exe
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+
+MHD.exe: MHD\MHD.dpr
+  $(DCC)
+
+ARozvrhy.exe: MHD\Accessories\Rozvrhy\ARozvrhy.dpr
+  $(DCC)
+
+AZastavky.exe: MHD\Accessories\Zastavky\AZastavky.dpr
+  $(DCC)
+
+AEditor.exe: MHD\Accessories\Editor\AEditor.dpr
+  $(DCC)
+
+OCR.exe: MHD\Accessories\OCR\OCR.dpr
+  $(DCC)
+
+ARepair.exe: MHD\Accessories\Repair\ARepair.dpr
+  $(DCC)
+
+MHDserver.exe: MHD\MHDserver\MHDserver.dpr
+  $(DCC)
+
+MHDclient.exe: MHD\MHDclient\MHDclient.dpr
+  $(DCC)
+
+ATest.exe: MHD\Accessories\Test\ATest.dpr
+  $(DCC)
+
+

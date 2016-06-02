@@ -1,0 +1,15 @@
+program MySQL;
+
+uses
+  Forms,
+  UnitMainForm in 'UnitMainForm.pas' {FormMain},
+  UnitCennik in 'UnitCennik.pas',
+  UnitCenniky in 'UnitCenniky.pas';
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TFormMain, FormMain);
+  Application.Run;
+end.

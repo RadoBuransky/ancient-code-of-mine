@@ -1,0 +1,41 @@
+unit FormSaveZak;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, FileCtrl;
+
+type
+  TForm1 = class(TForm)
+    DirectoryListBox: TDirectoryListBox;
+    DriveComboBox: TDriveComboBox;
+    Label1: TLabel;
+    ButtonOK: TButton;
+    ButtonCancel: TButton;
+    procedure ButtonOKClick(Sender: TObject);
+    procedure ButtonCancelClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.DFM}
+
+procedure TForm1.ButtonOKClick(Sender: TObject);
+begin
+  ModalResult := 1;
+end;
+
+procedure TForm1.ButtonCancelClick(Sender: TObject);
+begin
+  ModalResult := -1;
+end;
+
+end.

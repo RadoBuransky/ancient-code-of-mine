@@ -1,0 +1,179 @@
+unit UnitCennik;
+
+interface
+
+const FIELDS_MAX = 4;
+      OLD_CENNIK_EXT = '.old';
+      NEW_CENNIK_EXT = '.new';
+
+type PCennikServer = ^TCennikServer;
+     PData         = ^TData;
+
+     TCennikServer = record
+       Host      : string;
+       Port      : integer;
+       User      : string;
+       Password  : string;
+       Database  : string;
+     end;
+
+     TCennikFields = array[0..(FIELDS_MAX-1)] of string;
+
+     TData = array of TCennikFields;
+
+     TCennik = class
+     private
+       FFriendly      : string;                      // User friendly name of table
+       FName          : string;                      // Real name of table in MySQL database
+       FFileName      : string;                      // Name of local file containing table data
+       FData          : TData;                       // Data loaded from local file
+
+       procedure   LoadFromFile( FileName : string );      // Loads data from file to data
+       procedure   SaveToFile( FileName : string );        // Saves data to file
+     public
+       constructor Create( Friendly : string; Name : string; FileName : string );
+       destructor  Destroy; override;
+
+       procedure   ExportToFile( FileName : string );
+
+       procedure   AddRow;
+       procedure   DeleteRow( Index : integer );
+       procedure   EditCell( Col : integer; Row : integer; Value : string );
+       procedure   Rename( Name : string );
+       procedure   Assign( Data : PData );
+
+       property    Data            : TData    read  FData;
+       property    FriendlyName    : string   read  FFriendly;
+       property    Name            : string   read  FName;
+       property    FileName        : string   read  FFileName;
+     end;
+
+var  Cennik : TCennik;
+
+implementation
+
+// Constructor
+constructor TCennik.Create( Friendly : string; Name : string; FileName : string );
+begin
+  inherited Create;
+  FFriendly    := Friendly;
+  FName        := Name;
+  FFileName    := FileName;
+  SetLength( FData , 0 );
+
+  LoadFromFile( FFileName );
+end;
+
+// Destructor
+destructor TCennik.Destroy;
+begin
+  SaveToFile( FFileName );
+
+  inherited;
+end;
+
+//==============================================================================
+//  P R I V A T E
+//==============================================================================
+
+// Loads data from file to data
+procedure TCennik.LoadFromFile( FileName : string );
+var F : TextFile;
+    Count : integer;
+    I, J : integer;
+begin
+  AssignFile( F , FileName );
+
+  {$I-}
+  Reset( F );
+  {$I+}
+
+  if (IOResult <> 0) then
+    exit;
+
+  Readln( F , FName );
+  Readln( F , FFriendly );
+
+  // Get data
+  Readln( F , Count );
+  SetLength( FData , Count );
+
+  for I := 0 to Count-1 do
+    for J := 0 to FIELDS_MAX-1 do
+      Readln( F , FData[I][J] );
+
+  CloseFile( F );
+end;
+
+// Saves data to file
+procedure TCennik.SaveToFile( FileName : string );
+var F : TextFile;
+    I, J : integer;
+begin
+  AssignFile( F , FileName );
+  try
+    Rewrite( F );
+
+    Writeln( F , FName );
+    Writeln( F , FFriendly );
+
+    // Save data
+    Writeln( F , Length( FData ) );
+
+    for I := 0 to Length( FData )-1 do
+      for J := 0 to FIELDS_MAX-1 do
+        Writeln( F , FData[I][J] );
+  finally
+    CloseFile( F );
+  end;
+end;
+
+procedure TCennik.Assign( Data : PData );
+var I, J : integer;
+begin
+  SetLength( FData , Length( Data^ ) );
+
+  for I := 0 to Length( Data^ )-1 do
+    for J := 0 to FIELDS_MAX-1 do
+      FData[I,J] := Data^[I,J];
+end;
+
+//==============================================================================
+//  P U B L I C
+//==============================================================================
+
+procedure TCennik.ExportToFile( FileName : string );
+begin
+  SaveToFile( FileName );
+end;
+
+procedure TCennik.AddRow;
+var I : integer;
+begin
+  SetLength( FData , Length( FData )+1 );
+  for I := 0 to FIELDS_MAX-1 do
+    FData[Length( FData )-1][I] := '';
+end;
+
+procedure TCennik.DeleteRow( Index : integer );
+var I : integer;
+begin
+  for I := Index to Length( FData )-2 do
+    FData[I] := FData[I+1];
+  SetLength( FData , Length( FData )-1 );
+end;
+
+procedure TCennik.EditCell( Col : integer; Row : integer; Value : string );
+begin
+  if (Row >= Length( FData )) then
+    SetLength( FData , Row+1 );
+
+  FData[Row,Col] := Value;
+end;
+
+procedure TCennik.Rename( Name : string );
+begin
+  FFriendly := Name;
+end;
+
+end.

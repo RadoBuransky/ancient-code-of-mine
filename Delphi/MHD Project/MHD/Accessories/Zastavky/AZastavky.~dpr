@@ -1,0 +1,15 @@
+program AZastavky;
+
+uses
+  Forms,
+  FormHlavneOkno in 'FormHlavneOkno.pas' {HlavneOkno},
+  ClassData in '..\..\ClassData.pas',
+  Konstanty in '..\..\Konstanty.pas';
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(THlavneOkno, HlavneOkno);
+  Application.Run;
+end.

@@ -1,0 +1,23 @@
+object MainForm: TMainForm
+  Left = 190
+  Top = 197
+  Width = 393
+  Height = 305
+  Caption = 'SubWin'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object SubWin1: TSubWin
+    Left = 693
+    Top = 3
+    Width = 100
+    Height = 542
+    WinType = wtRight
+  end
+end

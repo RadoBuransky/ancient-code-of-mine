@@ -1,0 +1,17 @@
+unit Constants;
+
+interface
+
+const BOX_WIDTH = 30;
+      BOX_HEIGHT = 30;
+
+      ROWS_COUNT = 17;
+      COLS_COUNT = 26;
+
+      LEVEL_DIR = '\Levels\Level1.bmb';
+
+      CREATURES_DIR = '\Data\Creatures\';
+
+implementation
+
+end.

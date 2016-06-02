@@ -1,0 +1,22 @@
+program MHDserver;
+
+uses
+  Forms,
+  UnitMainForm in 'UnitMainForm.pas' {MainForm},
+  ClassMHDserver in 'ClassMHDserver.pas',
+  ClassUpdates in '..\Accessories\Test\ClassUpdates.pas',
+  SKonstanty in 'SKonstanty.pas',
+  UnitFormDate in '..\Accessories\Test\UnitFormDate.pas' {FormDate},
+  UnitEdit in '..\Accessories\Test\UnitEdit.pas' {FormEdit},
+  UnitAddTicket in 'UnitAddTicket.pas' {FormAddTicket};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TFormDate, FormDate);
+  Application.CreateForm(TFormEdit, FormEdit);
+  Application.CreateForm(TFormAddTicket, FormAddTicket);
+  Application.Run;
+end.

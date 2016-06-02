@@ -1,0 +1,8 @@
+program Project;
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.Run;
+end.

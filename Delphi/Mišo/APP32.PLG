@@ -1,0 +1,23 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: app32 - Win32 Debug--------------------
+</h3>
+
+
+Microsoft (R) Program Maintenance Utility   Version 6.00.8168.0
+Copyright (C) Microsoft Corp 1988-1998. All rights reserved.
+
+ cl -c -W3 -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -D_WIN95 -D_WIN32_WINDOWS=0x0400 -D_WIN32_IE=0x0300 -DWINVER=0x0400 -DWIN32  -D_WIN32 -Z7 -Od app32.c
+app32.c
+ link -debug:full -debugtype:cv /NODEFAULTLIB /INCREMENTAL:NO /PDB:NONE /RELEASE /NOLOGO -subsystem:windows,4.0 -out:app32.exe app32.obj app32.res libc.lib oldnames.lib kernel32.lib  wsock32.lib advapi32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib shell32.lib
+
+
+
+<h3>Results</h3>
+app32.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

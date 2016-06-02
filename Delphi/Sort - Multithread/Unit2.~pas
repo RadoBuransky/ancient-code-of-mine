@@ -1,0 +1,330 @@
+unit Unit2;
+
+interface
+
+Uses Classes, Graphics, ExtCtrls;
+
+type TPole = Array[1..10000] of integer;
+     PPole = ^TPole;
+
+     TSort = class(TThread)
+     private
+       PaintBox : TPaintBox;
+       Pole, Pole2 : TPole;
+       PocetPrvkov : Word;
+       Co, SCim : Word;
+       Farba : TColor;
+       procedure UkazVymenu;
+       procedure NakresliCiaruSynchro;
+       procedure NakresliCiaruSynchro2;
+     protected
+       procedure Execute; override;
+       procedure Vymen( A , B : Word );
+       procedure Nakresli( A : Word; NFarba : TColor );
+       procedure Nakresli2( A : Word; NFarba : TColor );
+       procedure Sort( var Pole : TPole ); virtual; abstract;
+       procedure UkazVsetkyPrvky;
+     public
+       constructor Create( Box : TPaintBox; var SortPole : TPole; Pocet : Word );
+     end;
+
+     TBubbleSort = class( TSort )
+       protected
+         procedure Sort( var Pole : TPole ); override;
+       end;
+
+     TQuickSort = class( TSort )
+       protected
+         procedure Sort( var Pole : TPole ); override;
+       end;
+
+     TSelectionSort = class( TSort )
+       protected
+         procedure Sort( var Pole : TPole ); override;
+       end;
+
+     TShellSort = class( TSort )
+       protected
+         procedure Sort( var Pole : TPole ); override;
+       end;
+
+     TRadixSort = class( TSort )
+       protected
+         procedure Sort( var Pole : TPole ); override;
+       end;
+
+     TMergeSort = class( TSort )
+       protected
+         procedure Sort( var Pole : TPole ); override;
+       end;
+
+     procedure NakresliCiaru( Velkost , Kde : Word; Farba : TColor; Paint : TPaintBox );
+
+implementation
+
+Uses Unit1;
+
+procedure NakresliCiaru( Velkost , Kde : Word; Farba : TColor; Paint : TPaintBox );
+begin
+  With Paint.Canvas do
+    begin
+      Pen.Color := Farba;
+      PolyLine( [Point(4+Round(Kde * ( (Paint.Width-8) / PocetPrvkov )), Paint.Height - 5 ) ,
+                 Point(4+Round(Kde * ( (Paint.Width-8) / PocetPrvkov )), Paint.Height - 5 - Round(((Paint.Height-10) / 500) * Velkost)) ]);
+    end;
+end;
+
+{---------------------- Trieda S O R T  -----------------------------}
+
+constructor TSort.Create( Box : TPaintBox; var SortPole : TPole; Pocet : Word );
+begin
+  PaintBox := Box;
+  Pole := SortPole;
+  FreeOnTerminate := True;
+  PocetPrvkov := Pocet;
+  UkazVsetkyPrvky;
+  inherited Create( False );
+end;
+
+procedure TSort.Execute;
+begin
+  Sort( Pole );
+end;
+
+procedure TSort.UkazVsetkyPrvky;
+var a : Word;
+begin
+  PaintBox.Repaint;
+  for a := 1 to PocetPrvkov do
+    NakresliCiaru( Pole[ a ] , a , clGreen , PaintBox );
+end;
+
+procedure TSort.UkazVymenu;
+begin
+  NakresliCiaru( Pole[ SCim ] , Co , clBtnFace , PaintBox );
+  NakresliCiaru( Pole[ Co ] , SCim , clBtnFace , PaintBox );
+
+  NakresliCiaru( Pole[ Co ] , Co , clGreen , PaintBox );
+  NakresliCiaru( Pole[ Scim ] , Scim , clGreen , PaintBox );
+end;
+
+procedure TSort.Vymen( a , b : Word );
+var c : Word;
+begin
+  c := Pole[ a ];
+  Pole[ a ] := Pole[ b ];
+  Pole[ b ] := c;
+
+  Co := a;
+  SCim := b;
+  Synchronize( UkazVymenu );
+end;
+
+procedure TSort.NakresliCiaruSynchro;
+begin
+  NakresliCiaru( Pole[Co] , Co , Farba , PaintBox );
+end;
+
+procedure TSort.Nakresli( A : Word; NFarba : TColor );
+begin
+  Co := A;
+  Farba := NFarba;
+  Synchronize( NakresliCiaruSynchro );
+end;
+
+procedure TSort.NakresliCiaruSynchro2;
+begin
+  NakresliCiaru( Pole2[Co] , Co , Farba , PaintBox );
+end;
+
+procedure TSort.Nakresli2( A : Word; NFarba : TColor );
+begin
+  Co := A;
+  Farba := NFarba;
+  Synchronize( NakresliCiaruSynchro2 );
+end;
+
+{---------------------- Trieda BUBBLE S O R T  -----------------------------}
+
+procedure TBubbleSort.Sort( var Pole : TPole );
+var a, b : Word;
+begin
+  for a := PocetPrvkov downto 1 do
+    for b := 1 to PocetPrvkov - 1 do
+      if Pole[ b ] > Pole[ b + 1 ] then
+      begin
+        Vymen( b , b + 1 );
+        if Terminated then Exit;
+      end;
+  KohoZrusit := 1;
+end;
+
+{---------------------- Trieda QUICK S O R T  -----------------------------}
+
+procedure TQuickSort.Sort( var Pole : TPole );
+
+procedure QuickSort(var Pole: TPole; iLo, iHi: Integer);
+  var
+    Lo, Hi, Mid : Integer;
+  begin
+    Lo := iLo;
+    Hi := iHi;
+    Mid := Pole[(Lo + Hi) div 2];
+    repeat
+      while Pole[Lo] < Mid do Inc(Lo);
+      while Pole[Hi] > Mid do Dec(Hi);
+      if Lo <= Hi then
+        begin
+          Vymen( Lo , Hi );
+          Inc(Lo);
+          Dec(Hi);
+        end;
+    until Lo > Hi;
+    if Hi > iLo then QuickSort( Pole, iLo, Hi);
+    if Lo < iHi then QuickSort( Pole, Lo, iHi);
+    if Terminated then Exit;
+  end;
+
+begin
+  QuickSort( Pole , 1, PocetPrvkov);
+  KohoZrusit := 2;
+end;
+
+{---------------------- Trieda SELECTION S O R T  -----------------------------}
+
+procedure TSelectionSort.Sort( var Pole : TPole );
+var
+  I, J : Integer;
+begin
+  for I := 1 to PocetPrvkov - 1 do
+    for J := PocetPrvkov downto I + 1 do
+      if Pole[I] > Pole[J] then
+      begin
+        Vymen( I , J );
+        if Terminated then Exit;
+      end;
+  KohoZrusit := 3;
+end;
+
+{---------------------- Trieda SHELL S O R T  -----------------------------}
+
+procedure TShellSort.Sort( var Pole : TPole );
+var a,b,c,d : integer;
+begin
+  c := 1;
+  repeat
+    c := 3*c + 1;
+  until c > PocetPrvkov;
+
+  repeat
+    c := c div 3;
+    for a := c+1 to PocetPrvkov do
+      begin
+        d := Pole[a];
+        b := a;
+        while (b > c) and (pole[b-c] > d) do
+          begin
+            Nakresli( b , clBtnFace );
+            pole[b] := pole[b-c];
+            Nakresli( b , clGreen );
+            b := b - c;
+          end;
+        Nakresli( b , clBtnFace );
+        pole[b] := d;
+        Nakresli( b , clGreen );
+      end
+  until c = 1;
+  KohoZrusit := 4;
+end;
+
+{---------------------- Trieda RADIX S O R T  -----------------------------}
+
+procedure TRadixSort.Sort( var Pole : TPole );
+var a, b, c : integer;
+    Mocnina, Poc : Word;
+begin
+  Pole2 := Pole;
+  Mocnina := 0;
+  for a := 1 to 3 do
+    begin
+      poc := 1;
+      if a = 1 then mocnina := 1
+               else mocnina := mocnina * 10;
+      for b := 0 to 9 do
+        for c := 1 to PocetPrvkov do
+          if ( Pole[c] div mocnina) mod 10 = b then
+            begin
+              Nakresli2( poc , clBtnFace );
+              pole2[poc] := pole[c];
+              Nakresli2( poc , clGreen );
+              inc(poc);
+            end;
+      Pole := Pole2;
+    end;
+  KohoZrusit := 5;
+end;
+
+{---------------------- Trieda MERGE S O R T  -----------------------------}
+
+procedure TMergeSort.Sort( var Pole : TPole );
+
+procedure Merge( i, j : integer );
+var a,l,p1,p2,poc : word;
+begin
+  l := i + ( (j - i) div 2 );
+  if j-i > 1 then
+    begin
+      Merge( i , l );
+      Merge( l + 1, j );
+    end;
+  if j-i = 0 then exit;
+  poc := 1;
+  p1 := i;
+  p2 := l + 1;
+  while true do
+    if pole[p1] > pole[p2] then
+      begin
+        pole2[poc] := pole[p2];
+        inc(p2);
+        inc(poc);
+        if p2 > j then
+          begin
+            for a := p1 to l do
+              begin
+                pole2[poc] := pole[a];
+                inc(poc);
+              end;
+            break;
+          end;
+      end
+        else
+      begin
+        pole2[poc] := pole[p1];
+        inc(p1);
+        inc(poc);
+        if p1 > l then
+          begin
+            for a := p2 to j do
+              begin
+                pole2[poc] := pole[a];
+                inc(poc);
+              end;
+            break;
+          end;
+      end;
+  for a := 1 to poc-1 do
+    begin
+      Nakresli( i+a-1 , clBtnFace);
+      pole[i+a-1] := pole2[a];
+      Nakresli( i+a-1 , clGreen );
+      pole2[a] := 0;
+    end;
+end;
+
+begin
+  Pole2 := Pole;
+  Merge( 1 , PocetPrvkov );
+  KohoZrusit := 6;
+end;
+
+end.

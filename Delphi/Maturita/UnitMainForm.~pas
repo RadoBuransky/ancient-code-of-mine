@@ -1,0 +1,45 @@
+unit UnitMainForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls;
+
+type
+  TMainForm = class(TForm)
+    Memo: TMemo;
+    ButtonStart: TButton;
+    procedure ButtonStartClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+uses ClassUlohy;
+
+{$R *.DFM}
+
+procedure TMainForm.ButtonStartClick(Sender: TObject);
+var I, J : integer;
+    Strings : TStrings;
+begin
+  ButtonStart.Enabled := False;
+  Memo.Clear;
+  for I := 0 to List.Count - 1 do
+    begin
+      Strings := TUloha( List[I] ).Solve;
+      for J := 0 to Strings.Count - 1 do
+        Memo.Lines.Add( Strings[I] );
+      Memo.Lines.Add( '' );
+    end;
+  ButtonStart.Enabled := True;
+end;
+
+end.

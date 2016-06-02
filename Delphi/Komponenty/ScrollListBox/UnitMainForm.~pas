@@ -1,0 +1,33 @@
+unit UnitMainForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ClassSListBox;
+
+type
+  TMainForm = class(TForm)
+    SListBox1: TSListBox;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.DFM}
+
+procedure TMainForm.FormCreate(Sender: TObject);
+var I : integer;
+begin
+  for I := 1 to 1000 do
+    SListBox1.Items.Add( IntToStr( I ) );
+end;
+
+end.

@@ -1,0 +1,79 @@
+AriTech Development Indonesia Component Readme
+--------------------------------------------------
+Component Name    : ATWinAmpDriver
+Version           : 1.01
+Programmer	  : Sony Arianto Kurniawan
+Date		  : November-December 1998
+For Delphi        : 2.0 ; 3.0 ; 4.0 maybe
+Source            : Available
+Demo              : e-mail me for demo
+Description       : Component to drive WinAmp
+Properties        : - Author : string : read-only = default property for all of my component
+                    - WinAmpPath : string : read-write = determine WinAmp path with executable file name
+                                                         i.e c:\Program Files\Winamp\winamp.exe
+                    - WinAmpMode : TATWAShowMode : read-write = determine WinAmp window mode
+                                                                (wamNormal,wamHide,wamMinimize,wamMaximize)
+Methods           : - function GetWinAmpHandle:hWnd; --> get WinAmp handle
+                    - function IsWinAmpRunning:boolean; --> is	WinAmp running? retval=1=yes;0=no
+                    - function GetWinAmpVersionStr:string; --> get WinAmp version in string format
+                    - function GetWinAmpVersionInt:integer; --> get WinAmp version in integer format
+                    - function GetPlayBackStatus:integer;  --> if WinAmp playing=1;pause=3 or not_play=0
+    		    - function GetSongLength:integer;  --> get song length in seconds
+    		    - function GetSongPos:integer;  --> get song pos in milliseconds
+    		    - function GetPlayListLength:integer;  --> get playlist length in tracks
+    		    - function WritePlayList:integer;  --> write play list to disk writes to <WinAmpDir>\WinAmp.pl
+		    - function JumpToTime(newsongpos:integer):integer; --> jump to new song position in milliseconds,
+                                                                       --> return 0=success
+                                                                       -->        1=on eof
+                                                                       -->       -1=error
+                                                                       --> ONLY AVAILABLE IN v1.60+
+    		    - procedure AddToPlayList(fname:string);  --> add file name to play list
+    		    - procedure DeletePlayList;  --> delete play list content
+    		    - procedure Play;  --> start play the music from playlist
+    		    - procedure ChangeDir(newdir:string);  --> change directory
+    		    - procedure SetPlayListPos(newplpos:integer);  --> set playlist pos for v2.00+
+    		    - procedure SetVolume(newvol:integer);  --> set volume for v2.00+ (0-255)
+                    - procedure SetPanning(newpan:integer);  --> set panning for v2.00+ (0-255)
+                    - procedure EQWindow;  --> show EQ window (toggle)
+    		    - procedure PlayListWindow;  --> toggle PlayList window (toggle)
+    		    - procedure VolumeUp;  --> set volume up a little
+                    - procedure VolumeDown;  --> set volume down a little
+                    - procedure ForwardFive;  --> forward 5 seconds
+                    - procedure RewindFive;  --> rewind five seconds
+    		    - procedure GoToPrevSong;  --> go to previous song
+    		    - procedure ShowLoadFile;  --> show load file(s) box
+    		    - procedure ShowPreferences;  --> show preferences box
+    		    - procedure SetAOT;  --> toggle set "Always On Top" option
+    		    - procedure ShowAbout;  --> show about box (cute)
+                    - procedure BtnPrevSong;  --> Button1 click
+                    - procedure BtnStartList;  --> Ctrl+Button1 click
+                    - procedure BtnRewFive;  --> Shift+Button1 click
+    		    - procedure BtnPlay;  --> Button2 click
+    		    - procedure BtnOpenLocation;  --> Ctrl+Button2 click
+    		    - procedure BtnLoadFile;  --> Shift+Button2 click
+    		    - procedure BtnPause;  --> Button3 click
+    		    - procedure BtnStop;  --> Button4 click
+    		    - procedure BtnFadeStop;  --> Shift+Button4 click
+    		    - procedure BtnFwdSong;  --> Button5 click
+    		    - procedure BtnEndList;  --> Ctrl+Button5 click
+    		    - procedure BtnFwdFive;  --> Shift+Button5 click
+    		    - function LaunchWinAmp:integer;  --> to launch WinAmp 0=success;1=fail
+    		    - function ShutdownWinAmp:integer;  --> to shutdown WinAmp
+Events            : none
+Component Type    : NonVisual
+Ancestor          : TComponent
+Usage Example     : 1. Just put the component in the form
+                    2. Set some property and just play some MP3s :)
+                         ...
+                           ATWinAmpDriver1.WinAmpPath := 'c:\Program Files\Winamp\winamp.exe';
+                           ATWinAmpDriver1.LaunchWinAmp;
+                           ATWinAmpDriver1.AddToPlayList('c:\MP3\ShaniaTwain-FromThisMoment.MP3');
+                           ATWinAmpDriver1.Play;
+                         ...
+Note              : -
+                    
+
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+_/ Sony Arianto Kurniawan  _/ http://www.geocities.com/Pentagon/5900/   _/
+_/ sony-ak@iname.com       _/     AriTech Development Indonesia         _/
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -1,0 +1,30 @@
+unit Vykres;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls;
+
+type
+  TVykres = class(TImage)
+  private
+    { Private declarations }
+  protected
+    { Protected declarations }
+  public
+    { Public declarations }
+  published
+    { Published declarations }
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Samples', [TVykres]);
+end;
+
+end.

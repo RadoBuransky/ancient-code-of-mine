@@ -1,0 +1,207 @@
+unit ClassLetterBoard;
+
+interface
+
+uses ClassBaseBoard, ClassLetters, ClassLetterStack, Classes, Controls,
+     ExtCtrls, Graphics;
+
+const CStoneSize   = 20;
+      CBckgndColor = $00000000;
+      CEmptyColor  = $00B0FFFF;
+
+type TBoardStack = array[1..2] of TStack;
+
+     TLetterBoard = class( TBaseBoard )
+     private
+       FBrdStack   : TBoardStack;
+       FMarked     : TLetter;
+       FMarkX      : integer;
+       FMarkY      : integer;
+
+       procedure   OnBtnDown( Sender: TObject; Button: TMouseButton;
+                              Shift: TShiftState; X, Y: Integer );
+       procedure   PaintBoard;
+     public
+       constructor Create( Image : TImage );
+       destructor  Destroy; override;
+
+       procedure   Clear;
+       procedure   SetStack( Stack : TLetterStack );
+       procedure   RemoveMarked;
+       procedure   UnMark;
+       procedure   TakeBack( Letter : TLetter );
+       function    GetBottomTiles : TNewLetters;
+
+       property    Marked : TLetter read FMarked;
+     end;
+
+implementation
+
+uses SysUtils;
+
+//==============================================================================
+// Constructor / destructor
+//==============================================================================
+
+constructor TLetterBoard.Create( Image : TImage );
+begin
+  inherited Create( Image );
+  FMarked.C          := #0;
+  FMarkX             := 0;
+  FMarkY             := 0;
+  FImage.OnMouseDown := OnBtnDown;
+end;
+
+destructor TLetterBoard.Destroy;
+begin
+  inherited;
+end;
+
+//==============================================================================
+// P R I V A T E
+//==============================================================================
+
+procedure TLetterBoard.OnBtnDown( Sender: TObject; Button: TMouseButton;
+                                  Shift: TShiftState; X, Y: Integer );
+var I, J : integer;
+    L    : TLetter;
+begin
+  if (X = 0) or
+     (X = FImage.Width-1) or
+     (Y = 0) or
+     (Y = FImage.Height-1) then
+    exit;
+
+  I := (X div (CStoneSize + 1))+1;
+  J := (Y div (CStoneSize + 1))+1;
+
+  if ((FMarkX = 0) and
+      (FMarkY = 0)) then
+    begin
+      if (FBrdStack[J,I].C <> #0) then
+        begin
+          FMarkX := I;
+          FMarkY := J;
+
+          FMarked := FBrdStack[J,I];
+
+          PaintLetter( FBrdStack[J,I] , I , J , CMrkColor , CMrkBckColor );
+        end;
+    end
+  else
+    begin
+      if (FBrdStack[J,I].C = #0) then
+        begin
+          FBrdStack[J,I] := FBrdStack[FMarkY,FMarkX];
+
+          FBrdStack[FMarkY,FMarkX].C     := #0;
+          FBrdStack[FMarkY,FMarkX].Value := 0;
+
+          PaintEmpty( (FMarkX-1)*CStoneSize+(FMarkX-1) , (FMarkY-1)*CStoneSize+(FMarkY-1) , CEmptyColor );
+          PaintLetter( FBrdStack[J,I] , I , J , CLtrColor , CLtrBckColor );
+        end
+      else
+        begin
+          L                        := FBrdStack[J,I];
+          FBrdStack[J,I]           := FBrdStack[FMarkY,FMarkX];
+          FBrdStack[FMarkY,FMarkX] := L;
+
+          PaintLetter( FBrdStack[J,I] , I , J , CLtrColor , CLtrBckColor );
+          PaintLetter( FBrdStack[FMarkY,FMarkX] , FMarkX , FMarkY , CLtrColor , CLtrBckColor );
+        end;
+
+      FMarked.C := #0;
+      FMarkX    := 0;
+      FMarkY    := 0;
+    end;
+end;
+
+procedure TLetterBoard.PaintBoard;
+var I, J : integer;
+begin
+  FImage.Canvas.Brush.Color := CBckgndColor;
+  FImage.Canvas.FillRect( FImage.ClientRect );
+  for J := 1 to 2 do
+    for I := 1 to 7 do
+      if (FBrdStack[J,I].C = #0) then
+        PaintEmpty( (I-1)*CStoneSize+(I-1) , (J-1)*CStoneSize+(J-1) , CEmptyColor )
+      else
+        PaintLetter( FBrdStack[J,I] , I , 1 , CLtrColor , CLtrBckColor );
+end;
+
+//==============================================================================
+// P U B L I C
+//==============================================================================
+
+procedure TLetterBoard.Clear;
+var I, J : integer;
+begin
+  for I := 1 to 2 do
+    for J := 1 to 7 do
+      FBrdStack[I,J].C := #0;
+  PaintBoard;
+end;
+
+procedure TLetterBoard.SetStack( Stack : TLetterStack );
+var I : integer;
+begin
+  for I := 1 to 7 do
+    begin
+      FBrdStack[1,I] := Stack.Stack[I];
+      FBrdStack[2,I].C := #0;
+    end;
+  PaintBoard;
+end;
+
+procedure TLetterBoard.RemoveMarked;
+begin
+  PaintEmpty( (FMarkX-1)*CStoneSize+(FMarkX-1) , (FMarkY-1)*CStoneSize+(FMarkY-1) , CEmptyColor );
+
+  FBrdStack[FMarkY,FMarkX].C := #0;
+
+  FMarked.C := #0;
+  FMarkX    := 0;
+  FMarkY    := 0;
+end;
+
+procedure TLetterBoard.UnMark;
+begin
+  if ((FMarkX = 0) or
+      (FMarkY = 0)) then
+    exit;
+
+  PaintLetter( FBrdStack[FMarkY,FMarkX] , FMarkX , FMarkY , CLtrColor , CLtrBckColor );
+
+  FMarked.C := #0;
+  FMarkX    := 0;
+  FMarkY    := 0;
+end;
+
+procedure TLetterBoard.TakeBack( Letter : TLetter );
+var I, J : integer;
+begin
+  for I := 1 to 2 do
+    for J := 1 to 7 do
+      if (FBrdStack[I,J].C = #0) then
+        begin
+          if (Letter.Value = 0) then
+            Letter.C := '?';
+          
+          FBrdStack[I,J] := Letter;
+          PaintLetter( FBrdStack[I,J] , J , I , CLtrColor , CLtrBckColor );
+          exit;
+        end;
+end;
+
+function TLetterBoard.GetBottomTiles : TNewLetters;
+var I, J : integer;
+begin
+  J := 0;
+  for I := 1 to 7 do
+    if (FBrdStack[2,I].C <> #0) then
+      Inc( J );
+
+  SetLength( Result , 0 );
+end;
+
+end.

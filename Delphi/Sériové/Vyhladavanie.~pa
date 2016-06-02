@@ -1,0 +1,48 @@
+unit Vyhladavanie;
+
+interface
+
+procedure Hladaj( Kde : Integer; Co : String );
+
+implementation
+
+uses Data, FormHlavneOkno;
+
+procedure Hladaj( Kde : Integer; Co : String );
+var A : Word;
+
+function Nasiel(Co , OutS : string) : Boolean;
+var A : Word;
+    Slovo : string[42];
+begin
+  nasiel := false;
+  A := 0;
+  if length(co) > 0 then
+    begin
+      nasiel := true;
+      repeat
+        slovo := '';
+        repeat
+          inc(a);
+          if co[a] <> '*' then slovo := concat(slovo,co[a]);
+        until (co[a] = '*') or (length(co) = a);
+        while co[a+1] = '*' do inc(a);
+        if pos(slovo,outs) = 0 then
+          begin
+            a := length(co);
+            nasiel := false;
+          end
+            else
+          delete(outs,1,pos(slovo,outs));
+      until length(co) = a;
+    end;
+end;
+
+begin
+  for A := 1 to Pole[ AktivnaSkupina ].PocetPoloziek do
+    if Nasiel( Co , HlavneOkno.Tabulka.Cells[ Kde , A ] ) then
+      begin
+      end;
+end;
+
+end.

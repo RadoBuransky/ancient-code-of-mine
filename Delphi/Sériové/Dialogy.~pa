@@ -1,0 +1,28 @@
+unit Dialogy;
+
+interface
+
+procedure DialogPridajPolozku( Skupina : Word );
+procedure DialogPridajSkupinu( Zrusit : Boolean );
+
+implementation
+
+uses FormPridatPolozku, Data;
+
+procedure DialogPridajPolozku( Skupina : Word );
+var Polozka : TPolozka;
+begin
+  if PridatPolozku.ShowModal = 1 then
+    begin
+      Polozka.Cislo := PridatPolozku.EditCislo.Text;
+      Polozka.Nazov := PridatPolozku.EditNazov.Text;
+      Polozka.Seriove := PridatPolozku.EditSeriove.Text;
+      Polozka.Prompt := PridatPolozku.EditPrompt.Text;
+    end; 
+end;
+
+procedure DialogPridajSkupinu( Zrusit : Boolean );
+begin
+end;
+
+end.

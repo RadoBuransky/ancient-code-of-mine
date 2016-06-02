@@ -1,0 +1,190 @@
+unit ClassWords;
+
+interface
+
+uses ClassBSTree;
+
+const IS_WORD_FLAG   = 32;
+      LAST_FLAG      = 64;
+      HAS_CHILD_FLAG = 128;
+      CHAR_MASK      = 31;
+      END_OF_WORDS   = 'END OF WORDS';
+
+type TWordsCallback = procedure( Word : string ) of object;
+
+     TWords = class
+     private
+       FTree       : TBSTree;
+       FCallback   : TWordsCallback;
+       FCounter    : integer;
+
+       function    UnpackWords( var F : File; Word : string ) : TBSTreeChildren;
+       procedure   CreateTree( FileName : string );
+       procedure   EnumWordsRec( Tree : TBSTree; Word : string );
+     public
+       constructor Create( FileName : string );
+       destructor  Destroy; override;
+
+       function    ExistsWord( Word : string ) : boolean;
+       procedure   EnumWords( Callback : TWordsCallback );
+     end;
+
+implementation
+
+uses UnitFormWait;
+
+//==============================================================================
+// Constructor / destructor
+//==============================================================================
+
+constructor TWords.Create( FileName : string );
+begin
+  inherited Create;
+  FTree     := TBSTree.Create( #0 , false );
+  FCallback := nil;
+
+  CreateTree( FileName );
+end;
+
+destructor TWords.Destroy;
+begin
+  FTree.Free;
+  inherited;
+end;
+
+//==============================================================================
+// P R I V A T E
+//==============================================================================
+
+function TWords.UnpackWords( var F : File; Word : string ) : TBSTreeChildren;
+var B : byte;
+    C : char;
+    Last : boolean;
+    Chars : array of record
+                       C : char;
+                       IsWord : boolean;
+                       HasChildren : boolean;
+                     end;
+    I : integer;
+begin
+  Last := false;
+  SetLength( Chars , 0 );
+  repeat
+    BlockRead( F , B , 1 );
+    Inc( FCounter );
+    if (FCounter = 2000) then
+      begin
+        FCounter := 0;
+        FormWait.ProgressBar.StepBy( 2000 );
+      end;
+
+    C := char((B and CHAR_MASK) + Ord( 'a' ));
+
+    SetLength( Chars , Length( Chars )+1 );
+    Chars[Length( Chars )-1].C := C;
+
+    if ((B and HAS_CHILD_FLAG) <> 0) then
+      Chars[Length( Chars )-1].HasChildren := true
+    else
+      Chars[Length( Chars )-1].HasChildren := false;
+
+    if ((B and IS_WORD_FLAG) <> 0) then
+      Chars[Length( Chars )-1].IsWord := true
+    else
+      Chars[Length( Chars )-1].IsWord := false;
+
+    if ((B and LAST_FLAG) <> 0) then
+      Last := true;
+  until Last;
+
+  SetLength( Result , Length( Chars ) );
+  for I := 0 to Length( Chars )-1 do
+    begin
+      Result[I] := TBSTree.Create( Chars[I].C , Chars[I].IsWord );
+      SetLength( Result[I].Children , 0 );
+    end;
+
+  for I := 0 to Length( Chars )-1 do
+    if (Chars[I].HasChildren) then
+      Result[I].Children := UnpackWords( F , Word + Chars[I].C );
+end;
+
+procedure TWords.CreateTree( FileName : string );
+var F : File;
+begin
+  AssignFile( F , FileName );
+  Reset( F , 1 );
+
+  FormWait := TFormWait.Create( nil );
+  try
+    FormWait.ProgressBar.Min      := 0;
+    FormWait.ProgressBar.Max      := FileSize( F );
+    FormWait.ProgressBar.Position := 0;
+    FormWait.ProgressBar.Step     := 1;
+
+    FormWait.Show;
+    FormWait.Update;
+
+    FCounter       := 0;
+    FTree.Children := UnpackWords( F , '' );
+
+    FormWait.Close;
+  finally
+    FormWait.Free;
+  end;
+
+  CloseFile( F );
+end;
+
+procedure TWords.EnumWordsRec( Tree : TBSTree; Word : string );
+var I : integer;
+begin
+  if (Tree.IsWord) then
+    FCallback( Word );
+
+  for I := Low( Tree.Children ) to High( Tree.Children ) do
+    EnumWordsRec( Tree.Children[I] , Word+Tree.Children[I].C );
+end;
+
+//==============================================================================
+// P U B L I C
+//==============================================================================
+
+function TWords.ExistsWord( Word : string ) : boolean;
+var T : TBSTree;
+    I, J : integer;
+    Found : boolean;
+begin
+  Result := false;
+  
+  T := FTree;
+  I := 1;
+  repeat
+    Found := false;
+    for J := Low( T.Children ) to High( T.Children ) do
+      if (T.Children[J].C = Word[I]) then
+        begin
+          Inc( I );
+
+          if ((I > Length( Word )) and
+              (T.Children[J].IsWord)) then
+            Result := true;
+
+          T     := T.Children[J];
+          Found := true;
+          break;
+        end;
+  until ((I > Length( Word )) or (not Found));
+end;
+
+procedure TWords.EnumWords( Callback : TWordsCallback );
+begin
+  FCallback := Callback;
+  if (not Assigned( FCallback )) then
+    exit;
+
+  EnumWordsRec( FTree , '' );
+  FCallback( END_OF_WORDS );
+end;
+
+end.
